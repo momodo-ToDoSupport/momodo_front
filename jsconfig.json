@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/componenets/*": ["src/componenets/*"]
+    }
+  }
+}
