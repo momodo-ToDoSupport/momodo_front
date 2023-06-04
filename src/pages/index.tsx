@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import styles from '../styles/Home.module.css';
-import Button from '../components/Button';
+import logo from '../../public/images/logo.svg';
+import letterlogo from '../../public/images/momodo.svg';
+import Image from 'next/image';
+import LoginButton from '../components/LoginButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,11 +16,17 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main>
-        <div className='text-4xl'>home</div>
-        <Button disabled={false} buttonSize={'medium'}>
-          이전 페이지
-        </Button>
+      <main className='flex flex-col items-center justify-end h-screen'>
+        <h1 className='h-4/5'>
+          <Image src={logo} className='mb-6' alt='로고 이미지' />
+          <Image src={letterlogo} alt='레터링 로고 이미지' />
+        </h1>
+        <div className='text-center absolute mb-20'>
+          <LoginButton type='kakao'>카카오톡 계정으로 로그인</LoginButton>
+          <LoginButton type='google'>구글 계정으로 로그인</LoginButton>
+          <LoginButton type='momodo'>모모두 계정으로 로그인</LoginButton>
+          <button className='block mx-auto my-0'>회원가입</button>
+        </div>
       </main>
     </>
   );
