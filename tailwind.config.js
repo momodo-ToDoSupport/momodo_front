@@ -9,6 +9,7 @@ module.exports = {
     colors: {
       'main-color': '#F0C23A',
       'disabled-color': '#87712D',
+      'bg-color': '#1f1f1f',
       'bg-main': ['#F0C23A'],
       'bg-disabled': '#87712D',
     },
