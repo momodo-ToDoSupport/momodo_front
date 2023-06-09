@@ -6,6 +6,9 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontSize: {
+      xxs: '9px',
+    },
     colors: {
       'main-color': '#F0C23A',
       'disabled-color': '#87712D',

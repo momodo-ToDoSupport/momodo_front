@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileImg from '../components/ProfileImg';
+import UserProfile from '../components/UserProfile';
 
 const mytodo = () => {
-  return <ProfileImg width={45} height={45} alt='프로필이미지' />;
+  return <UserProfile option='follow' />;
 };
 
 export default mytodo;
