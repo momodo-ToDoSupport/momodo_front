@@ -8,7 +8,7 @@ interface OwnProps {
 const FollowNumber: React.FC<OwnProps> = ({ number, title }) => {
   return (
     <div className='flex flex-col items-center'>
-      <p className='text-4xl text-bold'>{number}</p>
+      <p className='text-xl text-bold'>{number}</p>
       <p className='text-xxs'>{title}</p>
     </div>
   );
