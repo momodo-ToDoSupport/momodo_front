@@ -44,7 +44,7 @@ const MonthCalender = () => {
   const calendarData = generateCalendarData();
 
   return (
-    <section className='bg-[#242424] rounded-3xl m-4 px-5 py-4'>
+    <section className='bg-[#242424] rounded-3xl px-5 py-4'>
       <div className='flex items-center justify-between pb-3'>
         <span>{currentMonth.format('YYYY년 MMMM')}</span>
         <div className='relative top-1'>

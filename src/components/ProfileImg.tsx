@@ -5,7 +5,7 @@ import defaultProfileImg from '../../public/images/profile-default.svg';
 interface ProfileImgProps {
   width: number;
   height: number;
-  src: string;
+  src?: string;
   alt: string;
 }
 
