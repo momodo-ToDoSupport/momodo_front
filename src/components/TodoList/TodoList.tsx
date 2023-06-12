@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import Todo from './Todo';
 import todayTodo from '../../../public/images/todayTodoText.svg';
+import AddButton from '../AddButton';
 
 const TodoList = () => {
   return (
@@ -11,6 +12,7 @@ const TodoList = () => {
       <ul>
         <Todo />
       </ul>
+      <AddButton />
     </section>
   );
 };
