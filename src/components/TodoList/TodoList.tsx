@@ -7,7 +7,7 @@ const TodoList = () => {
   return (
     <section className='mt-8'>
       <h1 className='hidden'>투두리스트</h1>
-      <Image src={todayTodo} />
+      <Image src={todayTodo} className='mb-3 ml-1' />
       <ul>
         <Todo />
       </ul>

@@ -12,8 +12,11 @@ module.exports = {
       base: '16px',
       lg: '18px',
       xl: '20px',
+      xxl: '28px',
     },
     colors: {
+      white: '#ffffff',
+      black: '#000000',
       'main-color': '#F0C23A',
       'disabled-color': '#87712D',
       'grey-65': '#656565',
