@@ -15,10 +15,7 @@ const TodoList = () => {
         <Todo />
       </ul>
       <AddButton />
-      <Modal>
-        <ModalButton name='삭제하기' />
-        <ModalButton name='수정하기' />
-      </Modal>
+      <Modal type='newtodo' />
     </section>
   );
 };

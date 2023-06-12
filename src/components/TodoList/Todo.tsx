@@ -11,10 +11,10 @@ const Todo = () => {
       <p className='text-black'>호호호</p>
       <div className='absolute right-4 pt-1'>
         <button className='mr-3'>
-          <Image src={editTodo} />
+          <Image src={editTodo} alt='투두 수정하기' />
         </button>
         <button>
-          <Image src={checkbutton} />
+          <Image src={checkbutton} alt='투두 체크' />
         </button>
       </div>
     </li>
