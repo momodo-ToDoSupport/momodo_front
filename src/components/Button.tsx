@@ -15,11 +15,14 @@ const Button: React.FC<OwnProps> = ({ children, onClick, disabled, buttonSize })
     case 'small':
       buttonSizeClass = 'py-2 px-5 text-sm rounded-2xl';
       break;
+    case 'medium':
+      buttonSizeClass = 'w-1/2 py-3.5  rounded-full mx-auto my-0 block';
+      break;
     case 'large':
       buttonSizeClass = 'w-full py-3.5 px-8 text-lg rounded-full font-medium mx-auto my-0 block';
       break;
     default:
-      buttonSizeClass = 'w-1/2 py-3.5  rounded-full mx-auto my-0 block';
+      buttonSizeClass = 'py-3.5 px-6 rounded-full mx-auto my-0 block';
       break;
   }
 

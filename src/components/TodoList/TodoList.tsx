@@ -15,7 +15,7 @@ const TodoList = () => {
         <Todo />
       </ul>
       <AddButton />
-      <Modal type='newtodo' />
+      <Modal type='edittodo' />
     </section>
   );
 };
