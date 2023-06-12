@@ -20,6 +20,7 @@ module.exports = {
       'main-color': '#F0C23A',
       'disabled-color': '#87712D',
       'grey-65': '#656565',
+      'grey-44': '#444444',
       'bg-color': '#1f1f1f',
       'bg-disabled': '#87712D',
     },
