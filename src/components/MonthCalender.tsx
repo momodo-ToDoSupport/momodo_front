@@ -58,7 +58,7 @@ const MonthCalender = () => {
       </div>
       <div className='grid grid-cols-7 gap-5 text-center'>
         {weekdays.map((weekday, index) => (
-          <div key={index} className='text-xl text-[#ADADAD] font-bold'>
+          <div key={index} className='text-lg text-[#ADADAD] font-bold'>
             {weekday}
           </div>
         ))}

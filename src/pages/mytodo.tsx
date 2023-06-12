@@ -1,8 +1,9 @@
 import React from 'react';
 import MonthCalender from '../components/MonthCalender';
-import MytodoHeader from '../components/header/MytodoHeader';
+import MytodoHeader from '../components/Header/MytodoHeader';
 import UserProfile from '../components/UserProfile';
 import TabBar from '../components/TabBar';
+import TodoList from '../components/TodoList/TodoList';
 
 const mytodo = () => {
   return (
@@ -10,6 +11,7 @@ const mytodo = () => {
       <MytodoHeader />
       <UserProfile />
       <MonthCalender />
+      <TodoList />
       <TabBar />
     </div>
   );
