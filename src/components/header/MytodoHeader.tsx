@@ -7,7 +7,7 @@ const MytodoHeader = () => {
   return (
     <header className='flex justify-center relative mb-6 '>
       <Image src={momodoLogo} alt='모모두' width={73} className='' />
-      <Image src={calendarIcon} alt='캘린더아이콘' className='absolute right-4' />
+      <Image src={calendarIcon} alt='캘린더아이콘' className='absolute right-0' />
     </header>
   );
 };

@@ -68,7 +68,7 @@ const MonthCalender = () => {
               <button
                 key={dayIndex}
                 className={`flex justify-center items-center h-30 border border-black ${
-                  day.month() === currentMonth.month() ? '' : 'text-[#ADADAD]'
+                  day.month() === currentMonth.month() ? '' : 'text-[#535252]'
                 } ${day.isSame(currentDate, 'day') ? 'relative' : ''}`}
               >
                 {day.format('D')}
