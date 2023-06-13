@@ -9,10 +9,12 @@ interface TabBarProps {
 
 const TabBarIcon: React.FC<TabBarProps> = ({ src, name }) => {
   return (
-    <Link href='/' className='flex flex-col items-center mt-2'>
-      <Image src={src} alt={name} />
-      <p className='text-xs text-grey-65 pt-2'>{name}</p>
-    </Link>
+    <li className='text-xs text-grey-65 pt-2 mt-2 w-full'>
+      <Link href='/' className='flex flex-col items-center'>
+        <Image src={src} alt={name} className='pb-2' />
+        {name}
+      </Link>
+    </li>
   );
 };
 

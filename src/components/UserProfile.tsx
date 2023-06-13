@@ -4,9 +4,14 @@ import ProfileImg from './ProfileImg';
 import tierIcon1 from '../../public/images/tierIcon-red-1.svg';
 import FollowNumber from './FollowNumber';
 
-const UserProfile = ({ option }) => {
+interface ProfileProps {
+  option?: string | null;
+}
+
+const UserProfile: React.FC<ProfileProps> = ({ option }) => {
   return (
-    <section className='flex items-center justify-between px-5'>
+    <section className='flex items-center justify-between mb-4'>
+      <h1 className='hidden'>유저 프로필</h1>
       <div className='flex items-center'>
         <ProfileImg width={45} height={45} alt='프로필 이미지' />
         <div className='flex flex-col ml-2'>

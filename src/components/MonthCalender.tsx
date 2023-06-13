@@ -44,7 +44,7 @@ const MonthCalender = () => {
   const calendarData = generateCalendarData();
 
   return (
-    <section className='bg-[#242424] rounded-3xl m-4 px-5 py-4'>
+    <section className='bg-[#242424] rounded-3xl px-5 py-4'>
       <div className='flex items-center justify-between pb-3'>
         <span>{currentMonth.format('YYYY년 MMMM')}</span>
         <div className='relative top-1'>
@@ -58,7 +58,7 @@ const MonthCalender = () => {
       </div>
       <div className='grid grid-cols-7 gap-5 text-center'>
         {weekdays.map((weekday, index) => (
-          <div key={index} className='text-xl text-[#ADADAD] font-bold'>
+          <div key={index} className='text-lg text-[#ADADAD] font-bold'>
             {weekday}
           </div>
         ))}
@@ -68,7 +68,7 @@ const MonthCalender = () => {
               <button
                 key={dayIndex}
                 className={`flex justify-center items-center h-30 border border-black ${
-                  day.month() === currentMonth.month() ? '' : 'text-[#ADADAD]'
+                  day.month() === currentMonth.month() ? '' : 'text-[#535252]'
                 } ${day.isSame(currentDate, 'day') ? 'relative' : ''}`}
               >
                 {day.format('D')}
