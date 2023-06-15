@@ -8,12 +8,14 @@ interface OwnProps {
 }
 
 const Button: React.FC<OwnProps> = ({ children, onClick, disabled, buttonSize }) => {
-  const buttonActive = disabled ? 'bg-[#87712D] cursor-not-allowed ' : 'bg-[#F0C23A] text-black';
+  const buttonActive = disabled
+    ? 'bg-disabled-color cursor-not-allowed'
+    : 'bg-main-color text-black';
 
   let buttonSizeClass = '';
   switch (buttonSize) {
     case 'small':
-      buttonSizeClass = 'py-2 px-5 text-sm rounded-2xl';
+      buttonSizeClass = 'px-5 py-2 text-sm rounded-2xl';
       break;
     case 'medium':
       buttonSizeClass = 'w-1/2 py-3.5  rounded-full mx-auto my-0 block';
@@ -22,7 +24,7 @@ const Button: React.FC<OwnProps> = ({ children, onClick, disabled, buttonSize })
       buttonSizeClass = 'w-full py-3.5 px-8 text-lg rounded-full font-medium mx-auto my-0 block';
       break;
     default:
-      buttonSizeClass = 'py-3.5 px-6 rounded-full mx-auto my-0 block';
+      buttonSizeClass = 'px-6 py-3.5 rounded-full mx-auto my-0 block';
       break;
   }
 

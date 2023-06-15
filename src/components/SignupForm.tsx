@@ -1,77 +1,34 @@
 import React from 'react';
+import Input from './Input';
+import Label from './Label';
 
 const signupForm = () => {
   return (
     <form className=' flex flex-col'>
       <h1 className='text-2xl text-center py-10'>회원가입</h1>
-      <label htmlFor='id' className='block text-xs pb-2'>
-        아이디
-      </label>
-      <input
-        type='text'
-        id='id'
-        name='username'
-        required
-        className='w-full border border-[#979797] rounded-xl p-2 bg-bg-color text-xs mb-4'
-        placeholder='아이디를 입력하세요'
-      />
-      <label htmlFor='password' className='block text-xs pb-2'>
-        비밀번호
-      </label>
-      <input
-        type='password'
-        id='password'
-        name='password'
-        required
-        className='w-full border border-[#979797] rounded-xl p-2 bg-bg-color text-xs mb-4'
-        placeholder='비밀번호를 입력하세요'
-      />
-      <label htmlFor='name' className='block text-xs pb-2'>
-        이름
-      </label>
-      <input
-        type='text'
-        id='name'
-        name='name'
-        required
-        className='w-full border border-[#979797] rounded-xl p-2 bg-bg-color text-xs mb-4'
-        placeholder='이름을 입력하세요'
-      />
 
-      <label htmlFor='email' className='block text-xs pb-2'>
-        이메일
-      </label>
-      <div className='flex items-center mb-4'>
-        <input
-          type='text'
-          id='email'
-          name='email'
-          required
-          className='border border-[#979797] rounded-xl p-2 bg-bg-color text-xs flex-grow mr-2'
-          placeholder='이메일을 입력하세요'
-        />
-        <label htmlFor='email-domain' className='text-xs pb-2 flex-grow-0'>
-          @
-        </label>
-        <input
-          type='text'
-          id='email-domain'
-          name='email-domain'
-          required
-          className='border border-[#979797] rounded-xl p-2 bg-bg-color text-xs flex-grow ml-2'
-        />
+      <Label htmlFor='userId' labelText='아이디'>
+        <Input type='text' id='userId' placeholder='아이디를 입력하세요' />
+      </Label>
+
+      <Label htmlFor='password' labelText='비밀번호'>
+        <Input type='password' id='password' placeholder='비밀번호를 입력하세요' />
+      </Label>
+
+      <Label htmlFor='username' labelText='이름'>
+        <Input type='text' id='username' placeholder='이름을 입력하세요' />
+      </Label>
+
+      <Label htmlFor='email' labelText='이메일' />
+      <div className='flex items-center pb-4'>
+        <Input type='text' id='email' placeholder='이메일을 입력하세요' />
+        <Label htmlFor='email-domain' labelText='@' />
+        <Input type='text' id='email-domain' />
       </div>
-      <label htmlFor='phone' className='block text-xs pb-2'>
-        전화번호
-      </label>
-      <input
-        type='number'
-        id='phone'
-        name='phone'
-        required
-        className='w-full border border-[#979797] rounded-xl p-2 bg-bg-color text-xs mb-4'
-        placeholder='전화번호를 입력하세요'
-      />
+
+      <Label htmlFor='phone' labelText='전화번호'>
+        <Input type='number' id='phone' placeholder='전화번호를 입력하세요' />
+      </Label>
     </form>
   );
 };
