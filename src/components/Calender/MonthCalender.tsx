@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/ko';
-import leftArrow from '../../public/images/left-arrow.svg';
-import rightArrow from '../../public/images/right-arrow.svg';
+import leftArrow from '../../../public/images/left-arrow.svg';
+import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 
 const MonthCalender = () => {

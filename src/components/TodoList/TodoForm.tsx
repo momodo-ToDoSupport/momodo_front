@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Button from '../Button';
 
 const TodoForm = ({ type }) => {
-  console.log(type);
   const selectWeek = [
     { value: '일요일마다', name: '일요일 마다' },
     { value: '월요일마다', name: '월요일 마다' },
