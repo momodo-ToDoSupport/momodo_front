@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import defaultProfileImg from '../../public/images/profile-default.svg';
+import defaultProfileImg from '../../../public/images/profile-default.svg';
 
 interface ProfileImgProps {
   width: number;

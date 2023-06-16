@@ -9,9 +9,11 @@ module.exports = {
     fontSize: {
       xxs: '9px',
       xs: '12px',
+      sm: '14px',
       base: '16px',
       lg: '18px',
       xl: '20px',
+      mxl: '24px',
       xxl: '28px',
     },
     colors: {
@@ -22,6 +24,7 @@ module.exports = {
       'grey-65': '#656565',
       'grey-44': '#444444',
       'grey-97': '#979797',
+      'grey-2D': '#2D2D2D',
       'bg-color': '#1f1f1f',
       'bg-disabled': '#87712D',
     },
