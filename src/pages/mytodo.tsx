@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MonthCalender from '../components/Calender/MonthCalender';
 import MytodoHeader from '../components/Header/MytodoHeader';
-import UserProfile from '../components/UserProfile';
+import UserProfile from '../components/UserProfile/UserProfile';
 import TabBar from '../components/TabBar';
 import TodoList from '../components/TodoList/TodoList';
 import YourtodoHeader from '../components/Header/YourtodoHeader';
