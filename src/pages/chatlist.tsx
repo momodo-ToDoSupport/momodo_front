@@ -7,7 +7,11 @@ const chatlist = () => {
   return (
     <>
       <BasicHeader />
-      <ChatUserList />
+      <div className='p-5'>
+        <ChatUserList />
+        <ChatUserList />
+        <ChatUserList />
+      </div>
       <TabBar />
     </>
   );
