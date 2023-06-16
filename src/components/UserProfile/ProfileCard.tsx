@@ -5,7 +5,7 @@ interface ProfileCardProps {
   option?: string;
 }
 
-const ProfileCard = ({ option }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ option }) => {
   return (
     <div className='flex items-center'>
       <ProfileImg width={45} height={45} alt='프로필 이미지' />
