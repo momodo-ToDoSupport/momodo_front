@@ -18,7 +18,7 @@ const ChatInput = () => {
         placeholder='메시지 입력하기'
         className='w-full bg-grey-44 rounded-full placeholder-grey-97 text-sm p-2 pl-4'
       />
-      <button className='text-sm text-grey-97 whitespace-nowrap absolute z-10 right-9'>전송</button>
+      <button className='text-sm text-grey-97 absolute z-10 right-9'>전송</button>
     </form>
   );
 };
