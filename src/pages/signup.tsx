@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import SignupForm from '../components/SignupForm';
 
@@ -20,8 +20,6 @@ const Signup = () => {
     email: '',
     phone: '',
   };
-  const [inputValue, setInputValue] = useState<InputValue>({ ...initialState });
-  const [errors, setErrors] = useState<InputValue>({ ...initialState });
   const [isBlurs, setIsBlurs] = useState({
     userId: false,
     password: false,
@@ -29,6 +27,9 @@ const Signup = () => {
     email: false,
     phone: false,
   });
+  const [inputValue, setInputValue] = useState<InputValue>({ ...initialState });
+  const [errors, setErrors] = useState<InputValue>({ ...initialState });
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,10 +50,17 @@ const Signup = () => {
   // console.log(inputValue);
   console.log(errors);
 
+  useEffect(() => {
+    const isAllBlurred = Object.values(inputValue).every(
+      (value) => value.length !== 0
+    );
+    setIsFormValid(isAllBlurred);
+  }, [inputValue]);
+
   return (
     <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
       <SignupForm onBlur={handleBlur} onChange={handleChange} />
-      <Button buttonSize='large' disabled={true}>
+      <Button buttonSize='large' disabled={!isFormValid}>
         회원가입
       </Button>
     </div>
