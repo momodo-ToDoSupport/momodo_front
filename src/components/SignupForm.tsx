@@ -1,15 +1,23 @@
 import React from 'react';
+import Button from './Button';
 import Input from './Input';
 import Label from './Label';
 
 interface SignupFormProps {
   onBlur(e: React.FocusEvent<HTMLInputElement>): void;
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  onSubmit(e: React.FormEvent<HTMLFormElement>): void;
+  disabled: boolean;
 }
 
-const signupForm: React.FC<SignupFormProps> = ({ onBlur, onChange }) => {
+const signupForm: React.FC<SignupFormProps> = ({
+  onBlur,
+  onChange,
+  onSubmit,
+  disabled,
+}) => {
   return (
-    <form className=' flex flex-col'>
+    <form className=' flex flex-col' onSubmit={onSubmit}>
       <h1 className='text-2xl text-center py-2'>회원가입</h1>
 
       <Label htmlFor='userId' labelText='아이디'>
@@ -61,6 +69,9 @@ const signupForm: React.FC<SignupFormProps> = ({ onBlur, onChange }) => {
           onChange={onChange}
         />
       </Label>
+      <Button buttonSize='large' disabled={disabled}>
+        회원가입
+      </Button>
     </form>
   );
 };

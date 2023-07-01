@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../components/Button';
+import { useMutation } from 'react-query';
+import { postSignup } from '../api/axios-api';
 import SignupForm from '../components/SignupForm';
 
 interface InputValue {
@@ -31,6 +32,23 @@ const Signup = () => {
   const [errors, setErrors] = useState<InputValue>({ ...initialState });
   const [isFormValid, setIsFormValid] = useState(false);
 
+  useEffect(() => {
+    const isAllBlurred = Object.values(inputValue).every(
+      (value) => value.length !== 0
+    );
+    setIsFormValid(isAllBlurred);
+  }, [inputValue]);
+
+  const submitMutation = useMutation(postSignup, {
+    onSuccess(data) {
+      console.log(data);
+      alert('성공인가?');
+    },
+    onError(error) {
+      console.error(error);
+    },
+  });
+
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (value.length !== 0) {
@@ -46,23 +64,21 @@ const Signup = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  console.log(isBlurs);
-  // console.log(inputValue);
-  console.log(errors);
-
-  useEffect(() => {
-    const isAllBlurred = Object.values(inputValue).every(
-      (value) => value.length !== 0
-    );
-    setIsFormValid(isAllBlurred);
-  }, [inputValue]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitMutation.mutate({
+      ...inputValue,
+    });
+  };
 
   return (
     <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
-      <SignupForm onBlur={handleBlur} onChange={handleChange} />
-      <Button buttonSize='large' disabled={!isFormValid}>
-        회원가입
-      </Button>
+      <SignupForm
+        onBlur={handleBlur}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        disabled={!isFormValid}
+      />
     </div>
   );
 };
