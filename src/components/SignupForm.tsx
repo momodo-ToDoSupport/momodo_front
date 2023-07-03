@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import ErrorMsg from './ErrorMsg';
 import Input from './Input';
 import Label from './Label';
 
@@ -43,9 +44,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
             onChange={onChange}
           />
           {!isBlurs.userId && errorMsg.userId && (
-            <p className='text-xxs text-main-color absolute pt-1 pl-1'>
-              {errorMsg.userId}
-            </p>
+            <ErrorMsg msg={errorMsg.userId} />
           )}
         </>
       </Label>
@@ -59,11 +58,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
             onBlur={onBlur}
             onChange={onChange}
           />
-          {errorMsg.password && (
-            <p className='text-xxs text-main-color absolute pt-1 pl-1'>
-              {errorMsg.password}
-            </p>
-          )}
+          {errorMsg.password && <ErrorMsg msg={errorMsg.password} />}
         </>
       </Label>
 
@@ -76,11 +71,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
             onBlur={onBlur}
             onChange={onChange}
           />
-          {errorMsg.name && (
-            <p className='text-xxs text-main-color absolute pt-1 pl-1'>
-              {errorMsg.name}
-            </p>
-          )}
+          {errorMsg.name && <ErrorMsg msg={errorMsg.name} />}
         </>
       </Label>
 
@@ -93,11 +84,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
             onBlur={onBlur}
             onChange={onChange}
           />
-          {errorMsg.email && (
-            <p className='text-xxs text-main-color absolute pt-1 pl-1'>
-              {errorMsg.email}
-            </p>
-          )}
+          {errorMsg.email && <ErrorMsg msg={errorMsg.email} />}
         </>
       </Label>
 
@@ -110,11 +97,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
             onBlur={onBlur}
             onChange={onChange}
           />
-          {errorMsg.phone && (
-            <p className='text-xxs text-main-color absolute pt-1 pl-1'>
-              {errorMsg.phone}
-            </p>
-          )}
+          {errorMsg.phone && <ErrorMsg msg={errorMsg.phone} />}
         </>
       </Label>
       <div className='absolute bottom-7 w-full'>
