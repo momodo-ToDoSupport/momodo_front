@@ -7,7 +7,6 @@ import SignupForm, { InputValue } from '../components/SignupForm';
 const Signup = () => {
   const initialState: InputValue = {
     userId: '',
-    type: 'MOMODO',
     password: '',
     name: '',
     email: '',
@@ -26,11 +25,12 @@ const Signup = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const isAllBlurred = Object.values(inputValue).every(
-      (value) => value.length !== 0
+    const isAllErrorsEmpty = Object.values(errors).every(
+      (value) => value === ''
     );
-    setIsFormValid(isAllBlurred);
-  }, [inputValue]);
+    setIsFormValid(isAllErrorsEmpty);
+  }, [errors]);
+  console.log(errors);
 
   const submitMutation = useMutation(postSignup, {
     onSuccess(data) {
@@ -44,7 +44,7 @@ const Signup = () => {
   });
 
   const isValids = (target: string, targetName: string) => {
-    if (targetName === 'username') {
+    if (targetName === 'userId') {
       return /^[a-z]+[a-zA-Z0-9]{5,19}$/g.test(target);
     } else if (targetName === 'password') {
       return /^(?=.*[a-z])(?=.*[0-9]).{6,16}$/g.test(target);
@@ -112,11 +112,9 @@ const Signup = () => {
     e.preventDefault();
     submitMutation.mutate({
       ...inputValue,
+      type: 'MOMODO',
     });
   };
-
-  console.log(isBlurs);
-  console.log(errors);
 
   return (
     <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
