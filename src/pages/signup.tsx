@@ -30,7 +30,6 @@ const Signup = () => {
     );
     setIsFormValid(isAllErrorsEmpty);
   }, [errors]);
-  console.log(errors);
 
   const submitMutation = useMutation(postSignup, {
     onSuccess(data) {
@@ -72,34 +71,17 @@ const Signup = () => {
     setInputValue({ ...inputValue, [name]: value });
 
     if (value) {
+      const errorMessages: InputValue = {
+        userId:
+          '6자 이상 20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능합니다.',
+        password: '비밀번호는 6자 이상, 영소문자를 포함해야 합니다.',
+        phone: '핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.',
+        email: '유효한 이메일 형식으로 입력해주세요.',
+        name: '이름을 입력해주세요.',
+      };
+
       if (!isValids(value, name)) {
-        if (name === 'userId') {
-          setErrors({
-            ...errors,
-            [name]:
-              '6자 이상 20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능합니다.',
-          });
-        } else if (name === 'password') {
-          setErrors({
-            ...errors,
-            [name]: '비밀번호는 6자 이상, 영소문자를 포함해야 합니다.',
-          });
-        } else if (name === 'phone') {
-          setErrors({
-            ...errors,
-            [name]:
-              '핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.',
-          });
-        } else if (name === 'email') {
-          setErrors({
-            ...errors,
-            [name]: '유효한 이메일 형식으로 입력해주세요.',
-          });
-        } else if (name === 'name') {
-          setErrors({ ...errors, [name]: '이름을 입력해주세요.' });
-        } else {
-          setErrors({ ...errors, [name]: '' });
-        }
+        setErrors({ ...errors, [name]: errorMessages[name] });
       } else {
         setErrors({ ...errors, [name]: '' });
       }

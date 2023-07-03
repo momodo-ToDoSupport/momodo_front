@@ -5,11 +5,11 @@ import Label from './Label';
 
 export interface InputValue {
   userId: string | boolean;
-  type?: string | boolean;
   password: string | boolean;
   name: string | boolean;
   email: string | boolean;
   phone: string | boolean;
+  [key: string]: string | boolean;
 }
 
 interface SignupFormProps {
