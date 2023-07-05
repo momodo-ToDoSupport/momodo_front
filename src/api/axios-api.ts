@@ -5,7 +5,7 @@ import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
 
-const BASE_URL = 'http://3.86.91.142:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const instance = axios.create({
   baseURL: BASE_URL,
