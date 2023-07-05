@@ -7,12 +7,12 @@ const cookies = new Cookies();
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
 
-const accessInstance = axios.create({
+export const accessInstance = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -73,17 +73,4 @@ const refreshAccessToken = async (): Promise<string | null> => {
     console.error('Failed to refresh accessToken:', error);
     return null;
   }
-};
-
-export const postSignup = async (formdata: InputValue) => {
-  const response = await instance.post('/api/v1/user-app', formdata);
-  return response.data;
-};
-
-export const postUserLogin = async (formdata: LoginInput) => {
-  const response = await instance.post(
-    '/api/v1/authentication/token',
-    formdata
-  );
-  return response.data;
 };

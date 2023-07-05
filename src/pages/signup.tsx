@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { postSignup } from '../api/axios-api';
+import { postSignup } from '../api/auth';
 import SignupForm, { InputValue } from '../components/SignupForm';
 
 const Signup = () => {

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
-import { postUserLogin } from '../api/axios-api';
+import { postUserLogin } from '../api/auth';
 import LoginForm from '../components/LoginForm';
 import { useCookies } from 'react-cookie';
 
@@ -17,6 +17,7 @@ const Login = () => {
   });
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
+  const isInputValue = !inputValue.userId || !inputValue.password;
   const [cookies, setCookie] = useCookies(['refreshtoken']);
 
   const mutation = useMutation(postUserLogin, {
@@ -35,19 +36,6 @@ const Login = () => {
       console.log(error);
     },
   });
-
-  // useEffect(() => {
-  //   const cookieValue = cookies['refreshtoken'];
-
-  //   if (cookieValue) {
-  //     console.log('있당');
-  //     console.log(cookieValue);
-  //   }
-
-  //   if (!cookieValue) {
-  //     console.log('없당');
-  //   }
-  // }, [cookies]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -72,6 +60,7 @@ const Login = () => {
         onChange={handleChange}
         onSubmit={handleSubmit}
         errorMsg={errorMsg}
+        disabled={isInputValue}
       />
     </div>
   );

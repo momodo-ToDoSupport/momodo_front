@@ -7,12 +7,14 @@ interface LoginFormProps {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   onSubmit(e: React.FormEvent<HTMLFormElement>): void;
   errorMsg: string;
+  disabled: boolean;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
   onChange,
   onSubmit,
   errorMsg,
+  disabled,
 }) => {
   return (
     <form onSubmit={onSubmit} className=' flex flex-col relative h-full w-full'>
@@ -35,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       </Label>
       <p className='pl-4 pt-2 text-sm text-main-color'>{errorMsg}</p>
       <div className='absolute bottom-7 w-full'>
-        <Button buttonSize='large' disabled={false}>
+        <Button buttonSize='large' disabled={disabled}>
           로그인
         </Button>
       </div>
