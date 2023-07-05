@@ -6,16 +6,12 @@ import Label from './Label';
 interface LoginFormProps {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   onSubmit(e: React.FormEvent<HTMLFormElement>): void;
-  idRef: React.RefObject<HTMLInputElement>;
-  passwordRef: React.RefObject<HTMLInputElement>;
   errorMsg: string;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
   onChange,
   onSubmit,
-  idRef,
-  passwordRef,
   errorMsg,
 }) => {
   return (
@@ -26,7 +22,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
           type='text'
           id='userId'
           placeholder='아이디를 입력하세요'
-          ref={idRef}
           onChange={onChange}
         />
       </Label>
@@ -35,11 +30,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
           type='password'
           id='password'
           placeholder='비밀번호를 입력하세요'
-          ref={passwordRef}
           onChange={onChange}
         />
       </Label>
-      <p>{errorMsg}</p>
+      <p className='pl-4 pt-2 text-sm text-main-color'>{errorMsg}</p>
       <div className='absolute bottom-7 w-full'>
         <Button buttonSize='large' disabled={false}>
           로그인

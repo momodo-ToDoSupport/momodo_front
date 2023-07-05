@@ -6,7 +6,7 @@ import TodoList from '../components/TodoList/TodoList';
 import WeeklyCalender from '../components/Calender/WeeklyCalender';
 import MainHeader from '../components/Header/MainHeader';
 
-const mytodo = () => {
+const MyTodo = () => {
   const [showMonthCalender, setShowMonthCalender] = useState<boolean>(true);
 
   const toggleCalender = () => {
@@ -24,4 +24,4 @@ const mytodo = () => {
   );
 };
 
-export default mytodo;
+export default MyTodo;

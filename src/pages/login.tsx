@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { postUserLogin } from '../api/axios-api';
-import Button from '../components/Button';
 import LoginForm from '../components/LoginForm';
+import { useCookies } from 'react-cookie';
 
 export interface LoginInput {
   userId: string;
@@ -16,21 +16,38 @@ const Login = () => {
     password: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
-  const idRef = useRef<HTMLInputElement>();
-  const passwordRef = useRef<HTMLInputElement>();
   const router = useRouter();
+  const [cookies, setCookie] = useCookies(['refreshtoken']);
 
   const mutation = useMutation(postUserLogin, {
     onSuccess(data) {
-      console.log(data);
+      const { accessToken, refreshToken } = data.response;
+      localStorage.setItem('accessToken', accessToken);
+      setCookie('refreshtoken', refreshToken, {
+        path: '/',
+        httpOnly: true,
+      });
+
       router.push('/mytodo');
     },
     onError(error) {
-      idRef.current.focus();
       setErrorMsg('아이디 또는 비밀번호가 일치하지 않습니다.');
       console.log(error);
     },
   });
+
+  // useEffect(() => {
+  //   const cookieValue = cookies['refreshtoken'];
+
+  //   if (cookieValue) {
+  //     console.log('있당');
+  //     console.log(cookieValue);
+  //   }
+
+  //   if (!cookieValue) {
+  //     console.log('없당');
+  //   }
+  // }, [cookies]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,11 +58,9 @@ const Login = () => {
     e.preventDefault();
 
     if (!inputValue.userId) {
-      idRef.current.focus();
       return setErrorMsg('아이디를 입력해주세요.');
     }
     if (!inputValue.password) {
-      passwordRef.current.focus();
       return setErrorMsg('비밀번호를 입력해주세요.');
     }
     mutation.mutate(inputValue);
@@ -56,9 +71,7 @@ const Login = () => {
       <LoginForm
         onChange={handleChange}
         onSubmit={handleSubmit}
-        idRef={idRef}
-        passwordRef={passwordRef}
-        errorMsg={setErrorMsg}
+        errorMsg={errorMsg}
       />
     </div>
   );
