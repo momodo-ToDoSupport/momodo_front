@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { postUserLogin } from '../api/axios-api';
 import LoginForm from '../components/LoginForm';
