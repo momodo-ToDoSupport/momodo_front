@@ -8,9 +8,9 @@ const KakaoLogin = () => {
     console.log(code);
   }, []);
 
-  const mutation = useMutation(postKakaoLogin, {
-    onSuccess(data) {},
-  });
+  // const mutation = useMutation(postKakaoLogin, {
+  //   onSuccess(data) {},
+  // });
 
   return <div>KakaoLogin</div>;
 };
