@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-//TODO: 로그인 브랜치 머지 후, .env파일에 추가하기
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 const KAKAO_BASE_URL = process.env.NEXT_PUBLIC_KAKAO_BASE_URL;
