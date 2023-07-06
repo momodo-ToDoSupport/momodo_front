@@ -1,16 +1,69 @@
-import React from 'react';
-import Button from '../components/Button';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { useMutation } from 'react-query';
+import { postUserLogin } from '../api/auth';
 import LoginForm from '../components/LoginForm';
+import { useCookies } from 'react-cookie';
 
-const login = () => {
+export interface LoginInput {
+  userId: string;
+  password: string;
+}
+
+const Login = () => {
+  const [inputValue, setInputValue] = useState<LoginInput>({
+    userId: '',
+    password: '',
+  });
+  const [errorMsg, setErrorMsg] = useState('');
+  const router = useRouter();
+  const isInputValue = !inputValue.userId || !inputValue.password;
+  const [cookies, setCookie] = useCookies(['refreshtoken']);
+
+  const mutation = useMutation(postUserLogin, {
+    onSuccess(data) {
+      const { accessToken, refreshToken } = data.response;
+      localStorage.setItem('accessToken', accessToken);
+      setCookie('refreshtoken', refreshToken, {
+        path: '/',
+        httpOnly: true,
+      });
+
+      router.push('/mytodo');
+    },
+    onError(error) {
+      setErrorMsg('아이디 또는 비밀번호가 일치하지 않습니다.');
+      console.log(error);
+    },
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputValue({ ...inputValue, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!inputValue.userId) {
+      return setErrorMsg('아이디를 입력해주세요.');
+    }
+    if (!inputValue.password) {
+      return setErrorMsg('비밀번호를 입력해주세요.');
+    }
+    mutation.mutate(inputValue);
+  };
+
   return (
     <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
-      <LoginForm />
-      <Button buttonSize='large' disabled={true}>
-        로그인
-      </Button>
+      <LoginForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        errorMsg={errorMsg}
+        disabled={isInputValue}
+      />
     </div>
   );
 };
 
-export default login;
+export default Login;

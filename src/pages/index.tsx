@@ -7,6 +7,7 @@ import LoginButton from '../components/LoginButton';
 import Link from 'next/link';
 import { kakaoAuthUrl } from '../api/kakao-login';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -24,11 +25,18 @@ export default function Home() {
           <Image src={letterlogo} alt='레터링 로고 이미지' />
         </h1>
         <div className='text-center absolute mb-20'>
-          <LoginButton type='kakao'>카카오톡 계정으로 로그인</LoginButton>
-          <LoginButton type='google'>구글 계정으로 로그인</LoginButton>
-          <LoginButton type='momodo'>모모두 계정으로 로그인</LoginButton>
-          <button className='block mx-auto my-0'>회원가입</button>
-          <Link href={kakaoAuthUrl}>카카오 테스트</Link>
+          <LoginButton type='kakao' href='/signup'>
+            카카오톡 계정으로 로그인
+          </LoginButton>
+          <LoginButton type='google' href='/signup'>
+            구글 계정으로 로그인
+          </LoginButton>
+          <LoginButton type='momodo' href='/login'>
+            모모두 계정으로 로그인
+          </LoginButton>
+          <Link href='signup'>
+            <button className='block mx-auto my-0'>회원가입</button>
+          </Link>
         </div>
       </main>
     </>
