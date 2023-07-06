@@ -5,6 +5,8 @@ import letterlogo from '../../public/images/momodo.svg';
 import Image from 'next/image';
 import LoginButton from '../components/LoginButton';
 import Link from 'next/link';
+import { kakaoAuthUrl } from '../api/kakao-login';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
