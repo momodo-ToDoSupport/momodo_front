@@ -17,7 +17,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   disabled,
 }) => {
   return (
-    <form onSubmit={onSubmit} className=' flex flex-col relative h-full w-full'>
+    <form onSubmit={onSubmit} className='flex flex-col relative h-full w-full'>
       <h1 className='text-2xl text-center py-8'>로그인</h1>
       <Label htmlFor='userId' labelText='아이디'>
         <Input

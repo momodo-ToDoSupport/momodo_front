@@ -7,7 +7,6 @@ import LoginButton from '../components/LoginButton';
 import Link from 'next/link';
 import { kakaoAuthUrl } from '../api/kakao-login';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -25,7 +24,7 @@ export default function Home() {
           <Image src={letterlogo} alt='레터링 로고 이미지' />
         </h1>
         <div className='text-center absolute mb-20'>
-          <LoginButton type='kakao' href='/signup'>
+          <LoginButton type='kakao' href={kakaoAuthUrl}>
             카카오톡 계정으로 로그인
           </LoginButton>
           <LoginButton type='google' href='/signup'>

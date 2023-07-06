@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { useMutation } from 'react-query';
 import { postKakaoLogin } from '../api/kakao-login';
 
 const KakaoLogin = () => {
-  useEffect(() => {
-    const code = new URL(window.location.href).searchParams.get('code');
-    console.log(code);
-  }, []);
+  const router = useRouter();
+  const { code } = router.query;
+  console.log(code);
 
   // const mutation = useMutation(postKakaoLogin, {
   //   onSuccess(data) {},
