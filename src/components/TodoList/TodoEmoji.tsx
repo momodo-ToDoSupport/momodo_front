@@ -9,14 +9,19 @@ import Image from 'next/image';
 import change from '../../../public/images/switchIcon.svg';
 import close from '../../../public/images/closeIcon.svg';
 
-const TodoEmoji = () => {
+interface TodoEmojiProps {
+  setTodoEmoji(emoji: string): void;
+}
+
+const TodoEmoji: React.FC<TodoEmojiProps> = ({ setTodoEmoji }) => {
   const [selectedEmoji, setSelectedEmoji] = useState<string>('1f389');
   const [openEmojiPicker, setOpenEmojiPicker] = useState<boolean>(false);
 
-  function onClick(emojiData: EmojiClickData, event: MouseEvent) {
+  const handleEmojiClick = (emojiData: EmojiClickData, event: MouseEvent) => {
     setSelectedEmoji(emojiData.unified);
-    console.log(emojiData);
-  }
+    setTodoEmoji(emojiData.emoji);
+  };
+
   return (
     <>
       <div className='flex flex-col items-center justify-center text-center mb-12'>
@@ -51,7 +56,7 @@ const TodoEmoji = () => {
               <Image src={close} alt='닫기' />
             </button>
             <EmojiPicker
-              onEmojiClick={onClick}
+              onEmojiClick={handleEmojiClick}
               autoFocusSearch={false}
               theme={Theme.DARK}
               emojiStyle={EmojiStyle.NATIVE}
