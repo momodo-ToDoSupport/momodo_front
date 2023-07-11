@@ -15,7 +15,7 @@ const WeeklyCalender = () => {
   }
 
   return (
-    <div className='flex py-4 overflow-x-scroll hide-scrollbar'>
+    <div className='flex py-3 overflow-x-scroll hide-scrollbar'>
       {dates.map((date, index) => (
         <div
           key={index}

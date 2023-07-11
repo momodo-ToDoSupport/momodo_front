@@ -6,7 +6,12 @@ import close from '../../../public/images/closeIcon.svg';
 import Image from 'next/image';
 import Button from '../Button';
 
-const TodoForm = ({ type }) => {
+interface TodoFormProps {
+  type: string;
+  closeModal(): void;
+}
+
+const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const selectWeek = [
     { value: '일요일마다', name: '일요일 마다' },
     { value: '월요일마다', name: '월요일 마다' },
@@ -25,14 +30,18 @@ const TodoForm = ({ type }) => {
           alt='투두모달'
           className='mx-auto my-0'
         />
-        <button className='absolute right-4'>
+        <button className='absolute right-4' onClick={closeModal}>
           <Image src={close} alt='닫기 버튼' />
         </button>
       </div>
       <div className='flex flex-col items-center justify-center text-center mb-12'>
         <p className='bg-grey-65 text-xxl w-16 h-16 rounded-xl pt-2'>🎒</p>
         <button className='text-[#909090] flex items-center mt-2'>
-          <Image src={change} alt='이모지 변경하기 버튼' className='mr-1 mt-1' />
+          <Image
+            src={change}
+            alt='이모지 변경하기 버튼'
+            className='mr-1 mt-1'
+          />
           Change icon
         </button>
       </div>
