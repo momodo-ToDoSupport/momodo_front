@@ -1,10 +1,10 @@
-import React from 'react';
-import change from '../../../public/images/switchIcon.svg';
+import React, { useState } from 'react';
 import newtodo from '../../../public/images/newtodoIcon.svg';
 import edittodo from '../../../public/images/edittodo.svg';
 import close from '../../../public/images/closeIcon.svg';
 import Image from 'next/image';
 import Button from '../Button';
+import TodoEmoji from './TodoEmoji';
 
 interface TodoFormProps {
   type: string;
@@ -23,7 +23,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   ];
 
   return (
-    <>
+    <article>
+      <h2 className='hidden'>투두 추가 모달</h2>
       <div className='flex relative mt-4 mb-10'>
         <Image
           src={type === 'newtodo' ? newtodo : edittodo}
@@ -34,17 +35,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
           <Image src={close} alt='닫기 버튼' />
         </button>
       </div>
-      <div className='flex flex-col items-center justify-center text-center mb-12'>
-        <p className='bg-grey-65 text-xxl w-16 h-16 rounded-xl pt-2'>🎒</p>
-        <button className='text-[#909090] flex items-center mt-2'>
-          <Image
-            src={change}
-            alt='이모지 변경하기 버튼'
-            className='mr-1 mt-1'
-          />
-          Change icon
-        </button>
-      </div>
+      <TodoEmoji />
       <form className='flex flex-col items-center'>
         <input
           type='text'
@@ -71,7 +62,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
           </div>
         )}
       </form>
-    </>
+    </article>
   );
 };
 
