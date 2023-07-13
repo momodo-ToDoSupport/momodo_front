@@ -22,8 +22,7 @@ const KakaoLogin = () => {
   useEffect(() => {
     const handleKakaoLoginSuccess = async () => {
       if (kakaoLoginMutation.isSuccess) {
-        const data = kakaoLoginMutation.data;
-        const kakaoAccesstoken = data.access_token;
+        const kakaoAccesstoken = kakaoLoginMutation.data.access_token;
 
         try {
           const response = await sendKakaoToken(kakaoAccesstoken);
@@ -37,7 +36,13 @@ const KakaoLogin = () => {
       }
     };
     handleKakaoLoginSuccess();
-  }, [kakaoLoginMutation.isSuccess, kakaoLoginMutation.data, router]);
+  }, [
+    kakaoLoginMutation.isSuccess,
+    kakaoLoginMutation.data,
+    router,
+    setAccessToken,
+    setRefreshToken,
+  ]);
 
   return <div>로그인중...</div>;
 };
