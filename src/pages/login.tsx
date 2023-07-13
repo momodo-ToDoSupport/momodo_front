@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { postUserLogin } from '../api/auth';
 import LoginForm from '../components/LoginForm';
-import { useCookies } from 'react-cookie';
+import { useTokenCookies } from '../hooks/useTokenCookies';
 
 export interface LoginInput {
   userId: string;
@@ -18,17 +18,13 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
-  const [cookies, setCookie] = useCookies(['refreshtoken']);
+  const { setAccessToken, setRefreshToken } = useTokenCookies();
 
   const mutation = useMutation(postUserLogin, {
     onSuccess(data) {
       const { accessToken, refreshToken } = data.response;
-      localStorage.setItem('accessToken', accessToken);
-      setCookie('refreshtoken', refreshToken, {
-        path: '/',
-        httpOnly: true,
-      });
-
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
       router.push('/mytodo');
     },
     onError(error) {
