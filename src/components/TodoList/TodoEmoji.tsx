@@ -25,7 +25,10 @@ const TodoEmoji: React.FC<TodoEmojiProps> = ({ setTodoEmoji }) => {
   return (
     <>
       <div className='flex flex-col items-center justify-center text-center mb-12'>
-        <p className='bg-grey-65 text-xxl w-16 h-16 rounded-xl flex justify-center items-center'>
+        <p
+          className='bg-grey-65 text-xxl w-16 h-16 rounded-xl flex justify-center items-center'
+          onClick={() => setOpenEmojiPicker(true)}
+        >
           {selectedEmoji && (
             <Emoji
               unified={selectedEmoji}

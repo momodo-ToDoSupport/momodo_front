@@ -72,6 +72,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     };
 
     mutation.mutate(todoData);
+
+    setTodoValue('');
   };
 
   return (

@@ -9,7 +9,7 @@ import Modal from '../Modal/Modal';
 const TodoList = () => {
   const { modalOpen, openModal, closeModal } = useModal();
   return (
-    <section className='mt-8'>
+    <section className={`mt-8`}>
       <h2 className='hidden'>투두리스트</h2>
       <div className='flex justify-between items-center relative mb-4'>
         <Image src={todayTodos} className='ml-1' alt='오늘의 투두리스트' />
