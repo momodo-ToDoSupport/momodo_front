@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { instance } from './axios-api';
 
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
@@ -8,13 +9,21 @@ export const kakaoAuthUrl = `${KAKAO_BASE_URL}/oauth/authorize?response_type=cod
 const kakaoInstance = axios.create({
   baseURL: KAKAO_BASE_URL,
   headers: {
-    'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+    'Content-type': 'application/x-www-form-urlencoded',
   },
 });
 
-export const postKakaoLogin = async (code: string) => {
+export const postKakaoLogin = async (code: string | string[]) => {
   const body = `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`;
 
   const response = await kakaoInstance.post('/oauth/token', body);
+  return response.data;
+};
+
+export const sendKakaoToken = async (accesstoken: string) => {
+  const response = await instance.post('/api/v1/social-login/kakao', {
+    loginType: 'KAKAO',
+    accessToken: accesstoken,
+  });
   return response.data;
 };

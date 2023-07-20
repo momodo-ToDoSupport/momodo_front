@@ -6,28 +6,15 @@ interface InputProps {
   placeholder?: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
   onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
-  ref?: React.RefObject<HTMLInputElement>;
 }
 
-const Input: React.FC<InputProps> = ({
-  type,
-  id,
-  placeholder,
-  onBlur,
-  onChange,
-  ref,
-}) => {
+const Input: React.FC<InputProps> = (props) => {
   return (
     <input
-      type={type}
-      id={id}
-      name={id}
-      required
-      placeholder={placeholder}
+      name={props.id}
       className='w-full border border-grey-97 rounded-2xl p-3 bg-bg-color text-xs mt-2 placeholder-grey-65'
-      onBlur={onBlur}
-      onChange={onChange}
-      ref={ref}
+      required
+      {...props}
     />
   );
 };
