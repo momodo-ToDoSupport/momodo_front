@@ -4,7 +4,7 @@ interface OwnProps {
   children: string;
   onClick?(): void;
   disabled: boolean;
-  buttonSize: 'small' | 'medium' | 'large';
+  buttonSize?: 'small' | 'medium' | 'large';
 }
 
 const Button: React.FC<OwnProps> = ({
