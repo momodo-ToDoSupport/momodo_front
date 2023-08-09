@@ -26,13 +26,13 @@ accessInstance.interceptors.request.use(
       if (newAccessToken) {
         config.headers = {
           ...config.headers,
-          Authorization: `JWT ${newAccessToken}`,
+          Authorization: `Bearer ${newAccessToken}`,
         };
       }
     } else {
       config.headers = {
         ...config.headers,
-        Authorization: `JWT ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       };
     }
 
