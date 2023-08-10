@@ -1,7 +1,7 @@
 import React from 'react';
-import ChatBox from '../components/ChatBox';
-import ChatInput from '../components/ChatInput';
-import BasicHeader from '../components/Header/BasicHeader';
+import ChatBox from '../../components/ChatBox';
+import ChatInput from '../../components/ChatInput';
+import BasicHeader from '../../components/Header/BasicHeader';
 
 const chatroom = () => {
   return (

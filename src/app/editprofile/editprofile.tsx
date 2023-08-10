@@ -1,8 +1,8 @@
 import React from 'react';
-import BasicHeader from '../components/Header/BasicHeader';
-import ProfileForm from '../components/ProfileForm';
-import TabBar from '../components/TabBar';
-import EditProfileImg from '../components/UserProfile/EditProfileImg';
+import BasicHeader from '../../components/Header/BasicHeader';
+import ProfileForm from '../../components/ProfileForm';
+import TabBar from '../../components/TabBar';
+import EditProfileImg from '../../components/UserProfile/EditProfileImg';
 
 const editprofile = () => {
   return (

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { postKakaoLogin, sendKakaoToken } from '../api/kakao-login';
-import { useTokenCookies } from '../hooks/useTokenCookies';
+import { postKakaoLogin, sendKakaoToken } from '../../api/kakao-login';
+import { useTokenCookies } from '../../hooks/useTokenCookies';
 
 const KakaoLogin = () => {
   const router = useRouter();

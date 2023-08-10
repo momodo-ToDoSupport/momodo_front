@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import MonthCalender from '../components/Calender/MonthCalender';
-import UserProfile from '../components/UserProfile/UserProfile';
-import TabBar from '../components/TabBar';
-import TodoList from '../components/TodoList/TodoList';
-import WeeklyCalender from '../components/Calender/WeeklyCalender';
-import MainHeader from '../components/Header/MainHeader';
+import MonthCalender from '../../components/Calender/MonthCalender';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import TabBar from '../../components/TabBar';
+import TodoList from '../../components/TodoList/TodoList';
+import WeeklyCalender from '../../components/Calender/WeeklyCalender';
+import MainHeader from '../../components/Header/MainHeader';
 
 const MyTodo = () => {
   const [showMonthCalender, setShowMonthCalender] = useState<boolean>(true);
