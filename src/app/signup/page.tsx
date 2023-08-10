@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+"use client";
+
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { postSignup } from '../../api/auth';
