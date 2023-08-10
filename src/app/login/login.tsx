@@ -1,9 +1,11 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
-import { postUserLogin } from '../api/auth';
-import LoginForm from '../components/LoginForm';
-import { useTokenCookies } from '../hooks/useTokenCookies';
+"use client";
+
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useMutation } from "react-query";
+import { postUserLogin } from "../../api/auth";
+import LoginForm from "../../components/LoginForm";
+import { useTokenCookies } from "../../hooks/useTokenCookies";
 
 export interface LoginInput {
   userId: string;
@@ -12,10 +14,10 @@ export interface LoginInput {
 
 const Login = () => {
   const [inputValue, setInputValue] = useState<LoginInput>({
-    userId: '',
-    password: '',
+    userId: "",
+    password: "",
   });
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
   const { setAccessToken, setRefreshToken } = useTokenCookies();
@@ -25,7 +27,7 @@ const Login = () => {
       const { accessToken, refreshToken } = data.response;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
-      router.push('/mytodo');
+      router.push("/mytodo");
     },
     onError(error) {
       console.log(error);
@@ -41,16 +43,16 @@ const Login = () => {
     e.preventDefault();
 
     if (!inputValue.userId) {
-      return setErrorMsg('아이디를 입력해주세요.');
+      return setErrorMsg("아이디를 입력해주세요.");
     }
     if (!inputValue.password) {
-      return setErrorMsg('비밀번호를 입력해주세요.');
+      return setErrorMsg("비밀번호를 입력해주세요.");
     }
     mutation.mutate(inputValue);
   };
 
   return (
-    <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
+    <div className="p-6 pb-16 flex flex-col justify-between h-screen">
       <LoginForm
         onChange={handleChange}
         onSubmit={handleSubmit}

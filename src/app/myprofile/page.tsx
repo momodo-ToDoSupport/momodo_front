@@ -1,8 +1,8 @@
 import React from 'react';
-import MainHeader from '../components/Header/MainHeader';
-import TabBar from '../components/TabBar';
-import Tier from '../components/Tier';
-import UserProfile from '../components/UserProfile/UserProfile';
+import MainHeader from '../../components/header/MainHeader';
+import TabBar from '../../components/TabBar';
+import Tier from '../../components/Tier';
+import UserProfile from '../../components/UserProfile/UserProfile';
 
 const myprofile = () => {
   return (
