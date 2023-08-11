@@ -1,4 +1,4 @@
-import { LoginInput } from "../app/login/login";
+import { LoginInput } from "../app/login/page";
 import axios from "axios";
 import { InputValue } from "../components/SignupForm";
 import { Cookies } from "react-cookie";

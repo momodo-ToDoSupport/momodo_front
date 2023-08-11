@@ -1,35 +1,37 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useMutation } from 'react-query';
-import { postKakaoLogin, sendKakaoToken } from '../../../api/kakao-login';
-import { useTokenCookies } from '../../../hooks/useTokenCookies';
+"use client";
+
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { usetion } from "react-query";
+import { postKakaoLogin } from "../../api/kakao-login";
+import { useTokenCookies } from "../../hooks/useTokenCookies";
 
 const KakaoLogin = () => {
   const router = useRouter();
   const { code } = router.query;
   const { setAccessToken, setRefreshToken } = useTokenCookies();
 
-  const kakaoLoginMutation = useMutation((code: string | string[]) =>
+  const kakaoLogintion = usetion((code: string | string[]) =>
     postKakaoLogin(code)
   );
 
   useEffect(() => {
-    if (code && !kakaoLoginMutation.isLoading) {
-      kakaoLoginMutation.mutate(code);
+    if (code && !kakaoLogintion.isLoading) {
+      kakaoLogintion.te(code);
     }
   }, [code]);
 
   useEffect(() => {
     const handleKakaoLoginSuccess = async () => {
-      if (kakaoLoginMutation.isSuccess) {
-        const kakaoAccesstoken = kakaoLoginMutation.data.access_token;
+      if (kakaoLogintion.isSuccess) {
+        const kakaoAccesstoken = kakaoLogintion.data.access_token;
 
         try {
-          const response = await sendKakaoToken(kakaoAccesstoken);
+          const response = await kakaoAccesstoken;
           const { accessToken, refreshToken } = response.response;
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
-          router.push('/mytodo');
+          router.push("/mytodo");
         } catch (error) {
           console.log(error);
         }
@@ -37,8 +39,8 @@ const KakaoLogin = () => {
     };
     handleKakaoLoginSuccess();
   }, [
-    kakaoLoginMutation.isSuccess,
-    kakaoLoginMutation.data,
+    kakaoLogintion.isSuccess,
+    kakaoLogintion.data,
     router,
     setAccessToken,
     setRefreshToken,
