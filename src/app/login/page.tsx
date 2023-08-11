@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { postUserLogin } from "../../api/auth";
 import LoginForm from "../../components/LoginForm";
 import { useTokenCookies } from "../../hooks/useTokenCookies";
