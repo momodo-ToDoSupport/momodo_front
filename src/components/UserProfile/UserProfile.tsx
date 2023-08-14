@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import React from 'react';
 import tierIcon1 from '../../../public/images/tierIcon-red-1.svg';
 import FollowNumber from '../FollowNumber';
 import ProfileCard from './ProfileCard';
@@ -19,7 +18,13 @@ const UserProfile: React.FC<ProfileProps> = ({ option }) => {
           <FollowNumber number={0} title={'팔로잉'} />
         </div>
       ) : (
-        <Image width={51} height={37} src={tierIcon1} alt='티어 1단계' className='ml-auto' />
+        <Image
+          width={51}
+          height={37}
+          src={tierIcon1}
+          alt='티어 1단계'
+          className='ml-auto'
+        />
       )}
     </section>
   );
