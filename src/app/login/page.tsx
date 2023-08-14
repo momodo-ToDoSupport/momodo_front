@@ -6,6 +6,8 @@ import { getUserInfo, postUserLogin } from '../../api/auth';
 import LoginForm from '../../components/LoginForm';
 import { useTokenCookies } from '../../hooks/useTokenCookies';
 import { useRouter } from 'next/navigation';
+import { userAtom } from '../../store/authStore';
+import { useAtom } from 'jotai';
 
 export interface LoginInput {
   userId: string;
@@ -21,6 +23,7 @@ const Login = () => {
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
   const { setAccessToken, setRefreshToken } = useTokenCookies();
+  const [user, setUser] = useAtom(userAtom);
 
   const loginMutation = useMutation(postUserLogin, {
     onSuccess(data) {
@@ -28,6 +31,7 @@ const Login = () => {
       const { accessToken, refreshToken } = data.response;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
+      setUser({ ...user, isLoggedIn: true });
       router.push('/mytodo');
     },
     onError(error) {
@@ -37,7 +41,7 @@ const Login = () => {
 
   const userInfoMutation = useMutation(getUserInfo, {
     onSuccess(data) {
-      console.log(data);
+      setUser({ ...user, userId: data.userId });
     },
     onError(error) {
       console.error(error);
