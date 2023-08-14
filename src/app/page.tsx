@@ -4,7 +4,7 @@ import letterlogo from "../../public/images/momodo.svg";
 import Image from "next/image";
 import LoginButton from "../components/LoginButton";
 import Link from "next/link";
-import { kakaoAuthUrl } from "../api/kakao-login";
+import KakaoLoginButton from "../components/KakaoLoginButton";
 
 export const metadata: Metadata = {
   title: "momodo",
@@ -19,10 +19,9 @@ export default function Home() {
         <Image src={letterlogo} alt="레터링 로고 이미지" />
       </h1>
       <div className="text-center absolute mb-20">
-        {/* 서버 컴포넌트에서 통신과 관련되 */}
-        {/* <LoginButton type="kakao" href={kakaoAuthUrl}>
+        <KakaoLoginButton type="kakao">
           카카오톡 계정으로 로그인
-        </LoginButton> */}
+        </KakaoLoginButton>
         <LoginButton type="google" href="/signup">
           구글 계정으로 로그인
         </LoginButton>
