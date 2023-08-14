@@ -12,5 +12,11 @@ export const postUserLogin = async (formdata: LoginInput) => {
     '/api/v1/authentication/token',
     formdata
   );
+
+  return response.data;
+};
+
+export const getUserInfo = async (userId: string) => {
+  const response = await instance.get(`/api/v1/user-app/${userId}`);
   return response.data;
 };

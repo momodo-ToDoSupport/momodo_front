@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { postUserLogin } from '../../api/auth';
+import { getUserInfo, postUserLogin } from '../../api/auth';
 import LoginForm from '../../components/LoginForm';
 import { useTokenCookies } from '../../hooks/useTokenCookies';
 import { useRouter } from 'next/navigation';
+import { userAtom } from '../../store/authStore';
+import { useAtom } from 'jotai';
 
 export interface LoginInput {
   userId: string;
@@ -21,17 +23,28 @@ const Login = () => {
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
   const { setAccessToken, setRefreshToken } = useTokenCookies();
+  const [user, setUser] = useAtom(userAtom);
 
-  const mutation = useMutation(postUserLogin, {
+  const loginMutation = useMutation(postUserLogin, {
     onSuccess(data) {
       console.log(data);
       const { accessToken, refreshToken } = data.response;
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
+      setUser({ ...user, isLoggedIn: true });
       router.push('/mytodo');
     },
     onError(error) {
       console.log(error);
+    },
+  });
+
+  const userInfoMutation = useMutation(getUserInfo, {
+    onSuccess(data) {
+      setUser({ ...user, userId: data.userId });
+    },
+    onError(error) {
+      console.error(error);
     },
   });
 
@@ -49,7 +62,8 @@ const Login = () => {
     if (!inputValue.password) {
       return setErrorMsg('비밀번호를 입력해주세요.');
     }
-    mutation.mutate(inputValue);
+    loginMutation.mutate(inputValue);
+    userInfoMutation.mutate(inputValue.userId);
   };
 
   return (
