@@ -41,6 +41,9 @@ const Signup = () => {
     },
     onError(error) {
       console.error(error);
+      if (error.response.data.error.message === '회원 중복') {
+        alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
+      }
     },
   });
 
