@@ -9,12 +9,13 @@ interface ProfileImgProps {
   alt: string;
 }
 
-const ProfileImg: React.FC<ProfileImgProps> = ({ width, height, src, alt }) => {
+const ProfileImg: React.FC<ProfileImgProps> = ({
+  width,
+  height,
+  src = defaultProfileImg,
+  alt,
+}) => {
   return <Image width={width} height={height} src={src} alt={alt} />;
-};
-
-ProfileImg.defaultProps = {
-  src: defaultProfileImg,
 };
 
 export default ProfileImg;
