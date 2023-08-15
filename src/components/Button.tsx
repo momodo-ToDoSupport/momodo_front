@@ -3,7 +3,7 @@ import React from 'react';
 interface OwnProps {
   children: string;
   onClick?(): void;
-  disabled: boolean;
+  disabled?: boolean;
   buttonSize?: 'small' | 'medium' | 'large';
 }
 

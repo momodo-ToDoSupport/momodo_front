@@ -10,7 +10,7 @@ const KakaoLogin = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
-  console.log(code);
+
   const { setAccessToken, setRefreshToken } = useTokenCookies();
 
   const kakaoLoginMutation = useMutation((code: string | string[]) =>
