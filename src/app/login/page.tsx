@@ -29,6 +29,7 @@ const Login = () => {
     onSuccess(data) {
       console.log(data);
       const { accessToken, refreshToken } = data.response;
+      console.log(accessToken);
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
       setUser({ ...user, isLoggedIn: true });

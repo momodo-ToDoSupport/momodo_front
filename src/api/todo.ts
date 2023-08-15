@@ -3,6 +3,7 @@ import { accessInstance, instance } from './axios-api';
 
 export const postTodoData = async (tododata: TodoData) => {
   const response = await accessInstance.post('/api/v1/todos', tododata);
+  console.log('성공');
   return response.data;
 };
 
