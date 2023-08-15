@@ -1,35 +1,35 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { postKakaoLogin } from '../../api/kakao-login';
+import { postKakaoLogin, sendKakaoToken } from '../../api/kakao-login';
 import { useTokenCookies } from '../../hooks/useTokenCookies';
 
 const KakaoLogin = () => {
   const router = useRouter();
-  const { code } = router.query;
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code');
   console.log(code);
   const { setAccessToken, setRefreshToken } = useTokenCookies();
 
-  const kakaoLogintion = useMutation((code: string | string[]) =>
+  const kakaoLoginMutation = useMutation((code: string | string[]) =>
     postKakaoLogin(code)
   );
 
   useEffect(() => {
-    if (code && !kakaoLogintion.isLoading) {
-      kakaoLogintion.mutate(code);
+    if (code && !kakaoLoginMutation.isLoading) {
+      kakaoLoginMutation.mutate(code);
     }
   }, [code]);
 
   useEffect(() => {
     const handleKakaoLoginSuccess = async () => {
-      if (kakaoLogintion.isSuccess) {
-        const kakaoAccesstoken = kakaoLogintion.data.access_token;
-        console.log(kakaoAccesstoken);
+      if (kakaoLoginMutation.isSuccess) {
+        const kakaoAccesstoken = kakaoLoginMutation.data.access_token;
 
         try {
-          const response = await kakaoAccesstoken;
+          const response = await sendKakaoToken(kakaoAccesstoken);
           const { accessToken, refreshToken } = response.response;
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
@@ -41,8 +41,8 @@ const KakaoLogin = () => {
     };
     handleKakaoLoginSuccess();
   }, [
-    kakaoLogintion.isSuccess,
-    kakaoLogintion.data,
+    kakaoLoginMutation.isSuccess,
+    kakaoLoginMutation.data,
     router,
     setAccessToken,
     setRefreshToken,
