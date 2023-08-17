@@ -4,9 +4,12 @@ import 'moment/locale/ko';
 import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
+import CalendarButton from '../button/CalendarDayButton';
+import { getTodoData } from '../../api/todo';
 
 const MonthCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
+  const [selectedDate, setSelectedDate] = useState();
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -37,11 +40,18 @@ const MonthCalender = () => {
           .map(() => day.add(1, 'day').clone())
       );
     }
-
     return calendarData;
   };
-
   const calendarData = generateCalendarData();
+
+
+  const selectDate = (day) => {
+    setSelectedDate(day);
+    const selecctedDay = moment(day).format('YYYY-MM-DD');
+    const todoData = getTodoData(selecctedDay)
+    console.log(selecctedDay);
+    console.log(todoData);
+  };
 
   return (
     <section className='bg-[#242424] rounded-3xl px-5 py-4'>
@@ -65,17 +75,13 @@ const MonthCalender = () => {
         {calendarData.map((week, weekIndex) => (
           <React.Fragment key={weekIndex}>
             {week.map((day, dayIndex) => (
-              <button
+              <CalendarButton
                 key={dayIndex}
-                className={`flex justify-center items-center h-30 border border-black ${
-                  day.month() === currentMonth.month() ? '' : 'text-[#535252]'
-                } ${day.isSame(currentDate, 'day') ? 'relative' : ''}`}
-              >
-                {day.format('D')}
-                {day.isSame(currentDate, 'day') && (
-                  <span className='absolute top-[-7px] h-[6px] w-[6px] rounded-full bg-main-color'></span>
-                )}
-              </button>
+                day={day}
+                currentMonth={currentMonth}
+                currentDate={currentDate}
+                onClick={() => selectDate(day)}
+              />
             ))}
           </React.Fragment>
         ))}

@@ -6,8 +6,13 @@ export const postTodoData = async (tododata: TodoData) => {
   return response.data;
 };
 
-export const getTodoData = async (dueDate: string) => {
-  const response = await accessInstance.get('/api/v1/todos', dueDate);
+export const getTodoData = async (dueDatekey: string) => {
+  const response = await accessInstance.get('/api/v1/todos/date', {
+    params: {
+      dueDate: dueDatekey,
+    },
+  });
   console.log(response);
   return response.data;
 };
+
