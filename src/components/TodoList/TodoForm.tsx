@@ -19,6 +19,7 @@ export interface TodoData {
   emoji: string;
   dueDate: string;
   repeatDays: string;
+  duration: string;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
@@ -68,9 +69,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       title: todoValue,
       emoji: todoEmoji,
       dueDate: curretDate,
-      repeatDays,
+      repeatDays: '0',
+      duration: '0',
     };
 
+    console.log(todoData);
     mutation.mutate(todoData);
 
     setTodoValue('');
