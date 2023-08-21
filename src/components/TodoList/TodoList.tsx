@@ -8,8 +8,22 @@ import AddButton from '../AddButton';
 import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
 
-const TodoList = () => {
+interface TaskData {
+  id: string;
+  title: string;
+  emoji: string;
+  dueDate: string;
+  completed: string;
+};
+
+interface Props {
+  selectedDate: string;
+  todoList: TaskData[];
+}
+
+const TodoList: React.FC<Props> = ({ selectedDate, todoList }) => {
   const { modalOpen, openModal, closeModal } = useModal();
+
   return (
     <section className={`mt-8`}>
       <h2 className='hidden'>투두리스트</h2>
@@ -18,7 +32,7 @@ const TodoList = () => {
         <AddButton openModal={openModal} />
       </div>
       <ul>
-        <Todo />
+        <Todo selectedDate={selectedDate} todoList={todoList} />
       </ul>
       {modalOpen && <Modal type='newtodo' closeModal={closeModal} />}
     </section>

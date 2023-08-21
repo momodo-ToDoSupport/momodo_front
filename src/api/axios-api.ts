@@ -30,7 +30,6 @@ accessInstance.interceptors.request.use(
         };
       }
     } else {
-      console.log(accessToken);
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${accessToken}`,
