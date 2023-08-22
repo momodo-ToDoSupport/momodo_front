@@ -31,7 +31,7 @@ const MonthCalender = () => {
   const calendarData = generateCalendarData();
 
   // 클릭한 날짜 추출
-  const selectDate = async (day) => {
+  const selectDate = async (day:any) => {
     const selecctedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selecctedDay);
     const data = await getTodoData(selecctedDay);
