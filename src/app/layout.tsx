@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import Provider from '../queryContext/Provider';
+import { Providers } from '../queryContext/Providers';
 import { Noto_Sans_KR } from '@next/font/google';
 
 const notosanskr = Noto_Sans_KR({
@@ -16,7 +16,7 @@ export default function RootLayout({
     <html>
       <body>
         <main className='flex flex-col items-center h-screen w-full'>
-          <Provider>{children}</Provider>
+          <Providers>{children}</Providers>
         </main>
       </body>
     </html>

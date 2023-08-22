@@ -7,8 +7,8 @@ import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import { getTodoData } from '../../api/todo';
-import TodoList from '../TodoList/TodoList';
-import { generateCalendarData } from '../../utils/dateDataCreate'; // 모듈 import
+import TodoList from '../client/Todo/TodoList.client';
+import { generateCalendarData } from '../../utils/dateDataCreate';
 
 const MonthCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
@@ -31,11 +31,13 @@ const MonthCalender = () => {
   const calendarData = generateCalendarData();
 
   // 클릭한 날짜 추출
-  const selectDate = async (day:any) => {
+  const selectDate = async (day: any) => {
     const selecctedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selecctedDay);
     const data = await getTodoData(selecctedDay);
     setTodolist(data);
+    console.log('선택한 날짜' + selectedDate);
+    console.log('선택한 날짜 todolist' + todoList);
   };
   return (
     <>
@@ -77,7 +79,7 @@ const MonthCalender = () => {
           ))}
         </div>
       </section>
-      <TodoList selectedDate={selectedDate} todoList={todoList} />
+      <TodoList />
     </>
   );
 };

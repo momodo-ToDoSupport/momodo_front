@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { getUserInfo, postUserLogin } from '../../api/auth';
 import LoginForm from '../../components/LoginForm';
-import { useTokenCookies } from '../../hooks/useTokenCookies';
+// import { useTokenCookies } from '../../hooks/useTokenCookies';
 import { useRouter } from 'next/navigation';
 import { userAtom } from '../../store/authStore';
 import { useAtom } from 'jotai';
@@ -22,7 +22,7 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
-  const { setAccessToken, setRefreshToken } = useTokenCookies();
+  // const { setAccessToken, setRefreshToken } = useTokenCookies();
   const [user, setUser] = useAtom(userAtom);
 
   const loginMutation = useMutation(postUserLogin, {
@@ -30,8 +30,9 @@ const Login = () => {
       console.log(data);
       const { accessToken, refreshToken } = data.response;
       console.log(accessToken);
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
+      // setAccessToken(accessToken);
+      localStorage.setItem('accessToken',accessToken);
+      // setRefreshToken(refreshToken);
       setUser({ ...user, isLoggedIn: true });
       router.push('/mytodo');
     },

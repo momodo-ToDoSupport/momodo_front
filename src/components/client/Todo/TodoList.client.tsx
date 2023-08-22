@@ -3,19 +3,21 @@
 import Image from 'next/image';
 import React from 'react';
 import Todo from './Todo.client';
-import todayTodos from '../../../public/images/today-todos.svg';
+import todayTodos from '../../../../public/images/today-todos.svg';
 import AddButton from '../../AddButton';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
-import { getTodoData } from '../../../api/todo';
+// import { getTodoData } from '../../../api/todo';
+import { getTodoListQueryFns } from '../../../queryFns/todoListQueryFns';
+import moment from 'moment';
 
 interface TaskData {
-  id: string;
+  id: number;
   title: string;
   emoji: string;
   dueDate: string;
-  completed: string;
+  completed: boolean;
 }
 
 interface Props {
@@ -25,7 +27,13 @@ interface Props {
 
 const TodoList: React.FC = () => {
   const { modalOpen, openModal, closeModal } = useModal();
-  const { data } = useQuery({queryKey: ['todolist'],queryFn: getTodoData});
+  const selectedDay = moment().format('YYYY-MM-DD');
+
+  const { data } = useQuery<TaskData[]>({
+    queryKey: ['todolist', selectedDay],
+    queryFn: () => getTodoListQueryFns(selectedDay),
+  });
+  console.log(data);
 
   if (!data) return <div>Not found</div>;
 
@@ -37,7 +45,9 @@ const TodoList: React.FC = () => {
         <AddButton openModal={openModal} />
       </div>
       <ul>
-        <Todo />
+        {data.map((todoList) => (
+          <Todo todoList={todoList} key={todoList.id} />
+        ))}
       </ul>
       {modalOpen && <Modal type='newtodo' closeModal={closeModal} />}
     </section>

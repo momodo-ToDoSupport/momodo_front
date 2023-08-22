@@ -4,14 +4,14 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { postKakaoLogin, sendKakaoToken } from '../../api/kakao-login';
-import { useTokenCookies } from '../../hooks/useTokenCookies';
+// import { useTokenCookies } from '../../hooks/useTokenCookies';
 
 const KakaoLogin = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
 
-  const { setAccessToken, setRefreshToken } = useTokenCookies();
+  // const { setAccessToken, setRefreshToken } = useTokenCookies();
 
   const kakaoLoginMutation = useMutation((code: string | string[]) =>
     postKakaoLogin(code)
@@ -21,7 +21,7 @@ const KakaoLogin = () => {
     if (code && !kakaoLoginMutation.isLoading) {
       kakaoLoginMutation.mutate(code);
     }
-  }, [code]);
+  });
 
   useEffect(() => {
     const handleKakaoLoginSuccess = async () => {
@@ -31,8 +31,9 @@ const KakaoLogin = () => {
         try {
           const response = await sendKakaoToken(kakaoAccesstoken);
           const { accessToken, refreshToken } = response.response;
-          setAccessToken(accessToken);
-          setRefreshToken(refreshToken);
+          // setAccessToken(accessToken);
+          localStorage.setItem('accessToken', accessToken);
+          // setRefreshToken(refreshToken);
           router.push('/mytodo');
         } catch (error) {
           console.log(error);
@@ -40,13 +41,7 @@ const KakaoLogin = () => {
       }
     };
     handleKakaoLoginSuccess();
-  }, [
-    kakaoLoginMutation.isSuccess,
-    kakaoLoginMutation.data,
-    router,
-    setAccessToken,
-    setRefreshToken,
-  ]);
+  }, [kakaoLoginMutation.isSuccess, kakaoLoginMutation.data, router]);
 
   return <div>로그인중...</div>;
 };
