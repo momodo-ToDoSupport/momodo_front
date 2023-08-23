@@ -1,18 +1,11 @@
-import { useCookies } from 'react-cookie';
+// import { cookies } from 'next/headers';
 
-export const useTokenCookies = () => {
-  const [cookies, setCookie] = useCookies(['refreshtoken']);
+// const cookieStore = cookies();
 
-  const setAccessToken = (accessToken: string) => {
-    localStorage.setItem('accessToken', accessToken);
-  };
+// export const setCookie = (token: string) => {
+//   cookieStore.set(`${token}`, token);
+// };
 
-  const setRefreshToken = (refreshToken: string) => {
-    setCookie('refreshtoken', refreshToken, {
-      path: '/',
-      httpOnly: true,
-    });
-  };
-
-  return { setAccessToken, setRefreshToken };
-};
+// export const getCookie = (token: string) => {
+//   return cookieStore.get(`${token}`);
+// };

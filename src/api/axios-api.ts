@@ -1,9 +1,12 @@
-import { LoginInput } from '../app/login/page';
-import axios from 'axios';
-import { InputValue } from '../components/SignupForm';
-import { Cookies } from 'react-cookie';
+// import { getCookie, useCookies } from 'cookies-next';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import { getCookie } from '../app/action';
 
-const cookies = new Cookies();
+interface MoAxiosRequestConfig extends AxiosRequestConfig {
+  headers: {
+    [key: string]: string | undefined;
+  };
+}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -18,26 +21,27 @@ export const accessInstance = axios.create({
 });
 
 accessInstance.interceptors.request.use(
-  async (config: any) => {
-    const accessToken = localStorage.getItem('accessToken');
+  async (config) => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
 
-    if (!accessToken) {
-      const newAccessToken = await refreshAccessToken();
+      const newAccessToken = accessToken || (await refreshAccessToken());
+
+      console.log('intercepter newAccessToken', newAccessToken);
+
       if (newAccessToken) {
         config.headers = {
           ...config.headers,
           Authorization: `Bearer ${newAccessToken}`,
         };
       }
-    } else {
-      console.log(accessToken);
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${accessToken}`,
-      };
-    }
 
-    return config;
+      return config;
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem('accessToken');
+      return Promise.reject(error);
+    }
   },
   (error) => {
     return Promise.reject(error);
@@ -45,16 +49,17 @@ accessInstance.interceptors.request.use(
 );
 
 // AccessToken 재발급
-const refreshAccessToken = async (): Promise<string | null> => {
-  const token = cookies.get('refreshtoken');
+export const refreshAccessToken = async () => {
+  const token = await getCookie('refreshToken');
 
   if (!token) {
-    window.location.href = '/login';
+    // TODO: 모달형태로 알림 제공하고 모달 내에서 로그인 페이지로 이동하는 버튼 제공하기
     alert('다시 로그인해주세요.');
+    window.location.href = '/login';
   }
 
   try {
-    const response = await instance.put('/api/v1/authentication/token', {
+    const response = await accessInstance.put('/api/v1/authentication/token', {
       token,
     });
 
@@ -63,6 +68,7 @@ const refreshAccessToken = async (): Promise<string | null> => {
 
     if (response.data?.response.accessToken) {
       const newAccessToken = response.data.response.accessToken;
+      console.log(newAccessToken);
       localStorage.setItem('accessToken', newAccessToken);
       return newAccessToken;
     } else {
