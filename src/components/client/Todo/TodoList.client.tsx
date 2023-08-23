@@ -7,12 +7,11 @@ import todayTodos from '../../../../public/images/today-todos.svg';
 import AddButton from '../../AddButton';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
-import { useQuery } from '@tanstack/react-query';
-// import { getTodoData } from '../../../api/todo';
-import { getTodoListQueryFns } from '../../../queryFns/todoListQueryFns';
 import moment from 'moment';
+import { useQuery } from '@tanstack/react-query';
+import { getTodoListQueryFns } from '../../../queryFns/todoListQueryFns';
 
-interface TaskData {
+interface TodoData {
   id: number;
   title: string;
   emoji: string;
@@ -22,20 +21,21 @@ interface TaskData {
 
 interface Props {
   selectedDate: string;
-  todoList: TaskData[];
 }
 
-const TodoList: React.FC = () => {
+const TodoList: React.FC<Props> = ({ selectedDate }) => {
   const { modalOpen, openModal, closeModal } = useModal();
-  const selectedDay = moment().format('YYYY-MM-DD');
+  const showTodoListDate = selectedDate || moment().format('YYYY-MM-DD');
 
-  const { data } = useQuery<TaskData[]>({
-    queryKey: ['todolist', selectedDay],
-    queryFn: () => getTodoListQueryFns(selectedDay),
+  // react-Query를 활용한 Data Fetching
+  const { data, isLoading, isError } = useQuery<TodoData[]>({
+    queryKey: ['todolist', showTodoListDate],
+    queryFn: () => getTodoListQueryFns(showTodoListDate),
   });
-  console.log(data);
 
-  if (!data) return <div>Not found</div>;
+  if (!data) return <div>작성된 Todo가 없습니다.</div>;
+  if (isLoading) return <div>TodoList를 불러오고있습니다.</div>;
+  if (isError) return <div>잘못된 페이지 입니다. Error!! </div>;
 
   return (
     <section className={`mt-8`}>

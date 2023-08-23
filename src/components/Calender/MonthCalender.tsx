@@ -13,7 +13,6 @@ import { generateCalendarData } from '../../utils/dateDataCreate';
 const MonthCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
   const [selectedDate, setSelectedDate] = useState('');
-  const [todoList, setTodolist] = useState([]);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -30,14 +29,11 @@ const MonthCalender = () => {
   // 현재 월의 캘린더 데이터를 생성하는 함수
   const calendarData = generateCalendarData();
 
-  // 클릭한 날짜 추출
+  // 클릭한 날짜 추출 (day type 수정필요)
   const selectDate = async (day: any) => {
-    const selecctedDay = moment(day).format('YYYY-MM-DD');
-    setSelectedDate(selecctedDay);
-    const data = await getTodoData(selecctedDay);
-    setTodolist(data);
+    const selectedDay = moment(day).format('YYYY-MM-DD');
+    setSelectedDate(selectedDay);
     console.log('선택한 날짜' + selectedDate);
-    console.log('선택한 날짜 todolist' + todoList);
   };
   return (
     <>
@@ -79,7 +75,7 @@ const MonthCalender = () => {
           ))}
         </div>
       </section>
-      <TodoList />
+      <TodoList selectedDate={selectedDate}/>
     </>
   );
 };
