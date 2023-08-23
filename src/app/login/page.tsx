@@ -33,10 +33,6 @@ const Login = () => {
       setCookie('refreshToken', refreshToken);
       setUser({ ...user, isLoggedIn: true });
       router.push('/mytodo');
-      const readCookie = getCookie(refreshToken).then((data) =>
-        console.log(data)
-      );
-      console.log('readCookie', readCookie);
     },
     onError(error) {
       console.log(error);
