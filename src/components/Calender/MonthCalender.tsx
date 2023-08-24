@@ -7,13 +7,12 @@ import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import { getTodoData } from '../../api/todo';
-import TodoList from '../TodoList/TodoList';
-import { generateCalendarData } from '../../utils/dateDataCreate'; // 모듈 import
+import TodoList from '../client/Todo/TodoList.client';
+import { generateCalendarData } from '../../utils/dateDataCreate';
 
 const MonthCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
   const [selectedDate, setSelectedDate] = useState('');
-  const [todoList, setTodolist] = useState([]);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -30,12 +29,11 @@ const MonthCalender = () => {
   // 현재 월의 캘린더 데이터를 생성하는 함수
   const calendarData = generateCalendarData();
 
-  // 클릭한 날짜 추출
-  const selectDate = async (day) => {
-    const selecctedDay = moment(day).format('YYYY-MM-DD');
-    setSelectedDate(selecctedDay);
-    const data = await getTodoData(selecctedDay);
-    setTodolist(data);
+  // 클릭한 날짜 추출 (day type 수정필요)
+  const selectDate = async (day: any) => {
+    const selectedDay = moment(day).format('YYYY-MM-DD');
+    setSelectedDate(selectedDay);
+    console.log('선택한 날짜' + selectedDate);
   };
   return (
     <>
@@ -77,7 +75,7 @@ const MonthCalender = () => {
           ))}
         </div>
       </section>
-      <TodoList selectedDate={selectedDate} todoList={todoList} />
+      <TodoList selectedDate={selectedDate}/>
     </>
   );
 };
