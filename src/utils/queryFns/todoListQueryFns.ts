@@ -1,10 +1,9 @@
-import { accessInstance } from '../api/axios-api';
-
+import { accessInstance } from '../../service/axios-api';
 
 export const getTodoListQueryFns = async (dueDatekey: string) => {
   const response = await accessInstance.get('/api/v1/todos/date', {
     params: {
-      dueDate: dueDatekey
+      dueDate: dueDatekey,
     },
   });
   console.log('성공');
@@ -16,7 +15,7 @@ export const getTodoListQueryFns = async (dueDatekey: string) => {
 export const getTodoListQueryFnss = async () => {
   const response = await accessInstance.get('/api/v1/todos/date', {
     params: {
-      dueDate: "2023-08-23"
+      dueDate: '2023-08-23',
     },
   });
   console.log('성공');

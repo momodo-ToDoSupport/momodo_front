@@ -18,10 +18,12 @@ accessInstance.interceptors.request.use(
   async (config) => {
     const accessToken = localStorage.getItem('accessToken');
 
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${accessToken}`,
-    };
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    // ts.error 발생으로 위 소스코드로 대체하였음. 확인 후 수정 삭제필요
+    // config.headers = {
+    //   ...config.headers,
+    //   Authorization: `Bearer ${accessToken}`,
+    // };
 
     return config;
   },
