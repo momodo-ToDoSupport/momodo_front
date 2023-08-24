@@ -4,7 +4,7 @@ import React from 'react';
 import kakao from '../../public/images/kakao-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { kakaoAuthUrl } from '../api/kakao-login';
+import { kakaoAuthUrl } from '../service/kakao-login';
 
 interface LoginButtonProps {
   children: React.ReactNode;
