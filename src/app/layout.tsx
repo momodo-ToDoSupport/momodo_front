@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import { Providers } from '../queryContext/Providers';
 import { Noto_Sans_KR } from '@next/font/google';
 
+
 const notosanskr = Noto_Sans_KR({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
