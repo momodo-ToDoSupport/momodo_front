@@ -3,7 +3,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { postKakaoLogin, sendKakaoToken } from '../../api/kakao-login';
+import { postKakaoLogin, sendKakaoToken } from '../../service/kakao-login';
 // import { useTokenCookies } from '../../hooks/useTokenCookies';
 
 const KakaoLogin = () => {
