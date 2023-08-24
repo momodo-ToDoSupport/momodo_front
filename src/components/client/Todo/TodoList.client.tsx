@@ -10,14 +10,7 @@ import Modal from '../../Modal/Modal';
 import moment from 'moment';
 import { useQuery } from '@tanstack/react-query';
 import { getTodoListQueryFns } from '../../../utils/queryFns/todoListQueryFns';
-
-interface TodoData {
-  id: number;
-  title: string;
-  emoji: string;
-  dueDate: string;
-  completed: boolean;
-}
+import { TodoData } from '../../../types/todolistType';
 
 interface Props {
   selectedDate: string;

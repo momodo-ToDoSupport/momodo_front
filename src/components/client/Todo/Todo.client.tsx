@@ -1,20 +1,15 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import React from 'react';
 import editTodo from '../../../../public/images/editTodoIcon.svg';
 import checkbutton from '../../../../public/images/checkButtonIcon.svg';
+import { TodoData } from '../../../types/todolistType';
 
-interface TaskData {
-  todoList: {
-    id: number;
-    title: string;
-    emoji: string;
-    dueDate: string;
-    completed: boolean;
-  };
+interface Props {
+  todoList: TodoData;
 }
-const Todo: React.FC<TaskData> = ({ todoList }) => {
+const Todo: React.FC<Props> = ({ todoList }) => {
   return (
     <>
       <li className='flex items-center relative w-7/8 bg-white p-3 mb-2 rounded-2xl'>
