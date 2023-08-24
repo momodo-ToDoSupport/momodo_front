@@ -40,7 +40,6 @@ accessInstance.interceptors.response.use(
   }
 );
 
-// AccessToken 재발급
 export const refreshAccessToken = async () => {
   const token = await getCookie('refreshToken');
   console.log('token', token);
