@@ -45,7 +45,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     { value: '6', name: '토요일 마다' },
   ];
 
-  const handleTodoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  // 98~103 line에서 onChange error 발생해서 임의로 변경하였음. 수정필요
+  const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
   };
 

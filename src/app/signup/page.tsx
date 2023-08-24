@@ -39,7 +39,8 @@ const Signup = () => {
       router.push('/login');
       alert('회원가입이 완료되었습니다 😄');
     },
-    onError(error) {
+    // error type 수정 필요
+    onError(error:any) {
       console.error(error);
       if (error.response?.data?.error.message === '회원 중복') {
         alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');

@@ -22,7 +22,6 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
-  // const { setAccessToken, setRefreshToken } = useTokenCookies();
   const [user, setUser] = useAtom(userAtom);
 
   const loginMutation = useMutation(postUserLogin, {
