@@ -1,15 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import editTodo from '../../../../public/images/editTodoIcon.svg';
-import checkbutton from '../../../../public/images/checkButtonIcon.svg';
 import { TodoData } from '../../../types/todolistType';
+import ToggleCheckButton from '../../button/ToggleCheckButton';
 
 interface Props {
   todoList: TodoData;
 }
 const Todo: React.FC<Props> = ({ todoList }) => {
+  const [checked, setChecked] = useState(false);
   return (
     <>
       <li className='flex items-center relative w-7/8 bg-white p-3 mb-2 rounded-2xl'>
@@ -21,9 +22,7 @@ const Todo: React.FC<Props> = ({ todoList }) => {
           <button className='mr-3'>
             <Image src={editTodo} alt='투두 수정하기' />
           </button>
-          <button>
-            <Image src={checkbutton} alt='투두 체크' />
-          </button>
+          <ToggleCheckButton toggled={checked} onToggle={setChecked}/>
         </div>
       </li>
     </>
