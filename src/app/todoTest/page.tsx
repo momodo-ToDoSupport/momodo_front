@@ -5,13 +5,13 @@ import MainHeader from '../../components/header/MainHeader';
 import MonthCalender from '../../components/Calender/MonthCalender';
 import getQueryClient from '../getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
-import { getTodoListQueryFnss } from '../../queryFns/todoListQueryFns';
-import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet'
-import TodolistTest from '../../components/client/Todo/TodoListTest.client'
+import { getTodoListQueryFnss } from '../../utils/queryFns/todoListQueryFns';
+import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
+import TodolistTest from '../../components/client/Todo/TodoListTest.client';
 
-const MyTodo = async() => {
+const MyTodo = async () => {
   const queryclient = getQueryClient();
-  await queryclient.prefetchQuery(['todolist'],getTodoListQueryFnss);
+  await queryclient.prefetchQuery(['todolist'], getTodoListQueryFnss);
   const dehydarate = dehydrate(queryclient);
   console.log(queryclient);
 

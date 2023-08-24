@@ -9,7 +9,7 @@ import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
 import moment from 'moment';
 import { useQuery } from '@tanstack/react-query';
-import { getTodoListQueryFns } from '../../../queryFns/todoListQueryFns';
+import { getTodoListQueryFns } from '../../../utils/queryFns/todoListQueryFns';
 
 interface TodoData {
   id: number;
