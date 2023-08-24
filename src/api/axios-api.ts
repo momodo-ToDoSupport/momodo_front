@@ -1,13 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { getCookie } from '../app/action';
 import { putRefreshToken } from './auth';
-
-interface MoAxiosRequestConfig extends AxiosRequestConfig {
-  headers: {
-    [key: string]: string | undefined;
-  };
-}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
