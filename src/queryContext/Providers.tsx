@@ -3,6 +3,7 @@
 import React, { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Provider as JotaiProvider } from 'jotai';
 
 const queryClientOptions = {
   defaultOptions: {
@@ -21,7 +22,7 @@ export const Providers = ({ children }: Props) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <JotaiProvider>{children}</JotaiProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

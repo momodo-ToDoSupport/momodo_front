@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { getCookie } from '../app/action';
 import { putRefreshToken } from './auth';
 
