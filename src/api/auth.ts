@@ -20,3 +20,8 @@ export const getUserInfo = async (userId: string) => {
   const response = await instance.get(`/api/v1/user-app/${userId}`);
   return response.data;
 };
+
+export const putRefreshToken = async (token: string | undefined) => {
+  const response = await instance.put('/api/v1/authentication/token', token);
+  return response.data.response;
+};

@@ -1,6 +1,6 @@
-import { LoginInput } from '../app/login/page';
-import { InputValue } from '../components/SignupForm';
 import axios from 'axios';
+import { getCookie } from '../app/action';
+import { putRefreshToken } from './auth';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -15,22 +15,14 @@ export const accessInstance = axios.create({
 });
 
 accessInstance.interceptors.request.use(
-  async (config: any) => {
+  async (config) => {
     const accessToken = localStorage.getItem('accessToken');
 
-    // if (!accessToken) {
-    //   const newAccessToken = await refreshAccessToken();
-    //   if (newAccessToken) {
-    //     config.headers = {
-    //       ...config.headers,
-    //       Authorization: `Bearer ${newAccessToken}`,
-    //     };
-    //   }
-    // }
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${accessToken}`,
     };
+
     return config;
   },
   (error) => {
@@ -38,34 +30,37 @@ accessInstance.interceptors.request.use(
   }
 );
 
-// AccessToken 재발급
-// const refreshAccessToken = async (): Promise<string | null> => {
-//   // const token = cookies.get('refreshtoken');
+accessInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const newAccessToken = await refreshAccessToken();
+    console.log('refresh AccessToken!');
+  }
+);
 
-//   if (!token) {
-//     window.location.href = '/login';
-//     alert('다시 로그인해주세요.');
-//   }
+export const refreshAccessToken = async () => {
+  const token = await getCookie('refreshToken');
+  console.log('token', token);
 
-//   try {
-//     const response = await instance.put('/api/v1/authentication/token', {
-//       token,
-//     });
+  if (!token) {
+    // TODO: 모달형태로 알림 제공하고 모달 내에서 로그인 페이지로 이동하는 버튼 제공하기
+    alert('다시 로그인해주세요.');
+    window.location.href = '/login';
+  }
 
-//     // TODO: 추후 access토큰 만료시 변경하기
-//     console.log(response.data);
+  try {
+    const response = await putRefreshToken(token);
 
-//     if (response.data?.response.accessToken) {
-//       const newAccessToken = response.data.response.accessToken;
-//       localStorage.setItem('accessToken', newAccessToken);
-//       return newAccessToken;
-//     } else {
-//       // TODO: 새로운 accessToken을 받아오지 못한 경우 처리
-//       return null;
-//     }
-//   } catch (error) {
-//     // TODO: 요청 실패 또는 에러 발생 시 처리
-//     console.error('Failed to refresh accessToken:', error);
-//     return null;
-//   }
-// };
+    if (response.accessToken) {
+      const newAccessToken = response.accessToken;
+      localStorage.setItem('accessToken', newAccessToken);
+      return newAccessToken;
+    }
+  } catch (error) {
+    // TODO: 요청 실패 또는 에러 발생 시 처리
+    console.error('Failed to refresh accessToken:', error);
+    return null;
+  }
+};
