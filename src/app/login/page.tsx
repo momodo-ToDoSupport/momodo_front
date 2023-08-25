@@ -5,9 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { getUserInfo, postUserLogin } from '../../api/auth';
 import LoginForm from '../../components/LoginForm';
 import { useRouter } from 'next/navigation';
-import { userAtom } from '../../store/authStore';
-import { useAtom } from 'jotai';
-import { setCookie, getCookie } from '../action';
+import { setCookie } from '../action';
 
 export interface LoginInput {
   userId: string;
@@ -22,7 +20,6 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
   const isInputValue = !inputValue.userId || !inputValue.password;
-  const [user, setUser] = useAtom(userAtom);
 
   const loginMutation = useMutation(postUserLogin, {
     onSuccess(data) {
@@ -30,7 +27,6 @@ const Login = () => {
       const { accessToken, refreshToken } = data.response;
       localStorage.setItem('accessToken', accessToken);
       setCookie('refreshToken', refreshToken);
-      setUser({ ...user, isLoggedIn: true });
       router.push('/mytodo');
     },
     onError(error) {
@@ -40,7 +36,7 @@ const Login = () => {
 
   const userInfoMutation = useMutation(getUserInfo, {
     onSuccess(data) {
-      setUser({ ...user, userId: data.userId });
+      localStorage.setItem('userId', data.userId);
     },
     onError(error) {
       console.error(error);
