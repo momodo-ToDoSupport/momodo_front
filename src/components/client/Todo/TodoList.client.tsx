@@ -25,6 +25,7 @@ const TodoList: React.FC<Props> = ({ selectedDate }) => {
     queryKey: ['todolist', showTodoListDate],
     queryFn: () => getTodoListQueryFns(showTodoListDate),
   });
+  console.log(data);
 
   if (!data) return <div>작성된 Todo가 없습니다.</div>;
   if (isLoading) return <div>TodoList를 불러오고있습니다.</div>;
