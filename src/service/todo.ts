@@ -23,3 +23,9 @@ export const getTodoData = async (dueDatekey: string) => {
   const data = response.data;
   return data;
 };
+
+export const todoCompleted = async (id:number) => {
+  const response = await accessInstance.patch(`/api/v1/todos/${id}/complete`)
+  console.log('성공');
+  return response
+};
