@@ -27,3 +27,12 @@ export const sendKakaoToken = async (accesstoken: string) => {
   });
   return response.data;
 };
+
+export const getKakaoUser = async (kakaoToken: string) => {
+  const response = await instance.get('https://kapi.kakao.com/v2/user/me', {
+    headers: {
+      Authorization: `Bearer ${kakaoToken}`,
+    },
+  });
+  return response.data;
+};
