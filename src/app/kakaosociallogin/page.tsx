@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import { kakaoAuthUrl } from '../../api/kakao-login';
+import { kakaoAuthUrl } from '../../service/kakao-login';
 import Button from '../../components/Button';
 
 const page = () => {

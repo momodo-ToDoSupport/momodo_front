@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { getUserInfo, postUserLogin } from '../../api/auth';
+import { getUserInfo, postUserLogin } from '../../service/auth';
 import LoginForm from '../../components/LoginForm';
 import { useRouter } from 'next/navigation';
 import { setCookie } from '../action';

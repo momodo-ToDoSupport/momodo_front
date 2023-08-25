@@ -6,7 +6,6 @@ import 'moment/locale/ko';
 import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
-import { getTodoData } from '../../api/todo';
 import TodoList from '../client/Todo/TodoList.client';
 import { generateCalendarData } from '../../utils/dateDataCreate';
 

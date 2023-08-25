@@ -6,9 +6,9 @@ import MonthCalender from '../../components/Calender/MonthCalender';
 import getQueryClient from '../getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
 import { getTodoListQueryFns } from '../../queryFns/todoListQueryFns';
-import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
+import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet'
 
-const MyTodo = async () => {
+const MyTodo = async() => {
   // const queryclient = getQueryClient();
   // {/* @ts-expect-error Server Component */}
   // await queryclient.prefetchQuery(['todolist'],getTodoListQueryFns);
@@ -19,7 +19,7 @@ const MyTodo = async () => {
       <MainHeader option='todo' />
       <UserProfile />
       {/* <HydrateTodoList state={dehydarate}> */}
-      <MonthCalender />
+        <MonthCalender />
       {/* </HydrateTodoList> */}
       <TabBar />
     </div>

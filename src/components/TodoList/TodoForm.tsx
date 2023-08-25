@@ -7,7 +7,7 @@ import Button from '../Button';
 import TodoEmoji from './TodoEmoji';
 import moment from 'moment';
 import { useMutation } from '@tanstack/react-query';
-import { postTodoData } from '../../api/todo';
+import { postTodoData } from '../../service/todo';
 
 interface TodoFormProps {
   type: string;

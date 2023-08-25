@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import { Providers } from '../queryContext/Providers';
+import { Providers } from '../Context/Providers';
 import { Noto_Sans_KR } from '@next/font/google';
 
 
