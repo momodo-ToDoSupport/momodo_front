@@ -30,10 +30,9 @@ const KakaoLogin = () => {
 
         try {
           const response = await sendKakaoToken(kakaoAccesstoken);
-          const { accessToken, refreshToken } = response.response;
-          // setAccessToken(accessToken);
+          console.log(response.response);
+          const { accessToken } = response.response;
           localStorage.setItem('accessToken', accessToken);
-          // setRefreshToken(refreshToken);
           router.push('/mytodo');
         } catch (error) {
           console.log(error);
