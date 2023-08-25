@@ -36,8 +36,7 @@ const Login = () => {
 
   const userInfoMutation = useMutation(getUserInfo, {
     onSuccess(data) {
-      console.log(data);
-      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('userId', data.name);
     },
     onError(error) {
       console.error(error);
