@@ -8,6 +8,7 @@ type Props = {
 };
 
 const TodoCheckButton: React.FC<Props> = ({ toggled, onToggle }) => {
+
   return (
     <button onClick={() => onToggle(!toggled)}>
       {toggled ? (
