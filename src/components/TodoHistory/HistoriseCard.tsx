@@ -4,7 +4,7 @@ import checkBtnActive from '../../../public/images/check-btn-active.svg';
 
 const HistoriseCard = () => {
   return (
-    <div className='flex-col p-2 border h-52 overflow-hidden'>
+    <div className='flex-col bg-[#444444] p-2 max-w-md h-52 rounded-lg overflow-hidden'>
     <p className='mb-4'>dueDate : 2023-08-25</p>
     <ul className='shrink h-32'>
       <li className='flex gap-2'>
