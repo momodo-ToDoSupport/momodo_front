@@ -1,6 +1,8 @@
 'use client';
+
 import React, { useState } from 'react';
 import { HistoriseCards } from './TodoHistory/HistoriseCards';
+import UncompletedTodoList from '../components/UncompletedTodoList'
 
 export const TodoManageMent: React.FC = () => {
   const [activeContents, setActiveContents] = useState<number | null>(2);
@@ -28,7 +30,7 @@ export const TodoManageMent: React.FC = () => {
           <p className='pb-2 border-b-2'>히스토리</p>
         </button>
       </div>
-      {activeContents === 1 ? <div>미완료투두 목록</div> : <HistoriseCards />}
+      {activeContents === 1 ? <UncompletedTodoList /> : <HistoriseCards />}
     </section>
   );
 };
