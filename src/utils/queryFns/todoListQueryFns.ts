@@ -1,6 +1,7 @@
 import { accessInstance } from '../../service/axios-api';
+import moment from 'moment'
 
-export const getTodoListQueryFns = async (dueDatekey: string) => {
+export const getTodoListQueryFns = async (dueDatekey: string = moment().format('YYYY-MM-DD')) => {
   const response = await accessInstance.get('/api/v1/todos/date', {
     params: {
       dueDate: dueDatekey,
@@ -8,6 +9,7 @@ export const getTodoListQueryFns = async (dueDatekey: string) => {
   });
   console.log('성공');
   const data = response.data;
+  console.log(response);
   return data;
 };
 
@@ -17,7 +19,7 @@ export const getUncompletedTodolistFns = async (yearMonthkey: string) => {
   });
   console.log('미완료투두 성공')
   const data = response.data;
-  return data;
+  return data
 };
 
 // Test QueryFN 수정필요(삭제예정)

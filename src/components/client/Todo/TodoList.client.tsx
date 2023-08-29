@@ -7,29 +7,15 @@ import todayTodos from '../../../../public/images/today-todos.svg';
 import AddButton from '../../AddButton';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
-import moment from 'moment';
-import { useQuery } from '@tanstack/react-query';
-import { getTodoListQueryFns } from '../../../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../../../types/todolistType';
 
 interface Props {
   selectedDate: string;
+  data?:TodoData[]
 }
 
-const TodoList: React.FC<Props> = ({ selectedDate }) => {
+const TodoList: React.FC<Props> = ({data}) => {
   const { modalOpen, openModal, closeModal } = useModal();
-  const showTodoListDate = selectedDate || moment().format('YYYY-MM-DD');
-
-  // react-Query를 활용한 Data Fetching
-  const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['todolist', showTodoListDate],
-    queryFn: () => getTodoListQueryFns(showTodoListDate),
-  });
-  console.log(data);
-
-  if (!data) return <div>작성된 Todo가 없습니다.</div>;
-  if (isLoading) return <div>TodoList를 불러오고있습니다.</div>;
-  if (isError) return <div>잘못된 페이지 입니다. Error!! </div>;
 
   return (
     <section className={`mt-8`}>
@@ -39,7 +25,7 @@ const TodoList: React.FC<Props> = ({ selectedDate }) => {
         <AddButton openModal={openModal} />
       </div>
       <ul>
-        {data.map((todoList) => (
+        {data?.map((todoList) => (
           <Todo todoList={todoList} key={todoList.id} />
         ))}
       </ul>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
 import leftArrow from '../../../public/images/left-arrow.svg';
@@ -8,12 +8,26 @@ import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import TodoList from '../client/Todo/TodoList.client';
 import { generateCalendarData } from '../../utils/dateDataCreate';
+import { useQuery } from '@tanstack/react-query';
+import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
+import { TodoData } from '../../types/todolistType';
+import { useQueryClient } from '@tanstack/react-query';
 
 const MonthCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(moment());
   const [selectedDate, setSelectedDate] = useState('');
+  const [todoData, setTodoData] = useState([]);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+  // react-Query를 활용한 Data Fetching
+  const { data, isLoading, isError } = useQuery<TodoData[]>({
+    queryKey: ['todolist', selectedDate],
+    queryFn: () => getTodoListQueryFns(selectedDate),
+    enabled: !!selectedDate,
+  });
+  console.log(data);
+  console.log(selectedDate);
 
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {
@@ -32,8 +46,8 @@ const MonthCalender = () => {
   const selectDate = async (day: any) => {
     const selectedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selectedDay);
-    console.log('선택한 날짜' + selectedDate);
   };
+
   return (
     <>
       <section className='bg-[#242424] rounded-3xl px-5 py-4'>
@@ -74,7 +88,7 @@ const MonthCalender = () => {
           ))}
         </div>
       </section>
-      <TodoList selectedDate={selectedDate}/>
+      <TodoList selectedDate={selectedDate} data={data} />
     </>
   );
 };

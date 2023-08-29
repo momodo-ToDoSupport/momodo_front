@@ -23,10 +23,12 @@ const Login = () => {
 
   const loginMutation = useMutation(postUserLogin, {
     onSuccess(data) {
-      console.log(data);
+      // console.log(data);
       const { accessToken, refreshToken } = data.response;
-      localStorage.setItem('accessToken', accessToken);
-      setCookie('refreshToken', refreshToken);
+      setCookie([
+        { key: 'accessToken', value: accessToken },
+        { key: 'refreshToken', value: refreshToken },
+      ]);
       router.push('/mytodo');
     },
     onError(error) {
