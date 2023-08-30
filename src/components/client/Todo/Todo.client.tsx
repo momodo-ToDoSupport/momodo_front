@@ -6,16 +6,29 @@ import editTodo from '../../../../public/images/editTodoIcon.svg';
 import { TodoData } from '../../../types/todolistType';
 import ToggleCheckButton from '../../button/ToggleCheckButton';
 import { todoCompleted } from '../../../service/todo';
+import { useQueryClient} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 interface Props {
   todoList: TodoData;
 }
 const Todo: React.FC<Props> = ({ todoList }) => {
+  const queryClient = useQueryClient()
   const {id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
-  const handleCompleted =(checked:boolean) => {
-    todoCompleted(id)
-    setChecked(checked)
+  const mutation = useMutation(()=>todoCompleted(id), {
+    onSuccess:()=>{
+      queryClient.invalidateQueries({ queryKey: ['todolist'] })
+    }
+  })
+  
+  const handleCompleted = async(checked:boolean) => {
+    try {
+      await mutation.mutateAsync()
+      setChecked(checked)
+    } catch (error) {
+      console.log('에러'+error)
+    }
   };
 
   return (

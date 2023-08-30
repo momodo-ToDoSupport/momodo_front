@@ -14,7 +14,6 @@ type Props = {
   today:string
 }
 const MonthCalender: React.FC<Props> = ({today}) => {
-  const queryClient = new QueryClient()
   const [currentMonth, setCurrentMonth] = useState(moment());
   const [selectedDate, setSelectedDate] = useState(today);
   const currentDate = moment();
@@ -25,7 +24,7 @@ const MonthCalender: React.FC<Props> = ({today}) => {
     queryKey: ['todolist', selectedDate],
     queryFn: () => getTodoListQueryFns(selectedDate),
   });
-  console.log(data);
+ 
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
@@ -41,7 +40,6 @@ const MonthCalender: React.FC<Props> = ({today}) => {
 
   // 클릭한 날짜 추출 (day type 수정필요)
   const selectDate = (day: any) => {
-    queryClient.invalidateQueries({ queryKey: ['todolist'] })
     const selectedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selectedDay);
   };
