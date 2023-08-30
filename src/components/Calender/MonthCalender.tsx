@@ -1,22 +1,22 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-import 'moment/locale/ko';
 import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import TodoList from '../client/Todo/TodoList.client';
 import { generateCalendarData } from '../../utils/dateDataCreate';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../../types/todolistType';
-import { useQueryClient } from '@tanstack/react-query';
-
-const MonthCalender = () => {
+type Props = {
+  today:string
+}
+const MonthCalender: React.FC<Props> = ({today}) => {
+  const queryClient = new QueryClient()
   const [currentMonth, setCurrentMonth] = useState(moment());
-  const [selectedDate, setSelectedDate] = useState('');
-  const [todoData, setTodoData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(today);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -24,11 +24,8 @@ const MonthCalender = () => {
   const { data, isLoading, isError } = useQuery<TodoData[]>({
     queryKey: ['todolist', selectedDate],
     queryFn: () => getTodoListQueryFns(selectedDate),
-    enabled: !!selectedDate,
   });
   console.log(data);
-  console.log(selectedDate);
-
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
@@ -43,7 +40,8 @@ const MonthCalender = () => {
   const calendarData = generateCalendarData();
 
   // 클릭한 날짜 추출 (day type 수정필요)
-  const selectDate = async (day: any) => {
+  const selectDate = (day: any) => {
+    queryClient.invalidateQueries({ queryKey: ['todolist'] })
     const selectedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selectedDay);
   };
@@ -88,7 +86,7 @@ const MonthCalender = () => {
           ))}
         </div>
       </section>
-      <TodoList selectedDate={selectedDate} data={data} />
+      <TodoList data={data} />
     </>
   );
 };

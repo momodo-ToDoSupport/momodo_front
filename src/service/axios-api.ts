@@ -16,16 +16,15 @@ export const accessInstance = axios.create({
 
 accessInstance.interceptors.request.use(
   async (config) => {
-    // const accessToken = localStorage.getItem('accessToken');
     const accessToken = await getCookie('accessToken');
-    console.log('엑세스토큰!!' + accessToken)
+    // console.log('엑세스토큰!!' + accessToken)
 
-    // config.headers['Authorization'] = `Bearer ${accessToken}`;
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
     // ts.error 발생으로 위 소스코드로 대체하였음. 확인 후 수정 삭제필요
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${accessToken}`,
-    };
+    // config.headers = {
+    //   ...config.headers,
+    //   Authorization: `Bearer ${accessToken}`,
+    // };
 
     return config;
   },
@@ -39,7 +38,7 @@ accessInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log(error);
+    // console.log(error);
     // const newAccessToken = await refreshAccessToken();
     console.log('refresh AccessToken!');
   }

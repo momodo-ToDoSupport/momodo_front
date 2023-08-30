@@ -10,7 +10,6 @@ import Modal from '../../Modal/Modal';
 import { TodoData } from '../../../types/todolistType';
 
 interface Props {
-  selectedDate: string;
   data?:TodoData[]
 }
 

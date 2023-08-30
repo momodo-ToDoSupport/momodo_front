@@ -11,7 +11,6 @@ interface Props {
   todoList: TodoData;
 }
 const Todo: React.FC<Props> = ({ todoList }) => {
-  console.log(todoList);
   const {id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
   const handleCompleted =(checked:boolean) => {

@@ -23,7 +23,6 @@ const Login = () => {
 
   const loginMutation = useMutation(postUserLogin, {
     onSuccess(data) {
-      // console.log(data);
       const { accessToken, refreshToken } = data.response;
       setCookie([
         { key: 'accessToken', value: accessToken },

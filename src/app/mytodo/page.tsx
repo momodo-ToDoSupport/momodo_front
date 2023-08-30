@@ -7,19 +7,20 @@ import getQueryClient from '../../lib/getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
 import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
 import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
+import moment from 'moment';
 
 const MyTodo = async () => {
+  const today = moment().format('YYYY-MM-DD')
   const queryclient = getQueryClient();
-  await queryclient.prefetchQuery(['todolist'], () => getTodoListQueryFns());
+  await queryclient.prefetchQuery(['todolist',today], () => getTodoListQueryFns(today));
   const dehydarate = dehydrate(queryclient);
-  console.log(dehydarate);
 
   return (
     <div className='p-6 w-full h-screen'>
       <MainHeader option='todo' />
       <UserProfile />
       <HydrateTodoList state={dehydarate}>
-        <MonthCalender />
+        <MonthCalender today={today}/>
       </HydrateTodoList>
       <TabBar />
     </div>
