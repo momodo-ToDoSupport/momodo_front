@@ -6,12 +6,15 @@ import { useQuery } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../types/todolistType';
 
-const UncompletedTodoList = () => {
+type Props = {
+  yearMonthkey: string;
+};
+
+const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   const currentMonth = moment().format('YYYY년 MM월');
-  const showTodoListDate = moment().format('YYYY-MM');
   const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['UnTodoList'],
-    queryFn: () => getUncompletedTodolistFns(showTodoListDate),
+    queryKey: ['UnTodoList', yearMonthkey],
+    queryFn: () => getUncompletedTodolistFns(yearMonthkey),
   });
 
   if (!data) return <div>🎉미완료된 TodoList 목록이 없습니다!🎉</div>;

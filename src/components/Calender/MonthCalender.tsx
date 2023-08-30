@@ -7,7 +7,7 @@ import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import TodoList from '../client/Todo/TodoList.client';
 import { generateCalendarData } from '../../utils/dateDataCreate';
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../../types/todolistType';
 type Props = {
@@ -19,31 +19,32 @@ const MonthCalender: React.FC<Props> = ({today}) => {
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-  // react-Query를 활용한 Data Fetching
-  const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['todolist', selectedDate],
-    queryFn: () => getTodoListQueryFns(selectedDate),
-  });
- 
+  
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
   };
-
+  
   // 다음 달로 이동하는 함수
   const goToNextMonth = () => {
     setCurrentMonth(currentMonth.clone().add(1, 'month'));
   };
-
+  
   // 현재 월의 캘린더 데이터를 생성하는 함수
   const calendarData = generateCalendarData();
-
+  
   // 클릭한 날짜 추출 (day type 수정필요)
   const selectDate = (day: any) => {
     const selectedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selectedDay);
   };
-
+  // react-Query를 활용한 Data Fetching
+  const { data, isLoading, isError } = useQuery<TodoData[]>({
+    queryKey: ['todolist', selectedDate],
+    queryFn: () => getTodoListQueryFns(selectedDate),
+  });
+  console.log(data);
+  
   return (
     <>
       <section className='bg-[#242424] rounded-3xl px-5 py-4'>

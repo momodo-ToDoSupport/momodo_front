@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { HistoriseCards } from './TodoHistory/HistoriseCards';
 import UncompletedTodoList from '../components/UncompletedTodoList'
 
-export const TodoManageMent: React.FC = () => {
+type Props = {
+  yearMonthkey:string
+}
+export const TodoManageMent: React.FC<Props> = ({yearMonthkey}) => {
   const [activeContents, setActiveContents] = useState<number | null>(2);
 
   const handleClick = (ContentsIndex: number) => {
@@ -30,7 +33,7 @@ export const TodoManageMent: React.FC = () => {
           <p className='pb-2 border-b-2'>히스토리</p>
         </button>
       </div>
-      {activeContents === 1 ? <UncompletedTodoList /> : <HistoriseCards />}
+      {activeContents === 1 ? <UncompletedTodoList yearMonthkey={yearMonthkey}/> : <HistoriseCards />}
     </section>
   );
 };
