@@ -25,15 +25,13 @@ interface Props {
 
 const TodoList: React.FC = () => {
   const { modalOpen, openModal, closeModal } = useModal();
-  // const showTodoListDate = selectedDate || moment().format('YYYY-MM-DD');
 
   // react-Query를 활용한 Data Fetching
   // selectedDate가 존재할 때만 데이터 패치
   const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['todolist'],
-    queryFn: getTodoListQueryFnss,
-    // enabled: !!selectedDate,
-    // selectedDate가 있을 때만 표시
+    queryKey: ['Test'],
+    queryFn: ()=>getTodoListQueryFnss(),
+
   });
 
   if (!data) return <div>작성된 Todo가 없습니다.</div>;

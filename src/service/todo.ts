@@ -21,6 +21,7 @@ export const getTodoData = async (dueDatekey: string) => {
   });
   console.log('성공');
   const data = response.data;
+  console.log('todolist' + data);
   return data;
 };
 
