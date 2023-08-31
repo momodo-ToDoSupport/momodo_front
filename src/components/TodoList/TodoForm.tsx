@@ -28,20 +28,28 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const [todoValue, setTodoValue] = useState('');
   const [todoEmoji, setTodoEmoji] = useState('🎉');
   const [repeatDays, setRepeatDays] = useState('');
+  const [duration, setDuration] = useState('');
 
   // Constants
   const curretDate = moment().format('YYYY-MM-DD');
-  const selectWeek = [
-    { value: '0', name: '일요일 마다' },
-    { value: '1', name: '월요일 마다' },
-    { value: '2', name: '화요일 마다' },
-    { value: '3', name: '수요일 마다' },
-    { value: '4', name: '목요일 마다' },
-    { value: '5', name: '금요일 마다' },
-    { value: '6', name: '토요일 마다' },
+  const selectDayOfWeek = [
+    { value: '0', name: '월요일 마다' },
+    { value: '1', name: '화요일 마다' },
+    { value: '2', name: '수요일 마다' },
+    { value: '3', name: '목요일 마다' },
+    { value: '4', name: '금요일 마다' },
+    { value: '5', name: '토요일 마다' },
+    { value: '6', name: '일요일 마다' },
   ];
-  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-  
+  const selectWeek = [
+    { value: '0', name: '안 함' },
+    { value: '7', name: '1주' },
+    { value: '14', name: '2주' },
+    { value: '21', name: '3주' },
+    { value: '28', name: '4주' },
+  ];
+  const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
+
   // Event Handlers
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
@@ -49,15 +57,22 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
 
   const handleRepeatDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
+
     if (selectedValue === '안 함') {
       setRepeatDays('');
     } else if (repeatDays.includes(selectedValue)) {
       const updatedDays = repeatDays.replace(selectedValue, '');
       setRepeatDays(updatedDays);
-    } else if (repeatDays !== '') {
-      setRepeatDays((prevRepeatDays) => prevRepeatDays + selectedValue);
     } else {
-      setRepeatDays(selectedValue);
+      setRepeatDays((prevRepeatDays) => prevRepeatDays + selectedValue);
+    }
+  };
+  const handleDuration = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = e.target.value;
+    if (selectedValue === '안 함') {
+      setDuration('');
+    } else {
+      setDuration(selectedValue);
     }
   };
 
@@ -69,7 +84,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       emoji: todoEmoji,
       dueDate: curretDate,
       repeatDays: repeatDays,
-      duration: '14',
+      duration: duration,
     };
 
     console.log(todoData);
@@ -77,7 +92,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
 
     setTodoValue('');
   };
-  
+
   // Mutation(추가된 TodoList 업데이트)
   const mutation = useMutation(postTodoData, {
     onSuccess(data) {
@@ -87,6 +102,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       console.error(error);
     },
   });
+
+  console.log(repeatDays);
 
   return (
     <article>
@@ -112,29 +129,52 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
           onChange={handleTodoChange}
         />
         {/* 반복요일 선택 */}
-        <div className='flex items-center mb-10'>
-          <p className='text-xs bg-grey-65 px-3 py-2 rounded-lg mr-2'>반 복</p>
-          <select
-            className='bg-grey-65 rounded-lg pl-28 pr-3 py-2 text-right text-xs'
-            onChange={handleRepeatDay}
-            value={repeatDays}
-          >
-            <option value='안 함'>안 함</option>
-            {selectWeek.map((day) => (
-              <option key={day.value} value={day.value}>
-                {day.name}
-              </option>
-            ))}
-          </select>
-          {repeatDays !== '' && (
-            <div className='ml-2 text-xs'>
-              {repeatDays
-                .split('')
-                .map((value: any) => daysOfWeek[value])
-                .join(', ')}
-            </div>
-          )}
+        <div className='flex flex-col gap-3 mb-10'>
+          <div className='flex items-center'>
+            <p className='text-xs bg-grey-65 px-3 py-2 rounded-lg mr-2'>
+              반복 요일
+            </p>
+            <select
+              className='bg-grey-65 rounded-lg pl-28 pr-3 py-2 text-right text-xs'
+              onChange={handleRepeatDay}
+              value={repeatDays}
+            >
+              <option value='안 함'>안 함</option>
+              {selectDayOfWeek.map((day) => (
+                <option key={day.value} value={day.value}>
+                  {day.name}
+                </option>
+              ))}
+            </select>
+            {repeatDays !== '' && (
+              <div className='ml-2 text-xs'>
+                {repeatDays
+                  .split('')
+                  .map((value: any) => daysOfWeek[value])
+                  .join(', ')}
+              </div>
+            )}
+            {/* 반복주간 선택 */}
+          </div>
+          <div className='flex items-center'>
+            <p className='text-xs bg-grey-65 px-3 py-2 rounded-lg mr-2'>
+              반복 주간
+            </p>
+            <select
+              className='bg-grey-65 rounded-lg pl-28 pr-3 py-2 text-right text-xs'
+              onChange={handleDuration}
+              value={duration}
+            >
+              {/* <option value='안 함'>안 함</option> */}
+              {selectWeek.map((day) => (
+                <option key={day.value} value={day.value}>
+                  {day.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
         {/* type 따른 Button 모음 */}
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
