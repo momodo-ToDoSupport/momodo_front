@@ -8,6 +8,8 @@ import TodoEmoji from './TodoEmoji';
 import moment from 'moment';
 import { useMutation } from '@tanstack/react-query';
 import { postTodoData } from '../../service/todo';
+import { useQueryClient } from '@tanstack/react-query';
+// import { useMutation } from '@tanstack/react-query';
 
 interface TodoFormProps {
   type: string;
@@ -28,10 +30,12 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const [todoValue, setTodoValue] = useState('');
   const [todoEmoji, setTodoEmoji] = useState('🎉');
   const [repeatDays, setRepeatDays] = useState('');
-  const [duration, setDuration] = useState('');
+  const [duration, setDuration] = useState('0');
+  const queryClient = useQueryClient();
 
   // Constants
   const curretDate = moment().format('YYYY-MM-DD');
+  // const curretDate = moment().format('2023-08-01');
   const selectDayOfWeek = [
     { value: '0', name: '월요일 마다' },
     { value: '1', name: '화요일 마다' },
@@ -76,9 +80,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const todoData: TodoData = {
       title: todoValue,
       emoji: todoEmoji,
@@ -86,24 +89,19 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       repeatDays: repeatDays,
       duration: duration,
     };
-
-    console.log(todoData);
-    mutation.mutate(todoData);
-
-    setTodoValue('');
+    try {
+      await mutation.mutateAsync(todoData);
+      setTodoValue('');
+    } catch (error) {
+      console.log('투두 추가 에러' + error);
+    }
   };
 
-  // Mutation(추가된 TodoList 업데이트)
   const mutation = useMutation(postTodoData, {
-    onSuccess(data) {
-      console.log(data);
-    },
-    onError(error) {
-      console.error(error);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
   });
-
-  console.log(repeatDays);
 
   return (
     <article>
@@ -165,7 +163,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
               onChange={handleDuration}
               value={duration}
             >
-              {/* <option value='안 함'>안 함</option> */}
               {selectWeek.map((day) => (
                 <option key={day.value} value={day.value}>
                   {day.name}
