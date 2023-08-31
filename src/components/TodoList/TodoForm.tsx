@@ -8,12 +8,14 @@ import TodoEmoji from './TodoEmoji';
 import moment from 'moment';
 import { useMutation } from '@tanstack/react-query';
 import { postTodoData } from '../../service/todo';
+import { deleteTodoData } from '../../service/todo';
 import { useQueryClient } from '@tanstack/react-query';
 // import { useMutation } from '@tanstack/react-query';
 
 interface TodoFormProps {
   type: string;
   closeModal(): void;
+  id: number;
 }
 
 export interface TodoData {
@@ -24,7 +26,7 @@ export interface TodoData {
   duration: string;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
+const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   // State
   //TODO: 실제 유저가 선택한 날짜와 연결해주기
   const [todoValue, setTodoValue] = useState('');
@@ -90,14 +92,25 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       duration: duration,
     };
     try {
-      await mutation.mutateAsync(todoData);
-      setTodoValue('');
+      if(type === 'newtodo') {
+        await addMutation.mutateAsync(todoData);
+        setTodoValue('');
+      } else if(type === 'edittodo') {
+        await deleteMutation.mutateAsync(id);
+        setTodoValue('');
+      }
     } catch (error) {
       console.log('투두 추가 에러' + error);
     }
   };
 
-  const mutation = useMutation(postTodoData, {
+  const addMutation = useMutation(postTodoData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todolist'] });
+    },
+  });
+
+  const deleteMutation = useMutation(deleteTodoData, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
@@ -171,14 +184,13 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
             </select>
           </div>
         </div>
-
         {/* type 따른 Button 모음 */}
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
         ) : (
           <div className='flex w-4/6 justify-around'>
-            <Button disabled={true}>삭제하기</Button>
-            <Button disabled={true}>수정하기</Button>
+            <Button disabled={todoValue.length !== 0}>삭제하기</Button>
+            <Button disabled={todoValue.length === 0}>수정하기</Button>
           </div>
         )}
       </form>

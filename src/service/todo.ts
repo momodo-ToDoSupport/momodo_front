@@ -31,31 +31,9 @@ export const todoCompleted = async (id: number) => {
   return response;
 };
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-// export const getTodoListQueryFns = async (dueDatekey: string) => {
-//   const accessToken = localStorage.getItem('accessToken');
+export const deleteTodoData = async (id: number) => {
+  const response = await accessInstance.delete(`/api/v1/todos/${id}`);
+  console.log('성공');
+  return response;
+};
 
-//   const url = new URL('/api/v1/todos/date', BASE_URL);
-//   url.searchParams.append('dueDate', dueDatekey);
-
-//   try {
-//     const response = await fetch(url, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     });
-
-//     if (response.ok) {
-//       const data = await response.json();
-//       console.log('성공');
-//       return data;
-//     } else {
-//       throw new Error('Request failed');
-//     }
-//   } catch (error) {
-//     console.error('Failed to fetch data:', error);
-//     throw error;
-//   }
-// };

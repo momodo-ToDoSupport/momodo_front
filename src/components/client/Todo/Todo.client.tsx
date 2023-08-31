@@ -8,14 +8,17 @@ import ToggleCheckButton from '../../button/ToggleCheckButton';
 import { todoCompleted } from '../../../service/todo';
 import { useQueryClient} from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
+import useModal from '../../../hooks/useModal';
+import Modal from '../../Modal/Modal';
 
 interface Props {
   todoList: TodoData;
 }
 const Todo: React.FC<Props> = ({ todoList }) => {
-  const queryClient = useQueryClient()
   const {id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
+  const { modalOpen, openModal, closeModal } = useModal();
+  const queryClient = useQueryClient()
   const mutation = useMutation(()=>todoCompleted(id), {
     onSuccess:()=>{
       queryClient.invalidateQueries({ queryKey: ['todolist'] })
@@ -39,12 +42,13 @@ const Todo: React.FC<Props> = ({ todoList }) => {
         </span>
         <p className='text-black'>{title}</p>
         <div className='absolute right-4 pt-1'>
-          <button className='mr-3'>
+          <button className='mr-3' onClick={openModal}>
             <Image src={editTodo} alt='투두 수정하기' />
           </button>
           <ToggleCheckButton toggled={checked} onToggle={handleCompleted}/>
         </div>
       </li>
+      {modalOpen && <Modal id={id} type='edittodo' closeModal={closeModal} />}
     </>
   );
 };
