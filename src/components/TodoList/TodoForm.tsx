@@ -23,12 +23,14 @@ export interface TodoData {
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
+  // State
   //TODO: 실제 유저가 선택한 날짜와 연결해주기
-  const curretDate = moment().format('YYYY-MM-DD');
   const [todoValue, setTodoValue] = useState('');
   const [todoEmoji, setTodoEmoji] = useState('🎉');
   const [repeatDays, setRepeatDays] = useState('');
 
+  // Constants
+  const curretDate = moment().format('YYYY-MM-DD');
   const selectWeek = [
     { value: '0', name: '일요일 마다' },
     { value: '1', name: '월요일 마다' },
@@ -39,7 +41,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     { value: '6', name: '토요일 마다' },
   ];
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-
+  
+  // Event Handlers
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
   };
@@ -58,15 +61,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     }
   };
 
-  const mutation = useMutation(postTodoData, {
-    onSuccess(data) {
-      console.log(data);
-    },
-    onError(error) {
-      console.error(error);
-    },
-  });
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -83,6 +77,16 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
 
     setTodoValue('');
   };
+  
+  // Mutation(추가된 TodoList 업데이트)
+  const mutation = useMutation(postTodoData, {
+    onSuccess(data) {
+      console.log(data);
+    },
+    onError(error) {
+      console.error(error);
+    },
+  });
 
   return (
     <article>
@@ -98,6 +102,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
         </button>
       </div>
       <TodoEmoji setTodoEmoji={setTodoEmoji} />
+      {/* TodoList 입력  */}
       <form className='flex flex-col items-center' onSubmit={handleSubmit}>
         <input
           type='text'
@@ -106,6 +111,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
           value={todoValue}
           onChange={handleTodoChange}
         />
+        {/* 반복요일 선택 */}
         <div className='flex items-center mb-10'>
           <p className='text-xs bg-grey-65 px-3 py-2 rounded-lg mr-2'>반 복</p>
           <select
@@ -129,6 +135,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
             </div>
           )}
         </div>
+        {/* type 따른 Button 모음 */}
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
         ) : (
