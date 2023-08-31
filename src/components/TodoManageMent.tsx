@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { HistoriseCards } from './TodoHistory/HistoriseCards';
 import UncompletedTodoList from '../components/UncompletedTodoList'
+import WeeklyCalender from './Calender/WeeklyCalender';
 
 type Props = {
   yearMonthkey:string
@@ -33,7 +34,8 @@ export const TodoManageMent: React.FC<Props> = ({yearMonthkey}) => {
           <p className='pb-2 border-b-2'>히스토리</p>
         </button>
       </div>
-      {activeContents === 1 ? <UncompletedTodoList yearMonthkey={yearMonthkey}/> : <HistoriseCards />}
+      {activeContents === 1 ? <UncompletedTodoList yearMonthkey={yearMonthkey}/> : <WeeklyCalender />}
+      
     </section>
   );
 };

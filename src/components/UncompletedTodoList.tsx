@@ -22,7 +22,7 @@ const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   if (isError) return <div>❌데이터를 불러오지 못했습니다!❌</div>;
 
   return (
-    <section className='flex flex-col items-center'>
+    <section className='flex flex-col items-center border p-3'>
       <h2>
         <Image
           src={unCompletedTodo}

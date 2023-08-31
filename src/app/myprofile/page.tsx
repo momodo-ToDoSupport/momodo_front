@@ -7,20 +7,15 @@ import { TodoManageMent } from '../../components/TodoManageMent';
 import getQueryClient from '../../lib/getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../../utils/queryFns/todoListQueryFns';
-import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
 import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
 import moment from 'moment';
 
 const myprofile = async () => {
   const yearMonthkey = moment().format('YYYY-MM');
-  const dueDate = moment().format('YYYY-MM-DD');
   const queryclient = getQueryClient();
   await queryclient.prefetchQuery(['UnTodoList', yearMonthkey], () =>
     getUncompletedTodolistFns(yearMonthkey)
   );
-  await queryclient.prefetchQuery(['todoHistory', dueDate ], () =>
-  getTodoListQueryFns(dueDate)
-);
   const dehydarate = dehydrate(queryclient);
 
   return (
