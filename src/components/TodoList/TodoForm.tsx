@@ -28,12 +28,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const [todoValue, setTodoValue] = useState('');
   const [todoEmoji, setTodoEmoji] = useState('🎉');
   const [repeatDays, setRepeatDays] = useState('');
-  // const [todoData, setTodoData] = useState<TodoData>({
-  //   title: '',
-  //   emoji: '',
-  //   dueDate: curretDate,
-  //   repeatDays: '',
-  // });
 
   const selectWeek = [
     { value: '0', name: '일요일 마다' },
@@ -44,14 +38,24 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
     { value: '5', name: '금요일 마다' },
     { value: '6', name: '토요일 마다' },
   ];
+  const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
-  // 98~103 line에서 onChange error 발생해서 임의로 변경하였음. 수정필요
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
   };
 
   const handleRepeatDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRepeatDays(e.target.value);
+    const selectedValue = e.target.value;
+    if (selectedValue === '안 함') {
+      setRepeatDays('');
+    } else if (repeatDays.includes(selectedValue)) {
+      const updatedDays = repeatDays.replace(selectedValue, '');
+      setRepeatDays(updatedDays);
+    } else if (repeatDays !== '') {
+      setRepeatDays((prevRepeatDays) => prevRepeatDays + selectedValue);
+    } else {
+      setRepeatDays(selectedValue);
+    }
   };
 
   const mutation = useMutation(postTodoData, {
@@ -70,8 +74,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       title: todoValue,
       emoji: todoEmoji,
       dueDate: curretDate,
-      repeatDays: '0',
-      duration: '0',
+      repeatDays: repeatDays,
+      duration: '14',
     };
 
     console.log(todoData);
@@ -107,6 +111,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
           <select
             className='bg-grey-65 rounded-lg pl-28 pr-3 py-2 text-right text-xs'
             onChange={handleRepeatDay}
+            value={repeatDays}
           >
             <option value='안 함'>안 함</option>
             {selectWeek.map((day) => (
@@ -115,6 +120,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
               </option>
             ))}
           </select>
+          {repeatDays !== '' && (
+            <div className='ml-2 text-xs'>
+              {repeatDays
+                .split('')
+                .map((value: any) => daysOfWeek[value])
+                .join(', ')}
+            </div>
+          )}
         </div>
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
