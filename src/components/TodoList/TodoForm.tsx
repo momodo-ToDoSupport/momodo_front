@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import newtodo from '../../../public/images/newtodoIcon.svg';
 import edittodo from '../../../public/images/edittodo.svg';
 import close from '../../../public/images/closeIcon.svg';
@@ -6,25 +5,39 @@ import Image from 'next/image';
 import Button from '../Button';
 import TodoEmoji from './TodoEmoji';
 import moment from 'moment';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { postTodoData } from '../../service/todo';
+import {
+  modifyTodoData,
+  postTodoData,
+  deleteTodoData,
+  getIdTodoData,
+} from '../../service/todo';
 import { useQueryClient } from '@tanstack/react-query';
-// import { useMutation } from '@tanstack/react-query';
 
 interface TodoFormProps {
   type: string;
   closeModal(): void;
+  id: number;
 }
 
 export interface TodoData {
+  id?: number;
   title: string;
   emoji: string;
   dueDate: string;
-  repeatDays: string;
-  duration: string;
+  repeatDays?: string;
+  duration?: string;
+  completed?: boolean;
+}
+export interface ModifyTodo {
+  title: string;
+  emoji: string;
+  repeatDays?: string;
+  duration?: string;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
+const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   // State
   //TODO: 실제 유저가 선택한 날짜와 연결해주기
   const [todoValue, setTodoValue] = useState('');
@@ -32,6 +45,19 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const [repeatDays, setRepeatDays] = useState('');
   const [duration, setDuration] = useState('0');
   const queryClient = useQueryClient();
+
+  const getIdTodo = async () => {
+    const data = await getIdTodoData(id);
+    setTodoValue(data.title);
+    setTodoEmoji(data.emoji);
+    setRepeatDays(data.repeatDays || '');
+    setDuration(data.duration || '0');
+  };
+  useEffect(() => {
+    if (type === 'edittodo') {
+      getIdTodo();
+    }
+  }, [type]);
 
   // Constants
   const curretDate = moment().format('YYYY-MM-DD');
@@ -58,10 +84,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
   };
-
   const handleRepeatDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-
     if (selectedValue === '안 함') {
       setRepeatDays('');
     } else if (repeatDays.includes(selectedValue)) {
@@ -89,15 +113,32 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
       repeatDays: repeatDays,
       duration: duration,
     };
+
     try {
-      await mutation.mutateAsync(todoData);
-      setTodoValue('');
+      if (type === 'newtodo') {
+        await addMutation.mutateAsync(todoData);
+        setTodoValue('');
+      } else if (type === 'edittodo') {
+        await ModifyMutation.mutateAsync();
+        setTodoValue('');
+      }
     } catch (error) {
       console.log('투두 추가 에러' + error);
     }
   };
+  const addMutation = useMutation(postTodoData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todolist'] });
+    },
+  });
 
-  const mutation = useMutation(postTodoData, {
+  const modifyTodo: ModifyTodo = {
+    title: todoValue,
+    emoji: todoEmoji,
+    repeatDays: repeatDays,
+    duration: duration,
+  };
+  const ModifyMutation = useMutation(() => modifyTodoData(id, modifyTodo), {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
@@ -171,15 +212,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal }) => {
             </select>
           </div>
         </div>
-
         {/* type 따른 Button 모음 */}
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
         ) : (
-          <div className='flex w-4/6 justify-around'>
-            <Button disabled={true}>삭제하기</Button>
-            <Button disabled={true}>수정하기</Button>
-          </div>
+          <Button disabled={todoValue.length === 0}>수정하기</Button>
         )}
       </form>
     </article>

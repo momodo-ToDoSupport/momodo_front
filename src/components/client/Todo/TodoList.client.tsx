@@ -10,10 +10,10 @@ import Modal from '../../Modal/Modal';
 import { TodoData } from '../../../types/todolistType';
 
 interface Props {
-  data?:TodoData[]
+  data?: TodoData[];
 }
 
-const TodoList: React.FC<Props> = ({data}) => {
+const TodoList: React.FC<Props> = ({ data }) => {
   const { modalOpen, openModal, closeModal } = useModal();
 
   return (
@@ -28,7 +28,7 @@ const TodoList: React.FC<Props> = ({data}) => {
           <Todo todoList={todoList} key={todoList.id} />
         ))}
       </ul>
-      {modalOpen && <Modal type='newtodo' closeModal={closeModal} />}
+      {modalOpen && <Modal type='newtodo' closeModal={closeModal} id={0} />}
     </section>
   );
 };
