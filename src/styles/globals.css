@@ -58,3 +58,6 @@ ul {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+.delete-button {
+  border-right: 1px solid #fff;
+}

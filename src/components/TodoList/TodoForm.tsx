@@ -84,10 +84,8 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoValue(e.target.value);
   };
-
   const handleRepeatDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-
     if (selectedValue === '안 함') {
       setRepeatDays('');
     } else if (repeatDays.includes(selectedValue)) {
@@ -128,29 +126,19 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
       console.log('투두 추가 에러' + error);
     }
   };
-
-  const handelDelete = async () => {
-    await deleteMutation.mutateAsync(id);
-  };
-
   const addMutation = useMutation(postTodoData, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
   });
 
-  const deleteMutation = useMutation(deleteTodoData, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todolist'] });
-    },
-  });
   const modifyTodo: ModifyTodo = {
     title: todoValue,
     emoji: todoEmoji,
     repeatDays: repeatDays,
     duration: duration,
   };
-  const ModifyMutation = useMutation(()=> modifyTodoData(id, modifyTodo), {
+  const ModifyMutation = useMutation(() => modifyTodoData(id, modifyTodo), {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
@@ -228,12 +216,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
         {type === 'newtodo' ? (
           <Button disabled={todoValue.length === 0}>추가하기</Button>
         ) : (
-          <div className='flex w-4/6 justify-around'>
-            <Button onClick={handelDelete} disabled={todoValue.length !== 0}>
-              삭제하기
-            </Button>
-            <Button disabled={todoValue.length === 0}>수정하기</Button>
-          </div>
+          <Button disabled={todoValue.length === 0}>수정하기</Button>
         )}
       </form>
     </article>
