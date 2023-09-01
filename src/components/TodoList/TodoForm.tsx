@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import newtodo from '../../../public/images/newtodoIcon.svg';
 import edittodo from '../../../public/images/edittodo.svg';
 import close from '../../../public/images/closeIcon.svg';
@@ -6,11 +5,15 @@ import Image from 'next/image';
 import Button from '../Button';
 import TodoEmoji from './TodoEmoji';
 import moment from 'moment';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { postTodoData } from '../../service/todo';
-import { deleteTodoData } from '../../service/todo';
+import {
+  modifyTodoData,
+  postTodoData,
+  deleteTodoData,
+  getIdTodoData,
+} from '../../service/todo';
 import { useQueryClient } from '@tanstack/react-query';
-// import { useMutation } from '@tanstack/react-query';
 
 interface TodoFormProps {
   type: string;
@@ -19,11 +22,19 @@ interface TodoFormProps {
 }
 
 export interface TodoData {
+  id?: number;
   title: string;
   emoji: string;
   dueDate: string;
-  repeatDays: string;
-  duration: string;
+  repeatDays?: string;
+  duration?: string;
+  completed?: boolean;
+}
+export interface ModifyTodo {
+  title: string;
+  emoji: string;
+  repeatDays?: string;
+  duration?: string;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
@@ -34,6 +45,19 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   const [repeatDays, setRepeatDays] = useState('');
   const [duration, setDuration] = useState('0');
   const queryClient = useQueryClient();
+
+  const getIdTodo = async () => {
+    const data = await getIdTodoData(id);
+    setTodoValue(data.title);
+    setTodoEmoji(data.emoji);
+    setRepeatDays(data.repeatDays || '');
+    setDuration(data.duration || '0');
+  };
+  useEffect(() => {
+    if (type === 'edittodo') {
+      getIdTodo();
+    }
+  }, [type]);
 
   // Constants
   const curretDate = moment().format('YYYY-MM-DD');
@@ -91,17 +115,22 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
       repeatDays: repeatDays,
       duration: duration,
     };
+
     try {
-      if(type === 'newtodo') {
+      if (type === 'newtodo') {
         await addMutation.mutateAsync(todoData);
         setTodoValue('');
-      } else if(type === 'edittodo') {
-        await deleteMutation.mutateAsync(id);
+      } else if (type === 'edittodo') {
+        await ModifyMutation.mutateAsync();
         setTodoValue('');
       }
     } catch (error) {
       console.log('투두 추가 에러' + error);
     }
+  };
+
+  const handelDelete = async () => {
+    await deleteMutation.mutateAsync(id);
   };
 
   const addMutation = useMutation(postTodoData, {
@@ -111,6 +140,17 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   });
 
   const deleteMutation = useMutation(deleteTodoData, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todolist'] });
+    },
+  });
+  const modifyTodo: ModifyTodo = {
+    title: todoValue,
+    emoji: todoEmoji,
+    repeatDays: repeatDays,
+    duration: duration,
+  };
+  const ModifyMutation = useMutation(()=> modifyTodoData(id, modifyTodo), {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['todolist'] });
     },
@@ -189,7 +229,9 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
           <Button disabled={todoValue.length === 0}>추가하기</Button>
         ) : (
           <div className='flex w-4/6 justify-around'>
-            <Button disabled={todoValue.length !== 0}>삭제하기</Button>
+            <Button onClick={handelDelete} disabled={todoValue.length !== 0}>
+              삭제하기
+            </Button>
             <Button disabled={todoValue.length === 0}>수정하기</Button>
           </div>
         )}
