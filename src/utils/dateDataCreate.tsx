@@ -1,7 +1,6 @@
 import moment from 'moment';
 
-export const generateCalendarData = () => {
-  const currentMonth = moment();
+export const generateCalendarData = (currentMonth:any) => {
   const calendarData = [];
   
   // 현재 월의 시작일과 마지막일을 구함
@@ -19,3 +18,10 @@ export const generateCalendarData = () => {
   }
   return calendarData;
 };
+
+
+
+
+
+
+

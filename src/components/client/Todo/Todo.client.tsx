@@ -57,17 +57,15 @@ const Todo: React.FC<Props> = ({ todoList }) => {
         </span>
         <p className='text-black'>{title}</p>
         <div className='absolute right-4 pt-1'>
-          {!checked ? (
+          {!checked && (
             <>
               <button className='mr-3' onClick={openEditModal}>
                 <Image src={editTodo} alt='투두 수정' />
               </button>
               <button className='mr-3' onClick={openDeleteModal}>
-                <Image src={removeTodo} alt='투두 삭제'></Image>
+                <Image src={removeTodo} alt='투두 삭제' />
               </button>
             </>
-          ) : (
-            <></>
           )}
           <ToggleCheckButton toggled={checked} onToggle={handleCompleted} />
         </div>
