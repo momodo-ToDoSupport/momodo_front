@@ -16,17 +16,22 @@ const MyTodo = async () => {
   const today = moment().format('YYYY-MM-DD');
   const yearMonth = moment().format('YYYY-MM');
   const queryclient = getQueryClient();
-  await queryclient.prefetchQuery(['todoHistory', yearMonth], () =>
-    getTodohistoryFns(yearMonth)
-  );
-  await queryclient.prefetchQuery(['todolist', today], () =>
-    getTodoListQueryFns(today)
-  );
+
+  // Promise.all을 사용하여 병렬로 데이터 가져오기
+  const [todoHistory, todolist] = await Promise.all([
+    queryclient.prefetchQuery(['todoHistory', yearMonth], () =>
+      getTodohistoryFns(yearMonth)
+    ),
+    queryclient.prefetchQuery(['todolist', today], () =>
+      getTodoListQueryFns(today)
+    ),
+  ]);
+
   const dehydarate = dehydrate(queryclient);
 
   return (
     <div className='p-6 w-full h-screen'>
-      <MainHeader option='todo' />
+      <MainHeader />
       <UserProfile />
       <HydrateTodoList state={dehydarate}>
         <MonthCalender today={today} yearMonth={yearMonth} />
