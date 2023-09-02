@@ -8,25 +8,24 @@ import getQueryClient from '../../lib/getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../../utils/queryFns/todoListQueryFns';
 import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const myprofile = async () => {
-  // const yearMonthkey = '2023-08'
-  // const queryclient = getQueryClient();
-  // await queryclient.prefetchQuery(['UnTodoList', yearMonthkey], () =>
-  //   getUncompletedTodolistFns(yearMonthkey)
-  // );
-  // const dehydarate = dehydrate(queryclient);
-  // console.log(localStorage.getItem('accessToken'));
+import moment from 'moment';
 
+const myprofile = async () => {
+  const yearMonthkey = moment().format('YYYY-MM');
+  const queryclient = getQueryClient();
+  await queryclient.prefetchQuery(['UnTodoList', yearMonthkey], () =>
+    getUncompletedTodolistFns(yearMonthkey)
+  );
+  const dehydarate = dehydrate(queryclient);
 
   return (
     <div className='p-6 w-full h-screen'>
       <MainHeader option='myprofile' />
       <UserProfile option='follow' />
       <Tier />
-      {/* <HydrateTodoList state={dehydarate}> */}
-      <TodoManageMent />
-      {/* </HydrateTodoList> */}
+      <HydrateTodoList state={dehydarate}>
+        <TodoManageMent yearMonthkey={yearMonthkey} />
+      </HydrateTodoList>
       <TabBar />
     </div>
   );

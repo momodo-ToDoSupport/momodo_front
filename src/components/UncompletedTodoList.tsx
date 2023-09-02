@@ -6,12 +6,15 @@ import { useQuery } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../types/todolistType';
 
-const UncompletedTodoList = () => {
+type Props = {
+  yearMonthkey: string;
+};
+
+const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   const currentMonth = moment().format('YYYY년 MM월');
-  const showTodoListDate = moment().format('YYYY-MM');
   const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['UnTodoList'],
-    queryFn: () => getUncompletedTodolistFns(showTodoListDate),
+    queryKey: ['UnTodoList', yearMonthkey],
+    queryFn: () => getUncompletedTodolistFns(yearMonthkey),
   });
 
   if (!data) return <div>🎉미완료된 TodoList 목록이 없습니다!🎉</div>;
@@ -19,17 +22,9 @@ const UncompletedTodoList = () => {
   if (isError) return <div>❌데이터를 불러오지 못했습니다!❌</div>;
 
   return (
-    <section className='flex flex-col items-center'>
-      <h2>
-        <Image
-          src={unCompletedTodo}
-          alt='미완료투두리스트타이틀'
-          width={250}
-          height={300}
-        />
-      </h2>
-      <span className='mt-2'>{currentMonth}</span>
-      <div className='w-full mt-4 overflow-y-auto max-h-96'>
+    <>
+      <span className='mt-5 text-xxl'>{currentMonth}</span>
+      <div className='w-full my-10 overflow-y-auto fix-height'>
         <ul className='space-y-2'>
           {data.map((todo) => (
             <li
@@ -47,7 +42,7 @@ const UncompletedTodoList = () => {
           ))}
         </ul>
       </div>
-    </section>
+    </>
   );
 };
 

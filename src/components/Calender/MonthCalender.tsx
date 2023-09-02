@@ -9,7 +9,6 @@ import TodoList from '../client/Todo/TodoList.client';
 import CalendarWeek from './CalendarWeek';
 import { generateCalendarData } from '../../utils/dateDataCreate';
 import { useCombinedDataFetch } from '../../hooks/useQueryDataFetch';
-import { useQueryClient } from '@tanstack/react-query';
 
 type Props = {
   today: string;
@@ -33,13 +32,13 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
     setMoveMonth(currentMonth.subtract(1, 'months').format('YYYY-MM'));
   };
-
+  
   // 다음 달로 이동하는 함수
   const goToNextMonth = () => {
     setCurrentMonth(currentMonth.clone().add(1, 'month'));
     setMoveMonth(currentMonth.add(1, 'months').format('YYYY-MM'));
   };
-
+  
   // 현재 월의 캘린더 데이터를 생성하는 함수
   const calendarData = generateCalendarData(currentMonth);
 
