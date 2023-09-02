@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import { atom } from 'jotai';
 
-const initialUserId = localStorage.getItem('userId') || '';
+const initialUserId = localStorage.getItem('username') || '';
 const initialKakaoName = localStorage.getItem('kakaoName') || '';
 const initialAccessToken = localStorage.getItem('accessToken') || '';
 

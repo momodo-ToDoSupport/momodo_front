@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileImg from './ProfileImg';
 
-const EditProfileImg = () => {
+const EditProfileImg = ({ img }) => {
   return (
     <form className='m-14'>
       <label htmlFor='profileImg'>

@@ -4,7 +4,7 @@ const useModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
-    setModalOpen(true);
+    setModalOpen(!modalOpen);
   };
 
   const closeModal = () => {
