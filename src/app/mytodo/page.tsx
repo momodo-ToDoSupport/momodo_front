@@ -14,7 +14,6 @@ import moment from 'moment';
 
 const MyTodo = async () => {
   const today = moment().format('YYYY-MM-DD');
-  // const yearMonth = moment().format('2023-09');
   const yearMonth = moment().format('YYYY-MM');
   const queryclient = getQueryClient();
   await queryclient.prefetchQuery(['todoHistory', yearMonth], () =>

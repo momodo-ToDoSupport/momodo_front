@@ -14,10 +14,13 @@ import DeleteModal from '../../Modal/deleteModal';
 
 interface Props {
   todoList: TodoData;
+  isDueDatePassed: boolean;
 }
-const Todo: React.FC<Props> = ({ todoList }) => {
+const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
   const { id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
+  console.log(isDueDatePassed);
+
   const {
     modalOpen: editModalOpen,
     openModal: openEditModal,
@@ -57,7 +60,7 @@ const Todo: React.FC<Props> = ({ todoList }) => {
         </span>
         <p className='text-black'>{title}</p>
         <div className='absolute right-4 pt-1'>
-          {!checked && (
+          {!checked && !isDueDatePassed && (
             <>
               <button className='mr-3' onClick={openEditModal}>
                 <Image src={editTodo} alt='투두 수정' />
@@ -67,7 +70,9 @@ const Todo: React.FC<Props> = ({ todoList }) => {
               </button>
             </>
           )}
-          <ToggleCheckButton toggled={checked} onToggle={handleCompleted} />
+          {!isDueDatePassed && (
+            <ToggleCheckButton toggled={checked} onToggle={handleCompleted} />
+          )}
         </div>
       </li>
       {editModalOpen && (
