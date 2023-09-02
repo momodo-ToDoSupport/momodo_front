@@ -9,14 +9,13 @@ import EditProfileImg from '../../components/UserProfile/EditProfileImg';
 import { getUserInfo } from '../../service/auth';
 
 const EditProfile = () => {
-  const [profileImg, setProfileImg] = useState('');
-  const [name, setName] = useState('');
-  const [introduce, setIntroduce] = useState('');
+  const [profileImg, setProfileImg] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [introduce, setIntroduce] = useState<string>('');
   const userId = localStorage.getItem('userId');
   const userMutation = useMutation(getUserInfo, {
     onSuccess(data) {
       if (data) {
-        console.log(data);
         setProfileImg(data.profileImage);
         setName(data.name);
         setIntroduce(data.introduce);
@@ -27,23 +26,40 @@ const EditProfile = () => {
     },
   });
 
+  const handleNameChange = (newValue: string) => {
+    setName(newValue);
+  };
+
+  const handleIntroChange = (newValue: string) => {
+    setIntroduce(newValue);
+  };
+
   useEffect(() => {
     if (userId !== null) {
       userMutation.mutate(userId);
     }
   }, []);
 
+  console.log('name', name);
+  console.log('introduce', introduce);
+
   return (
     <div className='h-screen w-full'>
       <BasicHeader option='myprofile' />
       <div className='flex flex-col items-center p-7'>
-        <EditProfileImg img={profileImg} />
+        <EditProfileImg defaultImg={profileImg} />
         <p className='pb-12 text-lg'>{userId}</p>
-        <ProfileForm title='이름' placeholder='이름 입력' content={name} />
+        <ProfileForm
+          title='이름'
+          placeholder='이름 입력'
+          content={name}
+          onInputChange={handleNameChange}
+        />
         <ProfileForm
           title='자기소개'
           placeholder='자기소개 입력 (최대 15글자)'
           content={introduce}
+          onInputChange={handleIntroChange}
         />
       </div>
       <TabBar />

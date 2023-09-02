@@ -7,6 +7,7 @@ interface ProfileImgProps {
   height: number;
   src?: string;
   alt: string;
+  defaultImg?: string;
 }
 
 const ProfileImg: React.FC<ProfileImgProps> = ({
@@ -14,6 +15,7 @@ const ProfileImg: React.FC<ProfileImgProps> = ({
   height,
   src = defaultProfileImg,
   alt,
+  defaultImg,
 }) => {
   return <Image width={width} height={height} src={src} alt={alt} />;
 };
