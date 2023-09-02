@@ -19,11 +19,13 @@ export const getUncompletedTodolistFns = async (yearMonthkey: string) => {
 };
 
 export const getTodohistoryFns = async (yearMonthkey: string) => {
+
   const response = await accessInstance.get('/api/v1/todo-histories/yearMonth', {
     params: {
       yearMonth: yearMonthkey,
     },
   });
   const data = response.data;
+
   return data;
 };

@@ -22,7 +22,6 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
   const [moveMonth, setMoveMonth] = useState(yearMonth);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  console.log('button 누른 후 :' + moveMonth);
 
   const { todoListData, historyData } = useCombinedDataFetch(
     selectedDate,
@@ -82,7 +81,7 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
           ))}
         </div>
       </section>
-      <TodoList data={todoListData} />
+      <TodoList selectedDate={selectedDate} todoListData={todoListData} />
     </>
   );
 };
