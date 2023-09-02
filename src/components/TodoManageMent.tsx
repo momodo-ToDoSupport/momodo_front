@@ -2,40 +2,26 @@
 
 import React, { useState } from 'react';
 import { HistoriseCards } from './TodoHistory/HistoriseCards';
-import UncompletedTodoList from '../components/UncompletedTodoList'
+import UncompletedTodoList from '../components/UncompletedTodoList';
+import Image from 'next/image';
+import unCompletedTodo from '../../public/images/Uncompleted-todos.svg';
 import WeeklyCalender from './Calender/WeeklyCalender';
 
 type Props = {
-  yearMonthkey:string
-}
-export const TodoManageMent: React.FC<Props> = ({yearMonthkey}) => {
-  const [activeContents, setActiveContents] = useState<number | null>(2);
-
-  const handleClick = (ContentsIndex: number) => {
-    setActiveContents(ContentsIndex);
-  };
+  yearMonthkey: string;
+};
+export const TodoManageMent: React.FC<Props> = ({ yearMonthkey }) => {
   return (
-    <section className='border p-3'>
-      <div className='flex justify-around mb-3'>
-        <button
-          onClick={() => handleClick(1)}
-          className={`${
-            activeContents === 1 ? 'text-white' : 'text-[#535252]'
-          }`}
-        >
-          <p className='pb-2 border-b-2'>미완료 투두</p>
-        </button>
-        <button
-          onClick={() => handleClick(2)}
-          className={`${
-            activeContents === 2 ? 'text-white' : 'text-[#535252]'
-          }`}
-        >
-          <p className='pb-2 border-b-2'>히스토리</p>
-        </button>
-      </div>
-      {activeContents === 1 ? <UncompletedTodoList yearMonthkey={yearMonthkey}/> : <WeeklyCalender />}
-      
+    <section className =' p-3 flex flex-col items-center bg-grey-2D h-700 fix-height rounded-xl'>
+      <h2 className='mt-10'>
+        <Image
+          src={unCompletedTodo}
+          alt='미완료투두리스트타이틀'
+          width={250}
+          height={300}
+        />
+      </h2>
+      <UncompletedTodoList yearMonthkey={yearMonthkey} />
     </section>
   );
 };

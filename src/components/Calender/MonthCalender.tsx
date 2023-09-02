@@ -1,55 +1,57 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
 import TodoList from '../client/Todo/TodoList.client';
+import CalendarWeek from './CalendarWeek';
 import { generateCalendarData } from '../../utils/dateDataCreate';
-import { useQuery } from '@tanstack/react-query';
-import { getTodoListQueryFns } from '../../utils/queryFns/todoListQueryFns';
-import { TodoData } from '../../types/todolistType';
+import { useCombinedDataFetch } from '../../hooks/useQueryDataFetch';
+
 type Props = {
-  today:string
-}
-const MonthCalender: React.FC<Props> = ({today}) => {
-  const [currentMonth, setCurrentMonth] = useState(moment());
+  today: string;
+  yearMonth: string;
+};
+
+const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
+  const [currentMonth, setCurrentMonth] = useState(moment(yearMonth));
   const [selectedDate, setSelectedDate] = useState(today);
+  const [moveMonth, setMoveMonth] = useState(yearMonth);
   const currentDate = moment();
   const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-  
+  const { todoListData, historyData } = useCombinedDataFetch(
+    selectedDate,
+    moveMonth
+  );
+
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
+    setMoveMonth(currentMonth.subtract(1, 'months').format('YYYY-MM'));
   };
   
   // 다음 달로 이동하는 함수
   const goToNextMonth = () => {
     setCurrentMonth(currentMonth.clone().add(1, 'month'));
+    setMoveMonth(currentMonth.add(1, 'months').format('YYYY-MM'));
   };
   
   // 현재 월의 캘린더 데이터를 생성하는 함수
-  const calendarData = generateCalendarData();
-  
-  // 클릭한 날짜 추출 (day type 수정필요)
+  const calendarData = generateCalendarData(currentMonth);
+
+  // 클릭한 날짜 추출 (day type 수정 필요)
   const selectDate = (day: any) => {
     const selectedDay = moment(day).format('YYYY-MM-DD');
     setSelectedDate(selectedDay);
   };
-  // react-Query를 활용한 Data Fetching
-  const { data, isLoading, isError } = useQuery<TodoData[]>({
-    queryKey: ['todolist', selectedDate],
-    queryFn: () => getTodoListQueryFns(selectedDate),
-  });
-  console.log(data);
-  
   return (
     <>
       <section className='bg-[#242424] rounded-3xl px-5 py-4'>
         <div className='flex items-center justify-between pb-3'>
-          <span>{currentMonth.format('YYYY년 MMMM')}</span>
+          <span>{currentMonth.format('YYYY년 MM월')}</span>
           <div className='relative top-1'>
             <button onClick={goToPreviousMonth} className=''>
               <Image src={leftArrow} alt='이전 버튼' />
@@ -67,27 +69,20 @@ const MonthCalender: React.FC<Props> = ({today}) => {
           ))}
           {calendarData.map((week, weekIndex) => (
             <React.Fragment key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <button
-                  key={dayIndex}
-                  className={`flex justify-center items-center h-30 border border-black ${
-                    day.month() === currentMonth.month() ? '' : 'text-[#535252]'
-                  } ${day.isSame(currentDate, 'day') ? 'relative' : ''}`}
-                  onClick={() => selectDate(day)}
-                >
-                  {day.format('D')}
-                  {day.isSame(currentDate, 'day') && (
-                    <span className='absolute top-[-7px] h-[6px] w-[6px] rounded-full bg-main-color'></span>
-                  )}
-                </button>
-              ))}
+              <CalendarWeek
+                week={week}
+                currentMonth={currentMonth}
+                currentDate={currentDate}
+                historyData={historyData}
+                selectDate={selectDate}
+              />
             </React.Fragment>
           ))}
         </div>
       </section>
-      <TodoList data={data} />
+      <TodoList selectedDate={selectedDate} todoListData={todoListData} />
     </>
   );
 };
 
-export default MonthCalender;
+export default MonthCalendar;

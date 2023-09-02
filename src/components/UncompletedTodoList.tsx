@@ -22,17 +22,9 @@ const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   if (isError) return <div>❌데이터를 불러오지 못했습니다!❌</div>;
 
   return (
-    <section className='flex flex-col items-center border p-3'>
-      <h2>
-        <Image
-          src={unCompletedTodo}
-          alt='미완료투두리스트타이틀'
-          width={250}
-          height={300}
-        />
-      </h2>
-      <span className='mt-2'>{currentMonth}</span>
-      <div className='w-full mt-4 overflow-y-auto max-h-96'>
+    <>
+      <span className='mt-5 text-xxl'>{currentMonth}</span>
+      <div className='w-full my-10 overflow-y-auto fix-height'>
         <ul className='space-y-2'>
           {data.map((todo) => (
             <li
@@ -50,7 +42,7 @@ const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
           ))}
         </ul>
       </div>
-    </section>
+    </>
   );
 };
 
