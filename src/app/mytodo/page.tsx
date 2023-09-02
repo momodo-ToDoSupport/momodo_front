@@ -16,9 +16,9 @@ const MyTodo = async () => {
   const today = moment().format('YYYY-MM-DD');
   const yearMonth = moment().format('YYYY-MM');
   const queryclient = getQueryClient();
-
+  
   // Promise.all을 사용하여 병렬로 데이터 가져오기
-  const [todoHistory, todolist] = await Promise.all([
+  await Promise.all([
     queryclient.prefetchQuery(['todoHistory', yearMonth], () =>
       getTodohistoryFns(yearMonth)
     ),
