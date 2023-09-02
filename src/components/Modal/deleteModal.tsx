@@ -25,7 +25,7 @@ const DeleteModal: React.FC<Props> = ({ id, closeModal }) => {
             onClick={() => handleDelete(id)}
             disabled={isLoading}
           >
-            {isLoading ? '삭제 중...' : '삭제'}
+            삭제
           </button>
         </div>
       </div>
