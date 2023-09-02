@@ -4,29 +4,22 @@ import {
   getTodohistoryFns,
 } from '../utils/queryFns/todoListQueryFns';
 import { TodoData } from '../types/todolistType';
-type TodoHistory = {
-  id: number;
-  count: number;
-  completedCount: number;
-  step: number;
-  dueDate: string;
-};
 
-// 예시 커스텀 훅 1
+// 커스텀 훅 1
 const useTodoListData = (selectedDate: string) => {
-
   return useQuery<TodoData[]>({
     queryKey: ['todolist', selectedDate],
     queryFn: () => getTodoListQueryFns(selectedDate),
+    initialData:[],
   });
 };
 
-// 예시 커스텀 훅 2
+// 커스텀 훅 2
 const useHistoryData = (moveMonth: string) => {
-  console.log('커스텀 훅'+ moveMonth);
   return useQuery({
     queryKey: ['todoHistory', moveMonth],
     queryFn: () => getTodohistoryFns(moveMonth),
+    initialData:[],
   });
 };
 
@@ -37,8 +30,5 @@ export const useCombinedDataFetch = (
 ) => {
   const {data: todoListData} = useTodoListData(selectedDate);
   const {data: historyData} = useHistoryData(moveMonth);
-  console.log('통합 훅'+ moveMonth)
-  console.log(historyData);
-
   return { todoListData, historyData };
 };
