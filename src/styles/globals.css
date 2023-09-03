@@ -61,3 +61,15 @@ ul {
 .delete-button {
   border-right: 1px solid #fff;
 }
+.fix-height {
+  height: 800px;
+}
+.progressbar {
+  background-color: rgb(238 242 255);
+}
+.progressbar-container {
+  border: 1px solid #fff;
+}
+.zindex {
+  z-index: 100;
+}

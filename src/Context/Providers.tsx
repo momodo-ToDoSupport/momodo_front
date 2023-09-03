@@ -16,7 +16,6 @@ const queryClientOptions = {
   },
 };
 
-
 export const Providers = ({ children }: Props) => {
   const [queryClient] = useState(() => new QueryClient(queryClientOptions));
 

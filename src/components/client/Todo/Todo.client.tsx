@@ -10,14 +10,16 @@ import { todoCompleted, deleteTodoData } from '../../../service/todo';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
-import DeleteModal from '../../Modal/deleteModal';
+import InnerModal from '../../Modal/InnerModal';
 
 interface Props {
   todoList: TodoData;
+  isDueDatePassed: boolean;
 }
-const Todo: React.FC<Props> = ({ todoList }) => {
+const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
   const { id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
+
   const {
     modalOpen: editModalOpen,
     openModal: openEditModal,
@@ -57,25 +59,25 @@ const Todo: React.FC<Props> = ({ todoList }) => {
         </span>
         <p className='text-black'>{title}</p>
         <div className='absolute right-4 pt-1'>
-          {!checked ? (
+          {!checked && !isDueDatePassed && (
             <>
               <button className='mr-3' onClick={openEditModal}>
                 <Image src={editTodo} alt='투두 수정' />
               </button>
               <button className='mr-3' onClick={openDeleteModal}>
-                <Image src={removeTodo} alt='투두 삭제'></Image>
+                <Image src={removeTodo} alt='투두 삭제' />
               </button>
             </>
-          ) : (
-            <></>
           )}
-          <ToggleCheckButton toggled={checked} onToggle={handleCompleted} />
+          {!isDueDatePassed && (
+            <ToggleCheckButton toggled={checked} onToggle={handleCompleted} />
+          )}
         </div>
       </li>
       {editModalOpen && (
         <Modal id={id} type='edittodo' closeModal={closeEditModal} />
       )}
-      {deleteModalOpen && <DeleteModal id={id} closeModal={closeDeleteModal} />}
+      {deleteModalOpen && <InnerModal type={'deleteTodo'} id={id} closeModal={closeDeleteModal} />}
     </>
   );
 };

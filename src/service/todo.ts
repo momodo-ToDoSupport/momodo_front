@@ -33,7 +33,6 @@ export const modifyTodoData = async (id: number, modifyTodo: ModifyTodo) => {
     `/api/v1/todos/${id}`,
     modifyTodo
   );
-  console.log('통신!');
   return response;
 };
 
