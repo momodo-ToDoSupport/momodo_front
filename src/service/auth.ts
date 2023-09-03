@@ -1,4 +1,4 @@
-import { instance } from './axios-api';
+import { instance, accessInstance } from './axios-api';
 import { LoginInput } from '../app/login/page';
 import { InputValue } from '../components/SignupForm';
 
@@ -19,6 +19,13 @@ export const postUserLogin = async (formdata: LoginInput) => {
 export const getUserInfo = async (userId: string) => {
   const response = await instance.get(`/api/v1/user-app/${userId}`);
   return response.data;
+};
+
+export const putUserProfile = async (editdata) => {
+  console.log(editdata);
+  const response = await accessInstance.put('/api/v1/user-app', editdata);
+
+  return response;
 };
 
 export const putRefreshToken = async (token: string | undefined) => {

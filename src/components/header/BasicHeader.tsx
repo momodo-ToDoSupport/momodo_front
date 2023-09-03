@@ -6,9 +6,10 @@ import Button from '../Button';
 
 interface HeaderProps {
   option?: string;
+  onSave?: () => void;
 }
 
-const BasicHeader: React.FC<HeaderProps> = ({ option }) => {
+const BasicHeader: React.FC<HeaderProps> = ({ option, onSave }) => {
   return (
     <header className='flex mt-4 items-center mx-4 justify-between'>
       <button className='mt-1'>
@@ -32,9 +33,11 @@ const BasicHeader: React.FC<HeaderProps> = ({ option }) => {
       {option === 'myprofile' && (
         <>
           <p className='relative left-4'>프로필 설정</p>
-          <Button disabled buttonSize='small'>
-            확인
-          </Button>
+          <div onClick={onSave}>
+            <Button buttonSize='small' disabled={false}>
+              확인
+            </Button>
+          </div>
         </>
       )}
       {option === 'yourhome' && (
