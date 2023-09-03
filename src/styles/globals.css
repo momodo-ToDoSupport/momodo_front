@@ -64,3 +64,9 @@ ul {
 .fix-height {
   height: 800px;
 }
+.progressbar {
+  background-color: rgb(238 242 255);
+}
+.progressbar-container {
+  border: 1px solid #fff;
+}

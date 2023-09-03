@@ -19,7 +19,6 @@ interface Props {
 const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
   const { id, title, emoji, dueDate, completed } = todoList;
   const [checked, setChecked] = useState(completed);
-  console.log(isDueDatePassed);
 
   const {
     modalOpen: editModalOpen,

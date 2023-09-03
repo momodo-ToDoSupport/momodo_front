@@ -39,7 +39,6 @@ const Login = () => {
     onSuccess(data) {
       localStorage.setItem('userId', data.name);
       localStorage.setItem('tier', data.tier);
-      console.log(data);
     },
     onError(error) {
       console.error(error);

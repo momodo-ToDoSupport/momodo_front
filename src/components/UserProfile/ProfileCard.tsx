@@ -10,7 +10,6 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ option }) => {
   const [{ userId }] = useAtom(userAtom);
-  // const [{ tier }] = useAtom(userAtom);
   const [{ kakaoName }] = useAtom(kakaoAtom);
 
   return (

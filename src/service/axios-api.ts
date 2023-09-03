@@ -1,3 +1,4 @@
+import { setCookie } from './../app/action';
 import axios from 'axios';
 import { getCookie } from '../app/action';
 import { putRefreshToken } from './auth';
@@ -17,6 +18,11 @@ export const accessInstance = axios.create({
 accessInstance.interceptors.request.use(
   async (config) => {
     const accessToken = await getCookie('accessToken');
+
+    if (!accessToken) {
+      alert('다시 시도해주세용😊');
+    }
+
     config.headers['Authorization'] = `Bearer ${accessToken}`;
     return config;
   },
@@ -30,15 +36,15 @@ accessInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    // console.log(error);
-    // const newAccessToken = await refreshAccessToken();
+    console.log(error);
+    const newAccessToken = await refreshAccessToken();
+    console.log('newAccessToken', newAccessToken);
     console.log('refresh AccessToken!');
   }
 );
 
 export const refreshAccessToken = async () => {
   const token = await getCookie('refreshToken');
-  console.log('token', token);
 
   if (!token) {
     // TODO: 모달형태로 알림 제공하고 모달 내에서 로그인 페이지로 이동하는 버튼 제공하기
@@ -51,11 +57,15 @@ export const refreshAccessToken = async () => {
 
     if (response.accessToken) {
       const newAccessToken = response.accessToken;
-      localStorage.setItem('accessToken', newAccessToken);
+      setCookie([
+        {
+          key: 'accessToken',
+          value: newAccessToken,
+        },
+      ]);
       return newAccessToken;
     }
   } catch (error) {
-    // TODO: 요청 실패 또는 에러 발생 시 처리
     console.error('Failed to refresh accessToken:', error);
     return null;
   }

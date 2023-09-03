@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { HistoriseCards } from './TodoHistory/HistoriseCards';
+import React from 'react';
 import UncompletedTodoList from '../components/UncompletedTodoList';
 import Image from 'next/image';
 import unCompletedTodo from '../../public/images/Uncompleted-todos.svg';
-import WeeklyCalender from './Calender/WeeklyCalender';
 
 type Props = {
   yearMonthkey: string;
