@@ -63,13 +63,13 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
   const curretDate = moment().format('YYYY-MM-DD');
   // const curretDate = moment().format('2023-08-01');
   const selectDayOfWeek = [
-    { value: '0', name: '월요일 마다' },
-    { value: '1', name: '화요일 마다' },
-    { value: '2', name: '수요일 마다' },
-    { value: '3', name: '목요일 마다' },
-    { value: '4', name: '금요일 마다' },
-    { value: '5', name: '토요일 마다' },
-    { value: '6', name: '일요일 마다' },
+    { value: '1', name: '월요일 마다' },
+    { value: '2', name: '화요일 마다' },
+    { value: '3', name: '수요일 마다' },
+    { value: '4', name: '목요일 마다' },
+    { value: '5', name: '금요일 마다' },
+    { value: '6', name: '토요일 마다' },
+    { value: '7', name: '일요일 마다' },
   ];
   const selectWeek = [
     { value: '0', name: '안 함' },
@@ -78,7 +78,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
     { value: '21', name: '3주' },
     { value: '28', name: '4주' },
   ];
-  const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
+  const daysOfWeek = ['없음','월', '화', '수', '목', '금', '토', '일'];
 
   // Event Handlers
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +95,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
       setRepeatDays((prevRepeatDays) => prevRepeatDays + selectedValue);
     }
   };
+
   const handleDuration = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     if (selectedValue === '안 함') {
@@ -113,7 +114,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
       repeatDays: repeatDays,
       duration: duration,
     };
-
+    console.log(todoData);
     try {
       if (type === 'newtodo') {
         await addMutation.mutateAsync(todoData);
