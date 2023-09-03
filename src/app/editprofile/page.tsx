@@ -6,7 +6,7 @@ import BasicHeader from '../../components/header/BasicHeader';
 import ProfileForm from '../../components/ProfileForm';
 import TabBar from '../../components/TabBar';
 import EditProfileImg from '../../components/UserProfile/EditProfileImg';
-import { getUserInfo } from '../../service/auth';
+import { getUserInfo, putUserProfile } from '../../service/auth';
 
 const EditProfile = () => {
   const [profileImg, setProfileImg] = useState<string>('');
@@ -34,18 +34,37 @@ const EditProfile = () => {
     setIntroduce(newValue);
   };
 
+  const saveMutation = useMutation(putUserProfile, {
+    onSuccess(data) {
+      console.log(data);
+    },
+    onError(error) {
+      console.log(error);
+    },
+  });
+
+  const handleSave = async () => {
+    console.log('저장');
+    const editData = {
+      file: '',
+      updateDto: {
+        name,
+        introduce,
+      },
+    };
+
+    saveMutation.mutate(editData);
+  };
+
   useEffect(() => {
     if (userId !== null) {
       userMutation.mutate(userId);
     }
   }, []);
 
-  console.log('name', name);
-  console.log('introduce', introduce);
-
   return (
     <div className='h-screen w-full'>
-      <BasicHeader option='myprofile' />
+      <BasicHeader option='myprofile' onSave={handleSave} />
       <div className='flex flex-col items-center p-7'>
         <EditProfileImg defaultImg={profileImg} />
         <p className='pb-12 text-lg'>{userId}</p>
