@@ -6,7 +6,7 @@ import { putRefreshToken } from './auth';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const instance = axios.create({
-  baseURL: 'localhost:3000',
+  // baseURL: 'localhost:3000',
   headers: { 'Content-Type': 'application/json' },
 });
 
