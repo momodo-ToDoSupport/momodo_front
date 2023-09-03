@@ -70,3 +70,6 @@ ul {
 .progressbar-container {
   border: 1px solid #fff;
 }
+.zindex {
+  z-index: 100;
+}

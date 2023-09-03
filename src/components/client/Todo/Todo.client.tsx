@@ -10,7 +10,7 @@ import { todoCompleted, deleteTodoData } from '../../../service/todo';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal/Modal';
-import DeleteModal from '../../Modal/deleteModal';
+import InnerModal from '../../Modal/InnerModal';
 
 interface Props {
   todoList: TodoData;
@@ -77,7 +77,7 @@ const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
       {editModalOpen && (
         <Modal id={id} type='edittodo' closeModal={closeEditModal} />
       )}
-      {deleteModalOpen && <DeleteModal id={id} closeModal={closeDeleteModal} />}
+      {deleteModalOpen && <InnerModal type={'deleteTodo'} id={id} closeModal={closeDeleteModal} />}
     </>
   );
 };
