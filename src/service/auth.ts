@@ -20,8 +20,8 @@ export const getUserInfo = async (userId: string) => {
   const response = await instance.get(`/api/v1/user-app/${userId}`);
   return response.data;
 };
-
-export const putUserProfile = async (editdata) => {
+// any Type 수정필요
+export const putUserProfile = async (editdata:any) => {
   console.log(editdata);
   const response = await accessInstance.put('/api/v1/user-app', editdata);
 

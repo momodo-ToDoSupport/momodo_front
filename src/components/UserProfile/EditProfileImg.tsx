@@ -1,7 +1,12 @@
 import React from 'react';
 import ProfileImg from './ProfileImg';
 
-const EditProfileImg = ({ defaultImg }) => {
+// 수정필요
+type Props = {
+  defaultImg:any;
+}
+
+const EditProfileImg:React.FC<Props> = ({ defaultImg }) => {
   return (
     <form className='m-14'>
       <label htmlFor='profileImg'>

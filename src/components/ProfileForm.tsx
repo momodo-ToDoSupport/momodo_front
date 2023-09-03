@@ -36,7 +36,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
         className='border-none w-full bg-bg-color placeholder-grey-65'
         placeholder={placeholder}
         maxLength={15}
-        value={inputContent}
         onChange={handleInputChange}
       />
     </form>
