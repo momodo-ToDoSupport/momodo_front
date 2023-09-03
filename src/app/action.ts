@@ -2,17 +2,6 @@
 
 import { cookies } from 'next/dist/client/components/headers';
 
-// setCookie([
-//   {key:"acc",value:token}
-// ])
-
-// export const setCookie = async (key: string, value: string) => {
-//   return cookieStore.set({
-//     name: key,
-//     value: value,
-//   });
-// };
-
 // type 수정필요
 export const setCookie = async(arr:any[])=> {
   const cookieStore = cookies();
@@ -30,3 +19,8 @@ export const getCookie = async (key: string): Promise<string | undefined> => {
   const cookie = cookieStore.get(key);
   return cookie?.value;
 };
+
+// export const deleteCookie = async (key) => {
+//   const cookieStore = cookies();
+//   cookieStore.
+// };

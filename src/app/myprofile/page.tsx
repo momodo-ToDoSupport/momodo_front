@@ -20,7 +20,7 @@ const myprofile = async () => {
 
   return (
     <div className='p-6 w-full h-screen'>
-      <MainHeader option='myprofile' />
+      <MainHeader/>
       <UserProfile option='follow' />
       <Tier />
       <HydrateTodoList state={dehydarate}>
