@@ -1,19 +1,6 @@
-
 'use client'
-
 import Image from 'next/image';
 import momodoLogo from '../../../public/images/momodo.svg';
-import calendarIcon from '../../../public/images/calendarIcon.svg';
-import menuIcon from '../../../public/images/menuIcon.svg';
-import useModal from '../../hooks/useModal';
-import Modal from '../Modal/Modal';
-import ModalButton from '../Modal/ModalButton';
-import Link from 'next/link';
-
-
-const MainHeader: React.FC<MainHeaderProps> = ({ toggleCalender, option }) => {
-  const { modalOpen, openModal, closeModal } = useModal();
-
 import logoutIcon from '../../../public/images/logoutIcon.svg';
 import useModal from '../../hooks/useModal';
 import InnerModal from '../Modal/InnerModal';

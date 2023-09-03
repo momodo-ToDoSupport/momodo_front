@@ -5,7 +5,7 @@ interface ModalProps {
   children?: ReactNode;
   type?: string | null;
   closeModal(): void;
-  id?: number;
+  id: number;
 }
 
 const Modal: React.FC<ModalProps> = ({ children, type, closeModal, id }) => {
