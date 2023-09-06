@@ -9,7 +9,7 @@ export interface Todo {
 }
 export const postTodoData = async (tododata: TodoData) => {
   const response = await accessInstance.post('/api/v1/todos', tododata);
-  return response.data;
+  return response.data.data;
 };
 
 export const getTodoData = async (dueDatekey: string) => {
@@ -18,18 +18,18 @@ export const getTodoData = async (dueDatekey: string) => {
       dueDate: dueDatekey,
     },
   });
-  const data = response.data;
+  const data = response.data.data;
   return data;
 };
 
 export const getIdTodoData = async (id: number) => {
   const response = await accessInstance.get(`/api/v1/todos/${id}`);
-  const data = response.data;
+  const data = response.data.data;
   return data;
 };
 
 export const modifyTodoData = async (id: number, modifyTodo: ModifyTodo) => {
-  const response = await accessInstance.patch(
+  const response = await accessInstance.put(
     `/api/v1/todos/${id}`,
     modifyTodo
   );
@@ -37,7 +37,7 @@ export const modifyTodoData = async (id: number, modifyTodo: ModifyTodo) => {
 };
 
 export const todoCompleted = async (id: number) => {
-  const response = await accessInstance.patch(`/api/v1/todos/${id}/complete`);
+  const response = await accessInstance.put(`/api/v1/todos/${id}/complete`);
   return response;
 };
 

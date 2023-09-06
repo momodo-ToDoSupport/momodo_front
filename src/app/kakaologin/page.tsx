@@ -35,10 +35,9 @@ const KakaoLogin = () => {
           localStorage.setItem('kakaoName', kakaoResponse.properties.nickname);
 
           const response = await sendKakaoToken(kakaoAccesstoken);
-          const { accessToken, refreshToken } = response.response;
-          // 수정
-          // localStorage.setItem('accessToken', accessToken);
-          // setCookie('refreshToken', refreshToken);
+          console.log(response.accessToken);
+          const { accessToken, refreshToken } = response;
+
           setCookie([
             { key: 'accessToken', value: accessToken },
             { key: 'refreshToken', value: refreshToken },

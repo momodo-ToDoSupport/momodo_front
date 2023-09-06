@@ -44,12 +44,11 @@ const CalendarButton: React.FC<Props> = ({
 
   return (
     <button
-      className={`flex z-0 justify-center items-center h-30 border border-black ${
+      className={`flex z-0 justify-center items-center h-30 border border-black relative ${
         isCurrentMonth ? '' : 'text-[#535252]'
       } ${isCurrentDate ? 'relative' : ''}`}
       onClick={() => selectDate(day)}
     >
-      <div className="relative"></div>
       {matchingTier && (
         <Image
           className='absolute z-1'

@@ -5,7 +5,7 @@ import defaultProfileImg from '../../../public/images/profile-default.svg';
 interface ProfileImgProps {
   width: number;
   height: number;
-  src?: string;
+  src: string;
   alt: string;
   defaultImg?: string;
 }
@@ -13,11 +13,12 @@ interface ProfileImgProps {
 const ProfileImg: React.FC<ProfileImgProps> = ({
   width,
   height,
-  src = defaultProfileImg,
+  src,
   alt,
   defaultImg,
 }) => {
-  return <Image width={width} height={height} src={src} alt={alt} />;
+
+  return <Image className='profileImage' width={width} height={height} src={src} alt={alt} />;
 };
 
 export default ProfileImg;

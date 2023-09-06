@@ -26,6 +26,7 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
     selectedDate,
     moveMonth
   );
+  console.log(todoListData);
 
   // 이전 달로 이동하는 함수
   const goToPreviousMonth = () => {

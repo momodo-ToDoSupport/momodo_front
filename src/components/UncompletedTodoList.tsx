@@ -1,6 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
-import unCompletedTodo from '../../public/images/Uncompleted-todos.svg';
 import moment from 'moment';
 import { useQuery } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../utils/queryFns/todoListQueryFns';
@@ -23,8 +21,8 @@ const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
 
   return (
     <>
-      <span className='mt-5 text-xxl'>{currentMonth}</span>
-      <div className='w-full my-10 overflow-y-auto fix-height'>
+      <span className='mt-5 text-xl'>{currentMonth}</span>
+      <div className='w-full my-8 overflow-y-auto fix-height'>
         <ul className='space-y-2'>
           {data.map((todo) => (
             <li

@@ -58,7 +58,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (userId !== null) {
-      userMutation.mutate(userId);
+      userMutation.mutate();
     }
   }, []);
 

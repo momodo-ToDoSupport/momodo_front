@@ -3,10 +3,10 @@ import ProfileImg from './ProfileImg';
 
 // 수정필요
 type Props = {
-  defaultImg:any;
-}
+  defaultImg: any;
+};
 
-const EditProfileImg:React.FC<Props> = ({ defaultImg }) => {
+const EditProfileImg: React.FC<Props> = ({ defaultImg }) => {
   return (
     <form className='m-14'>
       <label htmlFor='profileImg'>
@@ -15,6 +15,7 @@ const EditProfileImg:React.FC<Props> = ({ defaultImg }) => {
           height={63}
           alt='프로필 이미지'
           defaultImg={defaultImg}
+          src={'defaultProfileImg'}
         />
       </label>
       <input type='file' id='profileImg' className='hidden' accept='image/*' />

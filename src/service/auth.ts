@@ -13,22 +13,21 @@ export const postUserLogin = async (formdata: LoginInput) => {
     formdata
   );
 
-  return response.data;
+  return response.data.data;
 };
 
-export const getUserInfo = async (userId: string) => {
-  const response = await instance.get(`/api/v1/user-app/${userId}`);
-  return response.data;
+export const getUserInfo = async () => {
+  const response = await accessInstance.get(`/api/v1/user-app`);
+  return response.data.data;
 };
+
 // any Type 수정필요
 export const putUserProfile = async (editdata:any) => {
-  console.log(editdata);
   const response = await accessInstance.put('/api/v1/user-app', editdata);
-
   return response;
 };
 
 export const putRefreshToken = async (token: string | undefined) => {
   const response = await instance.put('/api/v1/authentication/token', token);
-  return response.data.response;
+  return response.data.data;
 };

@@ -62,7 +62,10 @@ ul {
   border-right: 1px solid #fff;
 }
 .fix-height {
-  height: 800px;
+  height: 500px;
+}
+.todofix-height {
+  height: 290px;
 }
 .progressbar {
   background-color: rgb(238 242 255);
@@ -72,4 +75,11 @@ ul {
 }
 .zindex {
   z-index: 100;
+}
+.profileImage {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 1px solid #7a7878;
 }

@@ -11,7 +11,7 @@ type Props = {
 export const TodoManageMent: React.FC<Props> = ({ yearMonthkey }) => {
   return (
     <section className =' p-3 flex flex-col items-center bg-grey-2D h-700 fix-height rounded-xl'>
-      <h2 className='mt-10'>
+      <h2 className='mt-6'>
         <Image
           src={unCompletedTodo}
           alt='미완료투두리스트타이틀'
