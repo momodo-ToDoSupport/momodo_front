@@ -17,7 +17,7 @@ interface Props {
   isDueDatePassed: boolean;
 }
 const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
-  const { id, title, emoji, dueDate, completed } = todoList;
+  const { id, title, emoji, completed } = todoList;
   const [checked, setChecked] = useState(completed);
 
   const {
@@ -50,7 +50,7 @@ const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
   return (
     <>
       <li
-        className={`flex items-center relative w-7/8 ${
+        className={`flex items-center relative ${
           checked ? `bg-[#656565]` : `bg-white`
         } p-3 mb-2 rounded-2xl`}
       >
@@ -77,7 +77,9 @@ const Todo: React.FC<Props> = ({ todoList, isDueDatePassed }) => {
       {editModalOpen && (
         <Modal id={id} type='edittodo' closeModal={closeEditModal} />
       )}
-      {deleteModalOpen && <InnerModal type={'deleteTodo'} id={id} closeModal={closeDeleteModal} />}
+      {deleteModalOpen && (
+        <InnerModal type={'deleteTodo'} id={id} closeModal={closeDeleteModal} />
+      )}
     </>
   );
 };

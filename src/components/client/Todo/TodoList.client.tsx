@@ -38,7 +38,7 @@ const TodoList: React.FC<Props> = ({ todoListData, selectedDate }) => {
   );
 
   return (
-    <section className={`mt-8`}>
+    <section className={`mt-8 flex flex-col grow`}>
       <h2 className='hidden'>투두리스트</h2>
       <div className='flex justify-between items-center relative mb-4'>
         <Image src={todayTodos} className='ml-1 mr-3' alt='오늘의 투두리스트' />
@@ -50,7 +50,7 @@ const TodoList: React.FC<Props> = ({ todoListData, selectedDate }) => {
         />
       </div>
       <div
-        className={`w-full todofix-height my-7 overflow-y-auto bg-[#242424] rounded-3xl px-5 py-5 ${
+        className={`w-full my-7 todofix-height overflow-y-auto bg-[#242424] rounded-3xl px-5 py-5 flex flex-col grow ${
           processedTodoListData?.length === 0
             ? 'flex justify-center items-center'
             : ''

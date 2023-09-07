@@ -22,7 +22,7 @@ const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   return (
     <>
       <span className='mt-5 text-xl'>{currentMonth}</span>
-      <div className='w-full my-8 overflow-y-auto fix-height'>
+      <div className='w-full my-8 overflow-y-auto'>
         <ul className='space-y-2'>
           {data.map((todo) => (
             <li

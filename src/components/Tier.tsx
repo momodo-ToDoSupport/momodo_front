@@ -5,11 +5,9 @@ import tierIcon1 from '../../public/images/tierIcon-red-1.svg';
 import tierIcon2 from '../../public/images/tierIcon-green-2.svg';
 import tierIcon3 from '../../public/images/tierIcon-blue-3.svg';
 import tierIcon4 from '../../public/images/tierIcon-rainbow-4.svg';
-// import { useAtom } from 'jotai';
-// import { userAtom } from '../store/authStore';
 
 const Tier = () => {
-  const tier =localStorage.getItem('Tier');
+  const tier = localStorage.getItem('Tier');
   let tierIconSrc = '';
   let tierLevel = '';
   if (tier === 'RED') {
@@ -27,7 +25,7 @@ const Tier = () => {
   }
 
   return (
-    <div className='flex items-center justify-around py-5 px-5 my-10 bg-grey-2D rounded-xl'>
+    <div className='flex items-center justify-around py-5 px-5 mb-7 bg-grey-2D rounded-xl'>
       <Image
         src={tierIconSrc}
         alt='티어 레벨1'

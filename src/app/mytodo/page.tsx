@@ -26,20 +26,20 @@ const MyTodo = async () => {
     queryclient.prefetchQuery(['todolist', today], () =>
       getTodoListQueryFns(today)
     ),
-    queryclient.prefetchQuery(['userInfo'], () =>
-    getUserInfo()
-    ),
+    queryclient.prefetchQuery(['userInfo'], () => getUserInfo()),
   ]);
 
   const dehydarate = dehydrate(queryclient);
 
   return (
-    <div className='p-6 w-full h-screen'>
+    <div className='p-6 w-full min-h-screen flex flex-col'>
       <MainHeader />
-      <HydrateTodoList state={dehydarate}>
-        <UserProfile />
-        <MonthCalender today={today} yearMonth={yearMonth} />
-      </HydrateTodoList>
+      <div className='flex flex-col grow'>
+        <HydrateTodoList state={dehydarate}>
+          <UserProfile />
+          <MonthCalender today={today} yearMonth={yearMonth} />
+        </HydrateTodoList>
+      </div>
       <TabBar />
     </div>
   );

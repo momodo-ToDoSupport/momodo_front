@@ -12,25 +12,20 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
-  userId,
   name,
   profileImage,
   introduce,
 }) => {
-
   return (
     <div className='flex items-center'>
       <ProfileImg
-        width={45}
-        height={45}
+        width={35}
+        height={35}
         alt='프로필 이미지'
         src={profileImage}
       />
       <div className='flex flex-col ml-2'>
-        <p className='leading-tight'>
-          {name}
-          {/* {userId?.length === 0 ? kakaoName : userId} */}
-        </p>
+        <p className='leading-tight text-sm'>{name}</p>
         <span className={`text-xxs text-grey-C9`}>{introduce}</span>
       </div>
     </div>

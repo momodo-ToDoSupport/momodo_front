@@ -19,13 +19,15 @@ const myprofile = async () => {
   const dehydarate = dehydrate(queryclient);
 
   return (
-    <div className='p-6 w-full h-screen'>
-      <MainHeader/>
-      <UserProfile option='follow' />
-      <Tier />
-      <HydrateTodoList state={dehydarate}>
-        <TodoManageMent yearMonthkey={yearMonthkey} />
-      </HydrateTodoList>
+    <div className='p-6 w-full h-screen flex flex-col'>
+      <MainHeader />
+      <div className='flex flex-col grow'>
+        <UserProfile option='follow' />
+        <Tier />
+        <HydrateTodoList state={dehydarate}>
+          <TodoManageMent yearMonthkey={yearMonthkey} />
+        </HydrateTodoList>
+      </div>
       <TabBar />
     </div>
   );

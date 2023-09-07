@@ -19,17 +19,17 @@ const UserProfile: React.FC<ProfileProps> = ({ option }) => {
     queryKey: ['userInfo'],
     queryFn: () => getUserInfo(),
   });
-  console.log(userInfoData);
-  localStorage.setItem('Tier',userInfoData?.tier);
+  // console.log(userInfoData);
+  localStorage.setItem('Tier', userInfoData?.tier);
 
   let tierIconSrc = '';
-  if (userInfoData.tier === 'RED') {
+  if (userInfoData?.tier === 'RED') {
     tierIconSrc = tierIcon1;
-  } else if (userInfoData.tier === 'GREEN') {
+  } else if (userInfoData?.tier === 'GREEN') {
     tierIconSrc = tierIcon2;
-  } else if (userInfoData.tier === 'BLUE') {
+  } else if (userInfoData?.tier === 'BLUE') {
     tierIconSrc = tierIcon3;
-  } else if (userInfoData.tier === 'RAINBOW') {
+  } else if (userInfoData?.tier === 'RAINBOW') {
     tierIconSrc = tierIcon4;
   }
 
@@ -37,10 +37,10 @@ const UserProfile: React.FC<ProfileProps> = ({ option }) => {
     <section className='flex items-center justify-between mb-4'>
       <h1 className='hidden'>유저 프로필</h1>
       <ProfileCard
-        userId={userInfoData.userId}
-        name={userInfoData.name}
-        profileImage={userInfoData.profileImage}
-        introduce={userInfoData.introduce}
+        userId={userInfoData?.userId}
+        name={userInfoData?.name}
+        profileImage={userInfoData?.profileImage}
+        introduce={userInfoData?.introduce}
       />
       {option === 'follow' ? (
         <div className='flex flex-row gap-6'>
@@ -49,8 +49,8 @@ const UserProfile: React.FC<ProfileProps> = ({ option }) => {
         </div>
       ) : (
         <Image
-          width={51}
-          height={37}
+          width={40}
+          height={40}
           src={tierIcon1}
           alt='티어 1단계'
           className='ml-auto'
