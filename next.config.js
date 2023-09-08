@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/v1/authentication/token',
-  //       destination: `https://18.215.108.155:8080/api/v1/authentication/token`,
-  //     }
-  //   ]
-  // },
+  images: {
+    domains: ['momodo.s3.ap-northeast-2.amazonaws.com'],
+  },
   experimental: {
     serverActions: true,
   },

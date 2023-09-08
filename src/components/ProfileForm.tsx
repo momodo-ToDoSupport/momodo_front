@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 interface ProfileFormProps {
   title: string;
   placeholder?: string;
-  content?: string | null;
+  content?: string | undefined;
   onInputChange?: (newValue: string) => void;
 }
 
@@ -26,7 +26,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   }, [content]);
 
   return (
-    <form className='w-full mb-7 border-b-3 border-grey-65 border-b pb-3 flex'>
+    <div className='w-full mb-7 border-b-3 border-grey-65 border-b pb-3 flex'>
       <label htmlFor={title} className='w-1/4 mr-4'>
         {title}
       </label>
@@ -37,8 +37,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
         placeholder={placeholder}
         maxLength={15}
         onChange={handleInputChange}
+        value={inputContent}
       />
-    </form>
+    </div>
   );
 };
 

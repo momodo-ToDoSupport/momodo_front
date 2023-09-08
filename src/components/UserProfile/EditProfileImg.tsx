@@ -1,24 +1,26 @@
 import React from 'react';
 import ProfileImg from './ProfileImg';
+import test from '../../../public/images/TodayTier3.svg';
 
 // 수정필요
-type Props = {
-  defaultImg:any;
-}
+// type Props = {
+//   defaultImg: any;
+// };
 
-const EditProfileImg:React.FC<Props> = ({ defaultImg }) => {
+const EditProfileImg: React.FC = () => {
   return (
-    <form className='m-14'>
-      <label htmlFor='profileImg'>
-        <ProfileImg
-          width={63}
-          height={63}
-          alt='프로필 이미지'
-          defaultImg={defaultImg}
-        />
-      </label>
-      <input type='file' id='profileImg' className='hidden' accept='image/*' />
-    </form>
+    <div className='my-8'>
+      <label htmlFor='profileImg'></label>
+      <input type='file' id='profileImg' accept='image/*' />
+      <ProfileImg
+        width={80}
+        height={80}
+        alt='프로필 이미지'
+        // defaultImg={defaultImg}
+        src={test}
+        type={'modify'}
+      />
+    </div>
   );
 };
 

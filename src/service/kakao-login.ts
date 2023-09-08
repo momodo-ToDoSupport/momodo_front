@@ -25,7 +25,7 @@ export const sendKakaoToken = async (accesstoken: string) => {
     loginType: 'KAKAO',
     accessToken: accesstoken,
   });
-  return response.data;
+  return response.data.data;
 };
 
 export const getKakaoUser = async (kakaoToken: string) => {

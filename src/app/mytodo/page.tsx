@@ -9,6 +9,7 @@ import {
   getTodoListQueryFns,
   getTodohistoryFns,
 } from '../../utils/queryFns/todoListQueryFns';
+import { getUserInfo } from '../../service/auth';
 import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
 import moment from 'moment';
 
@@ -16,7 +17,7 @@ const MyTodo = async () => {
   const today = moment().format('YYYY-MM-DD');
   const yearMonth = moment().format('YYYY-MM');
   const queryclient = getQueryClient();
-  
+
   // Promise.all을 사용하여 병렬로 데이터 가져오기
   await Promise.all([
     queryclient.prefetchQuery(['todoHistory', yearMonth], () =>
@@ -25,19 +26,24 @@ const MyTodo = async () => {
     queryclient.prefetchQuery(['todolist', today], () =>
       getTodoListQueryFns(today)
     ),
+    queryclient.prefetchQuery(['userInfo'], () => getUserInfo()),
   ]);
 
   const dehydarate = dehydrate(queryclient);
 
   return (
-    <div className='p-6 w-full h-screen'>
-      <MainHeader />
-      <UserProfile />
-      <HydrateTodoList state={dehydarate}>
-        <MonthCalender today={today} yearMonth={yearMonth} />
-      </HydrateTodoList>
+    <>
+      <div className='p-6 w-full min-h-screen flex flex-col'>
+        <MainHeader option={'mytodo'}/>
+        <div className='flex flex-col grow'>
+          <HydrateTodoList state={dehydarate}>
+            <UserProfile />
+            <MonthCalender today={today} yearMonth={yearMonth} />
+          </HydrateTodoList>
+        </div>
+      </div>
       <TabBar />
-    </div>
+    </>
   );
 };
 

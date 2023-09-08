@@ -15,12 +15,34 @@ export const accessInstance = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+export const accessInstanceProfile = axios.create({
+  baseURL: BASE_URL,
+  // headers: { 'Content-Type': 'multipart/form-data' },
+});
+
 accessInstance.interceptors.request.use(
   async (config) => {
     const accessToken = await getCookie('accessToken');
 
     if (!accessToken) {
-      alert('다시 시도해주세용😊');
+      alert('다시 시도해주세요😊');
+    }
+
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+accessInstanceProfile.interceptors.request.use(
+  async (config) => {
+    const accessToken = await getCookie('accessToken');
+    console.log(config);
+
+    if (!accessToken) {
+      alert('다시 시도해주세요😊');
     }
 
     config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -39,7 +61,7 @@ accessInstance.interceptors.response.use(
     console.log(error);
     const newAccessToken = await refreshAccessToken();
     console.log('newAccessToken', newAccessToken);
-    console.log('refresh AccessToken!');
+    // console.log('refresh AccessToken!');
   }
 );
 

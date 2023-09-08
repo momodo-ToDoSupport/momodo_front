@@ -32,13 +32,13 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
     setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
     setMoveMonth(currentMonth.subtract(1, 'months').format('YYYY-MM'));
   };
-  
+
   // 다음 달로 이동하는 함수
   const goToNextMonth = () => {
     setCurrentMonth(currentMonth.clone().add(1, 'month'));
     setMoveMonth(currentMonth.add(1, 'months').format('YYYY-MM'));
   };
-  
+
   // 현재 월의 캘린더 데이터를 생성하는 함수
   const calendarData = generateCalendarData(currentMonth);
 
@@ -49,9 +49,9 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
   };
   return (
     <>
-      <section className='bg-[#242424] rounded-3xl px-5 py-4'>
+      <section className='bg-grey-2D rounded-3xl px-5 py-4'>
         <div className='flex items-center justify-between pb-3'>
-          <span>{currentMonth.format('YYYY년 MM월')}</span>
+          <span className='text-sm'>{currentMonth.format('YYYY년 MM월')}</span>
           <div className='relative top-1'>
             <button onClick={goToPreviousMonth} className=''>
               <Image src={leftArrow} alt='이전 버튼' />
@@ -61,9 +61,9 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
             </button>
           </div>
         </div>
-        <div className='grid grid-cols-7 gap-4 text-center'>
+        <div className='grid grid-cols-7 gap-3 text-center'>
           {weekdays.map((weekday, index) => (
-            <div key={index} className='text-lg text-[#ADADAD] font-bold'>
+            <div key={index} className='text-sm text-[#ADADAD] font-bold'>
               {weekday}
             </div>
           ))}
