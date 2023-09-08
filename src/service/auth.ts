@@ -1,8 +1,9 @@
-import { instance, accessInstance } from './axios-api';
+import { instance, accessInstance, accessInstanceProfile } from './axios-api';
 import { LoginInput } from '../app/login/page';
 import { InputValue } from '../components/SignupForm';
 
 export const postSignup = async (formdata: InputValue) => {
+  console.log(formdata);
   const response = await instance.post('/api/v1/user-app', formdata);
   return response.data;
 };
@@ -12,7 +13,6 @@ export const postUserLogin = async (formdata: LoginInput) => {
     '/api/v1/authentication/token',
     formdata
   );
-
   return response.data.data;
 };
 
@@ -22,8 +22,11 @@ export const getUserInfo = async () => {
 };
 
 // any Type 수정필요
-export const putUserProfile = async (editdata:any) => {
-  const response = await accessInstance.put('/api/v1/user-app', editdata);
+export const putUserProfile = async (formdata: any) => {
+  const response = await accessInstanceProfile.put(
+    '/api/v1/user-app',
+    formdata
+  );
   return response;
 };
 

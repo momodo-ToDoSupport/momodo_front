@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html className={notosanskr.className}>
       <body suppressHydrationWarning={true}>
-        <main className='flex flex-col items-center h-screen w-full'>
+        <main className=''>
           <Providers>{children}</Providers>
         </main>
       </body>

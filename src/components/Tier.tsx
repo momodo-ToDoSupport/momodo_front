@@ -34,14 +34,11 @@ const Tier = () => {
       />
       <div className='grow'>
         <div className='flex mb-2 justify-between'>
-          <span className='text-xxs'>{tierLevel}</span>
-          <span className='text-xxs'>💪30% 달성</span>
+          <span className='text-xs'>{tierLevel}</span>
+          <span className='text-xs'>💪 30% 달성</span>
         </div>
         <div className='w-full h-4 border-solid border-white border-2 rounded'>
-          <div
-            className='h-full rounded progressbar'
-            style={{ width: `${40}%` }}
-          ></div>
+          <div className='h-full progressbar' style={{ width: `${40}%` }}></div>
         </div>
       </div>
     </div>

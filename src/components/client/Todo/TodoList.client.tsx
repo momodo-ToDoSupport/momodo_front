@@ -6,7 +6,7 @@ import Todo from './Todo.client';
 import todayTodos from '../../../../public/images/today-todos.svg';
 import AddButton from '../../AddButton';
 import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal/Modal';
+import Modal from '../../Modal/TodoModal';
 import { TodoData } from '../../../types/todolistType';
 import moment from 'moment';
 
@@ -50,7 +50,7 @@ const TodoList: React.FC<Props> = ({ todoListData, selectedDate }) => {
         />
       </div>
       <div
-        className={`w-full my-7 todofix-height overflow-y-auto bg-[#242424] rounded-3xl px-5 py-5 flex flex-col grow ${
+        className={`w-full my-3 h-1 overflow-y-auto bg-grey-2D rounded-3xl px-5 py-5 flex flex-col grow ${
           processedTodoListData?.length === 0
             ? 'flex justify-center items-center'
             : ''

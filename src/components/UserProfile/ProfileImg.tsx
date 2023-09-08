@@ -8,6 +8,7 @@ interface ProfileImgProps {
   src: string;
   alt: string;
   defaultImg?: string;
+  type: string | '';
 }
 
 const ProfileImg: React.FC<ProfileImgProps> = ({
@@ -16,9 +17,23 @@ const ProfileImg: React.FC<ProfileImgProps> = ({
   src,
   alt,
   defaultImg,
+  type,
 }) => {
-
-  return <Image className='profileImage' width={width} height={height} src={src} alt={alt} />;
+  return (
+    <>
+      {type === 'modify' ? (
+        <Image className='cursor-pointer profileEidtImage' width={width} height={height} src={src} alt={alt} />
+      ) : (
+        <Image
+          className='profileImage cursor-pointer'
+          width={width}
+          height={height}
+          src={src}
+          alt={alt}
+        />
+      )}
+    </>
+  );
 };
 
 export default ProfileImg;

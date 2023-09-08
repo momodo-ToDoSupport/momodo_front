@@ -42,20 +42,13 @@ const UserProfile: React.FC<ProfileProps> = ({ option }) => {
         profileImage={userInfoData?.profileImage}
         introduce={userInfoData?.introduce}
       />
-      {option === 'follow' ? (
-        <div className='flex flex-row gap-6'>
-          <FollowNumber number={0} title={'팔로워'} />
-          <FollowNumber number={0} title={'팔로잉'} />
-        </div>
-      ) : (
-        <Image
-          width={40}
-          height={40}
-          src={tierIcon1}
-          alt='티어 1단계'
-          className='ml-auto'
-        />
-      )}
+      <Image
+        width={40}
+        height={40}
+        src={tierIcon1}
+        alt='티어 1단계'
+        className='ml-auto'
+      />
     </section>
   );
 };

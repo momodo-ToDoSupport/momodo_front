@@ -9,7 +9,7 @@ import ToggleCheckButton from '../../button/ToggleCheckButton';
 import { todoCompleted, deleteTodoData } from '../../../service/todo';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal/Modal';
+import Modal from '../../Modal/TodoModal';
 import InnerModal from '../../Modal/InnerModal';
 
 interface Props {

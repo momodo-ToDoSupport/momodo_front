@@ -32,7 +32,7 @@ const TabBarIcon: React.FC<TabBarProps> = ({ src, name, path }) => {
 
   return (
     <li
-      className={`text-xs pt-2 mt-2 w-full ${
+      className={`text-xs py-2 my-2 w-full ${
         isActivePage ? 'text-main-color' : 'text-grey-65'
       }`}
     >

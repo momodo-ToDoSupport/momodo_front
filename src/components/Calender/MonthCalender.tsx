@@ -49,7 +49,7 @@ const MonthCalendar: React.FC<Props> = ({ today, yearMonth }) => {
   };
   return (
     <>
-      <section className='bg-[#242424] rounded-3xl px-5 py-4'>
+      <section className='bg-grey-2D rounded-3xl px-5 py-4'>
         <div className='flex items-center justify-between pb-3'>
           <span className='text-sm'>{currentMonth.format('YYYY년 MM월')}</span>
           <div className='relative top-1'>

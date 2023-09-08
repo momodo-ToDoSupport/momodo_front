@@ -23,6 +23,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         height={35}
         alt='프로필 이미지'
         src={profileImage}
+        type={''}
       />
       <div className='flex flex-col ml-2'>
         <p className='leading-tight text-sm'>{name}</p>

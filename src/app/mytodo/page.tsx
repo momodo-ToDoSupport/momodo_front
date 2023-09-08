@@ -32,16 +32,18 @@ const MyTodo = async () => {
   const dehydarate = dehydrate(queryclient);
 
   return (
-    <div className='p-6 w-full min-h-screen flex flex-col'>
-      <MainHeader />
-      <div className='flex flex-col grow'>
-        <HydrateTodoList state={dehydarate}>
-          <UserProfile />
-          <MonthCalender today={today} yearMonth={yearMonth} />
-        </HydrateTodoList>
+    <>
+      <div className='p-6 w-full min-h-screen flex flex-col'>
+        <MainHeader option={'mytodo'}/>
+        <div className='flex flex-col grow'>
+          <HydrateTodoList state={dehydarate}>
+            <UserProfile />
+            <MonthCalender today={today} yearMonth={yearMonth} />
+          </HydrateTodoList>
+        </div>
       </div>
       <TabBar />
-    </div>
+    </>
   );
 };
 
