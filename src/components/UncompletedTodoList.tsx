@@ -10,7 +10,7 @@ type Props = {
 
 const UncompletedTodoList: React.FC<Props> = ({ yearMonthkey }) => {
   const currentMonth = moment().format('YYYY년 MM월');
-  const { data, isLoading, isError } = useQuery<TodoData[]>({
+  const { data } = useQuery<TodoData[]>({
     queryKey: ['UnTodoList', yearMonthkey],
     queryFn: () => getUncompletedTodolistFns(yearMonthkey),
   });
