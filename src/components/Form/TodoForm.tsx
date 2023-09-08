@@ -2,8 +2,8 @@ import newtodo from '../../../public/images/newtodoIcon.svg';
 import edittodo from '../../../public/images/edittodo.svg';
 import close from '../../../public/images/closeIcon.svg';
 import Image from 'next/image';
-import Button from '../Button';
-import TodoEmoji from './TodoEmoji';
+import Button from '../button/Button';
+import TodoEmoji from '../Todo/TodoEmoji';
 import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -78,7 +78,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
     { value: '21', name: '3주' },
     { value: '28', name: '4주' },
   ];
-  const daysOfWeek = ['없음','월', '화', '수', '목', '금', '토', '일'];
+  const daysOfWeek = ['없음', '월', '화', '수', '목', '금', '토', '일'];
 
   // Event Handlers
   const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,7 +114,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ type, closeModal, id }) => {
       repeatDays: repeatDays,
       duration: duration,
     };
-    console.log(todoData);
     try {
       if (type === 'newtodo') {
         await addMutation.mutateAsync(todoData);

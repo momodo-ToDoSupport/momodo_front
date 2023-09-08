@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginForm from '../../components/LoginForm';
+import LoginForm from '../../components/Form/LoginForm';
 
 export interface LoginInput {
   userId: string;
@@ -7,7 +7,6 @@ export interface LoginInput {
 }
 
 const Login = () => {
-
   return (
     <div className='p-6 pb-16 flex flex-col justify-between h-screen w-full'>
       <LoginForm />

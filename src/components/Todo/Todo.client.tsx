@@ -2,15 +2,15 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
-import editTodo from '../../../../public/images/editTodoIcon.svg';
-import removeTodo from '../../../../public/images/remove_icon.svg';
-import { TodoData } from '../../../types/todolistType';
-import ToggleCheckButton from '../../button/ToggleCheckButton';
-import { todoCompleted, deleteTodoData } from '../../../service/todo';
+import editTodo from '../../../public/images/editTodoIcon.svg';
+import removeTodo from '../../../public/images/remove_icon.svg';
+import { TodoData } from '../../types/todolistType';
+import ToggleCheckButton from '../button/ToggleCheckButton';
+import { todoCompleted, deleteTodoData } from '../../service/todo';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal/TodoModal';
-import InnerModal from '../../Modal/InnerModal';
+import useModal from '../../hooks/useModal';
+import Modal from '../Modal/TodoModal';
+import InnerModal from '../Modal/InnerModal';
 
 interface Props {
   todoList: TodoData;

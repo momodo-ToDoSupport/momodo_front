@@ -1,5 +1,4 @@
-import React, { ReactNode, useRef } from 'react';
-import useModal from '../../hooks/useModal';
+
 import Link from 'next/link';
 
 interface ModalProps {

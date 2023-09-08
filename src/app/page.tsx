@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import logo from '../../public/images/logo.svg';
 import letterlogo from '../../public/images/momodo.svg';
 import Image from 'next/image';
-import LoginButton from '../components/LoginButton';
+import LoginButton from '../components/button/LoginButton';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -20,9 +20,6 @@ export default function Home() {
       <div className='text-center mb-20'>
         <LoginButton type='kakao' href='/kakaosociallogin'>
           카카오 계정으로 로그인
-        </LoginButton>
-        <LoginButton type='google' href='/signup'>
-          구글 계정으로 로그인
         </LoginButton>
         <LoginButton type='momodo' href='/login'>
           모모두 계정으로 로그인

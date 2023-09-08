@@ -6,9 +6,6 @@ const WeeklyCalendar = () => {
   const currentDate = moment().locale('en');
   const firstDayOfMonth = currentDate.clone().startOf('month');
   const lastDayOfMonth = currentDate.clone().endOf('month');
-  console.log(currentDate);
-  console.log(firstDayOfMonth)
-  console.log(lastDayOfMonth);
 
   const totalDaysInMonth = lastDayOfMonth.diff(firstDayOfMonth, 'days') + 1;
   const dates = Array.from({ length: totalDaysInMonth }, (_, index) => {

@@ -5,21 +5,16 @@ import tierIcon1 from '../../../public/images/tierIcon-red-1.svg';
 import tierIcon2 from '../../../public/images/tierIcon-green-2.svg';
 import tierIcon3 from '../../../public/images/tierIcon-blue-3.svg';
 import tierIcon4 from '../../../public/images/tierIcon-rainbow-4.svg';
-import FollowNumber from '../FollowNumber';
 import ProfileCard from './ProfileCard';
 import { useQuery } from '@tanstack/react-query';
 import { getUserInfo } from '../../service/auth';
 
-interface ProfileProps {
-  option?: string | null;
-}
-
-const UserProfile: React.FC<ProfileProps> = ({ option }) => {
+const UserProfile: React.FC = () => {
   const { data: userInfoData } = useQuery({
     queryKey: ['userInfo'],
     queryFn: () => getUserInfo(),
   });
-  // console.log(userInfoData);
+
   localStorage.setItem('Tier', userInfoData?.tier);
 
   let tierIconSrc = '';

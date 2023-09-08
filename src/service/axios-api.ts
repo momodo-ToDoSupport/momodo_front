@@ -17,7 +17,6 @@ export const accessInstance = axios.create({
 
 export const accessInstanceProfile = axios.create({
   baseURL: BASE_URL,
-  // headers: { 'Content-Type': 'multipart/form-data' },
 });
 
 accessInstance.interceptors.request.use(
@@ -39,7 +38,6 @@ accessInstance.interceptors.request.use(
 accessInstanceProfile.interceptors.request.use(
   async (config) => {
     const accessToken = await getCookie('accessToken');
-    console.log(config);
 
     if (!accessToken) {
       alert('다시 시도해주세요😊');
@@ -58,10 +56,7 @@ accessInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log(error);
     const newAccessToken = await refreshAccessToken();
-    console.log('newAccessToken', newAccessToken);
-    // console.log('refresh AccessToken!');
   }
 );
 

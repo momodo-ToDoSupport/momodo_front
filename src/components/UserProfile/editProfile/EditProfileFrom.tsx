@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import BasicHeader from '../../header/BasicHeader';
-import ProfileForm from '../../ProfileForm';
-import TabBar from '../../TabBar';
+import ProfileForm from '../../Form/ProfileForm';
+import TabBar from '../../common/TabBar';
 import uploadImg from '../../../../public/images/upload-file.svg';
 import { getUserInfo, putUserProfile } from '../../../service/auth';
 import ProfileImg from '../ProfileImg';
@@ -37,7 +37,6 @@ const EditProfileFrom = () => {
   const queryClient = useQueryClient();
   const saveMutation = useMutation(putUserProfile, {
     onSuccess(data) {
-      console.log(data);
       queryClient.invalidateQueries({ queryKey: ['userInfo'] });
     },
     onError(error) {

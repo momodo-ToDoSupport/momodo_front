@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import mytodoActive from '../../public/images/todoIcon-active.svg';
-import searchActive from '../../public/images/searchIcon-active.svg';
-import feedActive from '../../public/images/feedIcon-active.svg';
-import myprofileActive from '../../public/images/profileIcon-active.svg';
+import mytodoActive from '../../../public/images/todoIcon-active.svg';
+import searchActive from '../../../public/images/searchIcon-active.svg';
+import feedActive from '../../../public/images/feedIcon-active.svg';
+import myprofileActive from '../../../public/images/profileIcon-active.svg';
 
 interface TabBarProps {
   src: string;

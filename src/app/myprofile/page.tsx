@@ -1,13 +1,13 @@
 import React from 'react';
 import MainHeader from '../../components/header/MainHeader';
-import TabBar from '../../components/TabBar';
-import Tier from '../../components/Tier';
+import TabBar from '../../components/common/TabBar';
+import Tier from '../../components/common/Tier';
 import UserProfile from '../../components/UserProfile/UserProfile';
-import { TodoManageMent } from '../../components/TodoManageMent';
+import { TodoManageMent } from '../../components/Todo/TodoManageMent';
 import getQueryClient from '../../lib/getQueryClient/getQueryclient';
 import { dehydrate } from '@tanstack/react-query';
 import { getUncompletedTodolistFns } from '../../utils/queryFns/todoListQueryFns';
-import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
+import HydrateTodoList from '../../components/hydration/HydrateTodoList.clinet';
 import moment from 'moment';
 
 const myprofile = async () => {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import leftArrow from '../../../public/images/left-arrow.svg';
-import Button from '../Button';
+import Button from '../button/Button';
 import Link from 'next/link';
 
 interface HeaderProps {

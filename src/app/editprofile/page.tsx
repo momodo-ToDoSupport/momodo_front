@@ -1,6 +1,6 @@
 import EditProfileFrom from '../../components/UserProfile/editProfile/EditProfileFrom';
 import getQueryClient from '../../lib/getQueryClient/getQueryclient';
-import HydrateTodoList from '../../components/client/hydration/HydrateTodoList.clinet';
+import HydrateTodoList from '../../components/hydration/HydrateTodoList.clinet';
 import { dehydrate } from '@tanstack/react-query';
 import { getUserInfo } from '../../service/auth';
 

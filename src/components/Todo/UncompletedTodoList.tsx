@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import { useQuery } from '@tanstack/react-query';
-import { getUncompletedTodolistFns } from '../utils/queryFns/todoListQueryFns';
-import { TodoData } from '../types/todolistType';
+import { getUncompletedTodolistFns } from '../../utils/queryFns/todoListQueryFns';
+import { TodoData } from '../../types/todolistType';
 
 type Props = {
   yearMonthkey: string;

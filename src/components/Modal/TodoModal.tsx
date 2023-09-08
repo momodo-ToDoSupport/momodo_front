@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef } from 'react';
-import TodoForm from '../TodoList/TodoForm';
+import TodoForm from '../Form/TodoForm';
 
 interface ModalProps {
   children?: ReactNode;

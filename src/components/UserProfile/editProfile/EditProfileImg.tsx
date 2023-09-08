@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileImg from './ProfileImg';
+import ProfileImg from '../ProfileImg';
 import test from '../../../public/images/TodayTier3.svg';
 
 // 수정필요

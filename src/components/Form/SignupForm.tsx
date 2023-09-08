@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from './Button';
-import ErrorMsg from './ErrorMsg';
-import Input from './Input';
-import Label from './Label';
+import Button from '../button/Button';
+import ErrorMsg from '../common/ErrorMsg';
+import Input from '../common/Input';
+import Label from '../common/Label';
 
 export interface InputValue {
   userId: string | boolean;

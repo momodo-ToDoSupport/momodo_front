@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import React, { useMemo } from 'react';
 import Todo from './Todo.client';
-import todayTodos from '../../../../public/images/today-todos.svg';
-import AddButton from '../../AddButton';
-import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal/TodoModal';
-import { TodoData } from '../../../types/todolistType';
+import todayTodos from '../../../public/images/today-todos.svg';
+import AddButton from '../button/AddButton';
+import useModal from '../../hooks/useModal';
+import Modal from '../Modal/TodoModal';
+import { TodoData } from '../../types/todolistType';
 import moment from 'moment';
 
 interface Props {

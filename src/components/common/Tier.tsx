@@ -1,10 +1,10 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
-import tierIcon1 from '../../public/images/tierIcon-red-1.svg';
-import tierIcon2 from '../../public/images/tierIcon-green-2.svg';
-import tierIcon3 from '../../public/images/tierIcon-blue-3.svg';
-import tierIcon4 from '../../public/images/tierIcon-rainbow-4.svg';
+import tierIcon1 from '../../../public/images/tierIcon-red-1.svg';
+import tierIcon2 from '../../../public/images/tierIcon-green-2.svg';
+import tierIcon3 from '../../../public/images/tierIcon-blue-3.svg';
+import tierIcon4 from '../../../public/images/tierIcon-rainbow-4.svg';
 
 const Tier = () => {
   const tier = localStorage.getItem('Tier');

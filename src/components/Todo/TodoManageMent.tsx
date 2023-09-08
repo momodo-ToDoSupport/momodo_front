@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import UncompletedTodoList from '../components/UncompletedTodoList';
+import UncompletedTodoList from './UncompletedTodoList';
 import Image from 'next/image';
-import unCompletedTodo from '../../public/images/Uncompleted-todos.svg';
+import unCompletedTodo from '../../../public/images/Uncompleted-todos.svg';
 
 type Props = {
   yearMonthkey: string;

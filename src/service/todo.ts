@@ -1,4 +1,4 @@
-import { TodoData, ModifyTodo } from './../components/TodoList/TodoForm';
+import { TodoData, ModifyTodo } from '../components/Form/TodoForm';
 import { accessInstance } from './axios-api';
 export interface Todo {
   id: string;
@@ -12,16 +12,6 @@ export const postTodoData = async (tododata: TodoData) => {
   return response.data.data;
 };
 
-export const getTodoData = async (dueDatekey: string) => {
-  const response = await accessInstance.get('/api/v1/todos/date', {
-    params: {
-      dueDate: dueDatekey,
-    },
-  });
-  const data = response.data.data;
-  return data;
-};
-
 export const getIdTodoData = async (id: number) => {
   const response = await accessInstance.get(`/api/v1/todos/${id}`);
   const data = response.data.data;
@@ -29,10 +19,7 @@ export const getIdTodoData = async (id: number) => {
 };
 
 export const modifyTodoData = async (id: number, modifyTodo: ModifyTodo) => {
-  const response = await accessInstance.put(
-    `/api/v1/todos/${id}`,
-    modifyTodo
-  );
+  const response = await accessInstance.put(`/api/v1/todos/${id}`, modifyTodo);
   return response;
 };
 

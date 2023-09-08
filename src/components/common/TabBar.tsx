@@ -1,8 +1,6 @@
 import React from 'react';
-import todoIcon from '../../public/images/todoIcon.svg';
-import searchIcon from '../../public/images/searchIcon.svg';
-import feedIcon from '../../public/images/feedIcon.svg';
-import profileIcon from '../../public/images/profileIcon.svg';
+import todoIcon from '../../../public/images/todoIcon.svg';
+import profileIcon from '../../../public/images/profileIcon.svg';
 import TabBarIcon from './TabBarIcon';
 
 const TabBar = () => {

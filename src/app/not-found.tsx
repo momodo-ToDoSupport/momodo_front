@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import notFound from '../../public/images/404Icon.svg';
-import Button from '../components/Button';
+import Button from '../components/button/Button';
 import Link from 'next/link';
 
 const notfound = () => {

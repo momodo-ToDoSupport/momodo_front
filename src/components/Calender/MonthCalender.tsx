@@ -5,7 +5,7 @@ import moment from 'moment';
 import leftArrow from '../../../public/images/left-arrow.svg';
 import rightArrow from '../../../public/images/right-arrow.svg';
 import Image from 'next/image';
-import TodoList from '../client/Todo/TodoList.client';
+import TodoList from '../Todo/TodoList.client';
 import CalendarWeek from './CalendarWeek';
 import { generateCalendarData } from '../../utils/dateDataCreate';
 import { useCombinedDataFetch } from '../../hooks/useQueryDataFetch';

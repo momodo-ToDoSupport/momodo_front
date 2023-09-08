@@ -1,13 +1,13 @@
 'use client';
 
-import Button from './Button';
-import Input from './Input';
-import Label from './Label';
+import Button from '../button/Button';
+import Input from '../common/Input';
+import Label from '../common/Label';
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { postUserLogin } from '../service/auth';
+import { postUserLogin } from '../../service/auth';
 import { useRouter } from 'next/navigation';
-import { setCookie } from '../app/action';
+import { setCookie } from '../../app/action';
 
 export interface LoginInput {
   userId: string;

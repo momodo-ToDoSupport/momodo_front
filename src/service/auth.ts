@@ -1,6 +1,6 @@
 import { instance, accessInstance, accessInstanceProfile } from './axios-api';
 import { LoginInput } from '../app/login/page';
-import { InputValue } from '../components/SignupForm';
+import { InputValue } from '../components/Form/SignupForm';
 
 export const postSignup = async (formdata: InputValue) => {
   console.log(formdata);

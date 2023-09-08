@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { postSignup } from '../../service/auth';
-import SignupForm, { InputValue } from '../../components/SignupForm';
+import SignupForm, { InputValue } from '../../components/Form/SignupForm';
 
 const Signup = () => {
   const initialState: InputValue = {
