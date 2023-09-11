@@ -4,8 +4,8 @@
 - [개발 환경](#개발-환경)
 - [구현 기능](#구현-기능)
 <br>
-> 배포 URL: https://momodo-front-git-dev-hi25.vercel.app/ <br>
 
+>[`Product 웹 바로가기 👈🏻`](https://momodo.vercel.app/) <br>
 >ID : Test    <br>
 >PW : 123456  <br>
 
@@ -55,13 +55,13 @@
   </tr>
   <tr>
     <td align="center">
-        <a href="https://github.com/Yang-zzz">Yang-zzz</a>
+        <a href="https://github.com/Yang-zzz">양지성(Yang-zzz)</a>
     </td>
     <td align="center">
-        <a href="https://github.com/yoyoujin">yoyoujin</a>
+        <a href="https://github.com/yoyoujin">한유진(yoyoujin)</a>
     </td>
     <td align="center">
-        <a href="https://github.com/SBSun">SBSun</a>
+        <a href="https://github.com/SBSun">송병선(SBSun)</a>
     </td>
   </tr>
 </table>
