@@ -1,34 +1,41 @@
 import moment from 'moment';
 import React from 'react';
 
-const WeeklyCalender = () => {
+const WeeklyCalendar = () => {
+  const currentMonth = moment().format('YYYY년 MM월');
   const currentDate = moment().locale('en');
-  const dates = [];
+  const firstDayOfMonth = currentDate.clone().startOf('month');
+  const lastDayOfMonth = currentDate.clone().endOf('month');
 
-  for (let i = 0; i <= 30; i++) {
-    const date = currentDate.clone().add(i, 'days');
+  const totalDaysInMonth = lastDayOfMonth.diff(firstDayOfMonth, 'days') + 1;
+  const dates = Array.from({ length: totalDaysInMonth }, (_, index) => {
+    const date = firstDayOfMonth.clone().add(index, 'days');
     const dayOfWeek = date.format('ddd');
     const dayOfMonth = date.format('DD');
     const isToday = date.isSame(moment(), 'day');
 
-    dates.push({ dayOfWeek, dayOfMonth, isToday });
-  }
+    return { dayOfWeek, dayOfMonth, isToday };
+  });
 
   return (
-    <div className='flex py-3 overflow-x-scroll hide-scrollbar'>
-      {dates.map((date, index) => (
-        <div
-          key={index}
-          className={`text-center flex-col items-center inline-block px-5 py-4 border-2 rounded-2xl mr-3 border-main-color font-medium ${
-            date.isToday && 'bg-main-color text-black'
-          }`}
-        >
-          <div className='text-sm'>{date.dayOfWeek}</div>
-          <div className='text-mxl text-center'>{date.dayOfMonth}</div>
-        </div>
-      ))}
-    </div>
+    <section className='flex flex-col items-center'>
+      <h2>TodoHistory</h2>
+      <span className='mt-2'>{currentMonth}</span>
+      <div className='grid grid-cols-4 gap-4 py-3 overflow-y-auto max-h-96'>
+        {dates.map((date, index) => (
+          <div
+            key={index}
+            className={`text-center inline-flex flex-col items-center px-5 py-4 border-2 rounded-2xl mr-3 border-main-color font-medium ${
+              date.isToday ? 'bg-main-color text-black' : ''
+            }`}
+          >
+            <div className='text-sm'>{date.dayOfWeek}</div>
+            <div className='text-xxl text-center'>{date.dayOfMonth}</div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
-export default WeeklyCalender;
+export default WeeklyCalendar;

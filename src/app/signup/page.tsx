@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
-import { postSignup } from '../../api/auth';
-import SignupForm, { InputValue } from '../../components/SignupForm';
+import { useMutation } from '@tanstack/react-query';
+import { postSignup } from '../../service/auth';
+import SignupForm, { InputValue } from '../../components/Form/SignupForm';
 
 const Signup = () => {
   const initialState: InputValue = {
@@ -39,8 +39,12 @@ const Signup = () => {
       router.push('/login');
       alert('회원가입이 완료되었습니다 😄');
     },
-    onError(error) {
+    // error type 수정 필요
+    onError(error: any) {
       console.error(error);
+      if (error.response?.data?.error.message === '회원 중복') {
+        alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
+      }
     },
   });
 
@@ -101,12 +105,11 @@ const Signup = () => {
   };
 
   return (
-    <div className='p-6 pb-16 flex flex-col justify-between h-screen'>
+    <div className='p-6 pb-16 flex flex-col justify-between h-screen w-full'>
       <SignupForm
         onBlur={handleBlur}
         isBlurs={isBlurs}
         onChange={handleChange}
-        
         onSubmit={handleSubmit}
         disabled={!isFormValid}
         errorMsg={errors}

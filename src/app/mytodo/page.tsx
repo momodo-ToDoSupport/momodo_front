@@ -1,26 +1,48 @@
-import React, { useState } from "react";
-import MonthCalender from "../../components/Calender/MonthCalender";
-import UserProfile from "../../components/UserProfile/UserProfile";
-import TabBar from "../../components/TabBar";
-import TodoList from "../../components/TodoList/TodoList";
-import WeeklyCalender from "../../components/Calender/WeeklyCalender";
-import MainHeader from "../../components/header/MainHeader";
+import React from 'react';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import TabBar from '../../components/common/TabBar';
+import MainHeader from '../../components/header/MainHeader';
+import MonthCalender from '../../components/Calender/MonthCalender';
+import getQueryClient from '../../lib/getQueryClient/getQueryclient';
+import { dehydrate } from '@tanstack/react-query';
+import {
+  getTodoListQueryFns,
+  getTodohistoryFns,
+} from '../../utils/queryFns/todoListQueryFns';
+import { getUserInfo } from '../../service/auth';
+import HydrateTodoList from '../../components/hydration/HydrateTodoList.clinet';
+import moment from 'moment';
 
-const MyTodo = () => {
-  const [showMonthCalender, setShowMonthCalender] = useState<boolean>(true);
+const MyTodo = async () => {
+  const today = moment().format('YYYY-MM-DD');
+  const yearMonth = moment().format('YYYY-MM');
+  const queryclient = getQueryClient();
 
-  const toggleCalender = () => {
-    setShowMonthCalender(!showMonthCalender);
-  };
+  await Promise.all([
+    queryclient.prefetchQuery(['todoHistory', yearMonth], () =>
+      getTodohistoryFns(yearMonth)
+    ),
+    queryclient.prefetchQuery(['todolist', today], () =>
+      getTodoListQueryFns(today)
+    ),
+    queryclient.prefetchQuery(['userInfo'], () => getUserInfo()),
+  ]);
+
+  const dehydarate = dehydrate(queryclient);
 
   return (
-    <div className="p-6 w-full h-screen">
-      <MainHeader toggleCalender={toggleCalender} option="todo" />
-      <UserProfile />
-      {showMonthCalender ? <MonthCalender /> : <WeeklyCalender />}
-      <TodoList />
+    <>
+      <div className='p-6 w-full min-h-screen flex flex-col'>
+        <MainHeader option={'mytodo'} />
+        <div className='flex flex-col grow'>
+          <HydrateTodoList state={dehydarate}>
+            <UserProfile />
+            <MonthCalender today={today} yearMonth={yearMonth} />
+          </HydrateTodoList>
+        </div>
+      </div>
       <TabBar />
-    </div>
+    </>
   );
 };
 

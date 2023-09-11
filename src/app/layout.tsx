@@ -1,23 +1,11 @@
-"use client";
-
-import "../styles/globals.css";
-import { Noto_Sans_KR } from "@next/font/google";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { CookiesProvider } from "react-cookie";
-import { kakaoAuthUrl } from "../api/kakao-login";
-import logo from "../../public/images/logo.svg";
-import letterlogo from "../../public/images/momodo.svg";
-import Image from "next/image";
-import LoginButton from "../components/LoginButton";
-import Link from "next/link";
+import '../styles/globals.css';
+import { Providers } from '../Context/Providers';
+import { Noto_Sans_KR } from '@next/font/google';
 
 const notosanskr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
 });
-
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -25,15 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>
-        <main className="flex flex-col items-center justify-end h-screen">
-          <CookiesProvider>
-            <QueryClientProvider client={queryClient}>
-              {children}
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </CookiesProvider>
+    <html className={notosanskr.className}>
+      <body suppressHydrationWarning={true}>
+        <main className=''>
+          <Providers>{children}</Providers>
         </main>
       </body>
     </html>

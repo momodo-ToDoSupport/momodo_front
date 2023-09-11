@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from 'react';
 
 const useModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
-    setModalOpen(true);
+    setModalOpen(!modalOpen);
   };
 
   const closeModal = () => {

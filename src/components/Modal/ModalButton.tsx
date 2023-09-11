@@ -2,10 +2,11 @@ import React from 'react';
 
 interface ModalProps {
   name: string;
+  closeModal(): void;
 }
 
-const ModalButton: React.FC<ModalProps> = ({ name }) => {
-  return <button className='mb-8 ml-5 text-left'>{name}</button>;
+const ModalButton: React.FC<ModalProps> = ({ name, closeModal }) => {
+  return <button onClick={()=>closeModal()} className='mb-3 ml-5 text-base'>{name}</button>;
 };
 
 export default ModalButton;
