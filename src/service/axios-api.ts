@@ -83,7 +83,7 @@ export const refreshAccessToken = async () => {
       return newAccessToken;
     }
   } catch (error) {
-    console.error('Failed to refresh accessToken:', error);
+    // console.error('Failed to refresh accessToken:', error);
     return null;
   }
 };

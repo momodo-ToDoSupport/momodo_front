@@ -35,7 +35,6 @@ const Signup = () => {
 
   const submitMutation = useMutation(postSignup, {
     onSuccess(data) {
-      console.log(data);
       router.push('/login');
       alert('회원가입이 완료되었습니다 😄');
     },
