@@ -13,19 +13,23 @@ const UserProfile: React.FC = () => {
   const { data: userInfoData } = useQuery({
     queryKey: ['userInfo'],
     queryFn: () => getUserInfo(),
+    staleTime: 10 * 10 * 2000,
   });
 
-  localStorage.setItem('Tier', userInfoData?.tier);
-
   let tierIconSrc = '';
+  let tierLevel = '';
   if (userInfoData?.tier === 'RED') {
     tierIconSrc = tierIcon1;
+    tierLevel = 'LV.1 : Red';
   } else if (userInfoData?.tier === 'GREEN') {
     tierIconSrc = tierIcon2;
+    tierLevel = 'LV.2 : Green';
   } else if (userInfoData?.tier === 'BLUE') {
     tierIconSrc = tierIcon3;
+    tierLevel = 'LV.3 : Blue';
   } else if (userInfoData?.tier === 'RAINBOW') {
     tierIconSrc = tierIcon4;
+    tierLevel = 'LV.4 : RainBow';
   }
 
   return (
@@ -37,13 +41,16 @@ const UserProfile: React.FC = () => {
         profileImage={userInfoData?.profileImage}
         introduce={userInfoData?.introduce}
       />
-      <Image
-        width={40}
-        height={40}
-        src={tierIcon1}
-        alt='티어 1단계'
-        className='ml-auto'
-      />
+      <div className='flex flex-col items-center justify-around'>
+        <Image
+          width={40}
+          height={40}
+          src={tierIconSrc}
+          alt='티어 1단계'
+          className='ml-auto'
+        />
+        <span className='text-xxs mt-2'>{tierLevel}</span>
+      </div>
     </section>
   );
 };

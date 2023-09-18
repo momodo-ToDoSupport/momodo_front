@@ -23,9 +23,9 @@ const myprofile = async () => {
       <div className='p-6 w-full h-screen flex flex-col'>
         <MainHeader option={'myprofile'} />
         <div className='flex flex-col grow'>
-          <UserProfile />
-          <Tier />
           <HydrateTodoList state={dehydarate}>
+            <UserProfile />
+            <Tier />
             <TodoManageMent yearMonthkey={yearMonthkey} />
           </HydrateTodoList>
         </div>
