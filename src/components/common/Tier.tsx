@@ -1,25 +1,31 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getUserInfo } from '../../service/auth';
 import tierIcon1 from '../../../public/images/tierIcon-red-1.svg';
 import tierIcon2 from '../../../public/images/tierIcon-green-2.svg';
 import tierIcon3 from '../../../public/images/tierIcon-blue-3.svg';
 import tierIcon4 from '../../../public/images/tierIcon-rainbow-4.svg';
 
 const Tier = () => {
-  const tier = localStorage.getItem('Tier');
+  const { data: userInfoData } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: () => getUserInfo(),
+    staleTime: 10 * 10 * 2000,
+  });
   let tierIconSrc = '';
   let tierLevel = '';
-  if (tier === 'RED') {
+  if (userInfoData?.tier === 'RED') {
     tierIconSrc = tierIcon1;
     tierLevel = 'LV.1';
-  } else if (tier === 'GREEN') {
+  } else if (userInfoData?.tier === 'GREEN') {
     tierIconSrc = tierIcon2;
     tierLevel = 'LV.2';
-  } else if (tier === 'BLUE') {
+  } else if (userInfoData?.tier === 'BLUE') {
     tierIconSrc = tierIcon3;
     tierLevel = 'LV.3';
-  } else if (tier === 'RAINBOW') {
+  } else if (userInfoData?.tier === 'RAINBOW') {
     tierIconSrc = tierIcon4;
     tierLevel = 'LV.4';
   }
